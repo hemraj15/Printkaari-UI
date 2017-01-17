@@ -18,6 +18,7 @@ app.controller('loginController',['$scope', '$http',function($scope,$http){
 			url: 'http://162.220.61.86:8080/printkaari-api/oauth/token',
 			headers: {
 			'Content-Type' : 'application/json'
+			'Accept' : 'application/json' ,'*/*'
 			},
 			data: data
 		};
