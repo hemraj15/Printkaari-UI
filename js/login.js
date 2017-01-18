@@ -13,22 +13,30 @@ app.controller('loginController',['$scope', '$http',function($scope,$http){
 			"scope":"read,write,trust"
 		};
 
-		var req = {
-			method: 'POST',
-			url: 'http://162.220.61.86:8080/printkaari-api/oauth/token',
-			headers: {
-			'Content-Type' : 'application/json'
-			'Accept' : 'application/json' ,'*/*'
-			},
-			data: data
-		};
+		var requestData = $scope.transformRequestForFormEncoded(data);
+        var _config = {
+            headers: {"content-type": "application/x-www-form-urlencoded",
+			           "Access-Control-Allow-Origin": "*"
+					 },
+			transformRequest: requestData
+        };
 		
-		$http(req)
-			.then(function successCallback(response){
-				console.log("response");
-				console.log(response);
-			}, function errorCallback(err){
-				console.log(err);
-			});
+		$http.post('http://162.220.61.86:8080/printkaari-api/oauth/token', data, _config).then(onSuccess, onError);
+			
+			
 	}
+	
+	var onSuccess = function(response){
+			console.log(response);
+		};
+		var onError = function(error){
+			console.log(error);				
+		}
+	
+	$scope.transformRequestForFormEncoded = function(obj) {
+			var str = [];
+			for (var p in obj)
+				str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
+			return str.join("&");    
+        }
 }]);
