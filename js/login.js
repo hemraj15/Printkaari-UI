@@ -1,6 +1,6 @@
 var app = angular.module('loginApp',[]);
 
-app.controller('loginController',['$scope', '$http',function($scope,$http){
+app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
 	$scope.doLogin = function(){
 
 		
@@ -19,22 +19,95 @@ app.controller('loginController',['$scope', '$http',function($scope,$http){
 			
         };
 		
-		$http.post('http://localhost:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
-			
-			
-	}
-	
-	var onSuccess = function(response){
+		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
+
+		var onSuccess = function(response){
+			$('#signupBoxStepOne').hide(); 
+			$('#signupBoxStepTwo').show();
 			console.log(response);
 		};
+		
 		var onError = function(error){
 			console.log(error);				
 		}
+			
+			
+	}
+
+
+	$scope.SignUpIntiate = function(){
+		var data = {
+			"firstName" : $scope.firstName,
+			"lastName"  : $scope.lastName,
+			"email"     : $scope.email,
+			"password"  : $scope.password,
+			"userType"  : $scope.userType,
+		}
+
+		var requestData = $scope.transformRequestForFormEncoded(data);
+        var _config = {
+            headers: {
+            	'Content-Type' : 'application/json',
+			}
+        };
+		
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
+
+
+		var onSuccess = function(response){
+			$('#signupBoxStepOne').hide(); 
+			$('#signupBoxStepTwo').show();
+			console.log(response);
+		};
+		
+		var onError = function(error){
+			console.log(error);				
+		}	
+			
+	}
+
+	$scope.SignUpFinal = function(){
+		
+		var data = {
+			"emailToken"	: $scope.emailToken,
+			"contactNo"		: $scope.contactNo,
+			"countryId"		: $scope.countryId,
+			"stateId"		: $scope.stateId,
+			"cityId"		: $scope.cityId,
+			"zipCode"		: $scope.zipCode,
+			"userType"		: $scope.userType,
+			"houseNo"		: $scope.houseNo,
+			"street"		: $scope.street,
+			"landMark"		: $scope.landMark,
+			"area"			: $scope.area
+		}
+
+		var requestData = $scope.transformRequestForFormEncoded(data);
+        var _config = {
+            headers: {
+            	'Content-Type' : 'application/json'
+			}
+        };
+		
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
+			
+		var onSuccess = function(response){
+			$window.location.href = "index.html";
+			console.log(response);
+		};
+		
+		var onError = function(error){
+			console.log(error);				
+		}
+					
+	}
+	
 	
 	$scope.transformRequestForFormEncoded = function(obj) {
 			var str = [];
 			for (var p in obj)
 				str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
 			return str.join("&");    
-        }
+    }
+
 }]);

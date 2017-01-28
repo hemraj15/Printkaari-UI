@@ -119,7 +119,7 @@
         End Fixed Navigation
         ==================================== -->
         <div class="container">    
-          <div id="loginbox" style="margin-top:150px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+          <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-default" style="border-radious:0px;">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Login In</div>
@@ -168,7 +168,7 @@
                     <div class="col-md-12 control">
                       <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                         Don't have an account! 
-                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                        <a href="#" onClick="$('#loginbox').hide(); $('#signupBoxStepOne').show()">
                           Register here
                         </a>
                       </div>
@@ -181,14 +181,13 @@
               </div>                     
             </div>  
           </div>
-          <div id="signupbox" style="display:none; margin-top:150px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div id="signupBoxStepOne" style="display:none; margin-top:150px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
-                <div class="panel-title" style='color:white'>Register here</div>
+                <div class="panel-title" style='color:white'>Sign Up 1</div>
                 <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Login In</a></div>
               </div>  
               <div class="panel-body" >
-                <form id="signupform" class="form-horizontal" role="form">
 
                   <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -200,35 +199,35 @@
                   <div class="form-group">
                     <label for="email" class="col-md-3 control-label">Email</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control" name="email" placeholder="Email Address">
+                      <input type="text" class="form-control" name="email" ng-model="email" placeholder="Email Address">
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                      <input type="text" class="form-control" name="firstname" ng-model="firstname" placeholder="First Name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="lastname" class="col-md-3 control-label">Last Name</label>
                     <div class="col-md-9">
-                      <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                      <input type="text" class="form-control" name="lastname" ng-model="lastname" placeholder="Last Name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-9">
-                      <input type="password" class="form-control" name="passwd" placeholder="Password">
+                      <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Employee Type</label>
                     <div class="col-md-4">
-                      <input type="radio" name="emp_type">Employee</input>
+                      <input type="radio" name="emp_type" ng-model="userType" value="none" ng-Value="employee">Employee</input>
                     </div>
                     <div class="col-md-4">
-                      <input type="radio" name="emp_type">Customer</input>
+                      <input type="radio" name="emp_type" ng-model="userType" value="none" ng-Value="customer">Customer</input>
                     </div>
                   </div>
 
@@ -237,7 +236,7 @@
                   <div class="form-group">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">
-                      <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                      <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()">Next</a>
 
                     </div>
                   </div>
@@ -245,15 +244,104 @@
 
 
 
-                </form>
               </div>
+            </div>
+            </div>
+
+
+            <div id="signupBoxStepTwo" style="display:none; margin-top:150px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+              <div class="panel-heading"  style="background-color:#009688 !important">
+                <div class="panel-title" style='color:white'>Sign Up Step 2</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Login In</a></div>
+              </div>  
+              <div class="panel-body" >
+
+                  <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">Mobile No</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact Number">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-3 col-md-offset-1">
+                      <label for="country" class="control-label">Country</label>
+                        
+                        <select ng-model="countryId" ng-options=""></select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      <label for="state" class="control-label">State</label>
+                        <select ng-model="stateId" ng-options=""></select>
+                    </div>
+
+                    <div class="form-group col-md-offset-1 col-md-3">
+                      <label for="city" class="control-label">City</label>
+                        <select ng-model="cityId" ng-options=""></select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="zipcode" class="col-md-3 control-label">Zip Code</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="zipCode" ng-model="zipCode" placeholder="Zip Code">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="house_number" class="col-md-3 control-label">House No</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="houseNo" ng-model="houseNo" placeholder="House No">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastname" class="col-md-3 control-label">Street</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="street" ng-model="street" placeholder="Street">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastname" class="col-md-3 control-label">Land Mark</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="landMark" ng-model="landMark" placeholder="Land Mark">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastname" class="col-md-3 control-label">Area</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="area" ng-model="area" placeholder="Area">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <!-- Button -->                                        
+                    <div class="col-md-offset-3 col-md-9">
+                      <button id="btn-signup" type="button" class="btn btn-info" ng-click="SignUpFinal()"> Sign Up </button>
+
+                    </div>
+                  </div>
+
+
+
+
+              </div>
+            </div>
             </div>
 
 
 
 
           </div> 
-        </div>
 
 
 
