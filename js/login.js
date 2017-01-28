@@ -22,8 +22,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
 
 		var onSuccess = function(response){
-			$('#signupBoxStepOne').hide(); 
-			$('#signupBoxStepTwo').show();
+			$window.location.href = "index.html";
 			console.log(response);
 		};
 		
@@ -67,7 +66,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	}
 
 	$scope.SignUpFinal = function(){
-		
+
 		var data = {
 			"emailToken"	: $scope.emailToken,
 			"contactNo"		: $scope.contactNo,
