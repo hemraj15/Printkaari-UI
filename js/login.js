@@ -42,7 +42,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			"password"  : $scope.password,
 			"userType"  : $scope.userType,
 		}
-
+		console.log(data);
 		var requestData = $scope.transformRequestForFormEncoded(data);
         var _config = {
             headers: {
