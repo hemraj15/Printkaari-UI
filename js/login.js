@@ -8,20 +8,15 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
                         
                         "username": $scope.username,
                         "password": $scope.password
-                        
-                };
+                    };
 
 		var requestData = $scope.transformRequestForFormEncoded(data);
         var _config = {
             headers: {'Content-Type' : 'application/json'
 					 }
-					 
-			
-        };
-		
-		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
-
-		var onSuccess = function(response){
+		 };
+			var onSuccess = function(response){
+			$scope.User=response.data;
 			$window.location.href = "index.html";
 			console.log(response);
 		};
@@ -29,8 +24,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var onError = function(error){
 			console.log(error);				
 		}
-			
-			
+		
+		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
+		
 	}
 
 
@@ -49,11 +45,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
             	'Content-Type' : 'application/json',
 			}
         };
-		
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
-
-
-		var onSuccess = function(response){
+			var onSuccess = function(response){
 			$('#signupBoxStepOne').hide(); 
 			$('#signupBoxStepTwo').show();
 			console.log(response);
@@ -61,7 +53,11 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var onError = function(error){
 			console.log(error);				
-		}	
+		}
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
+
+
+		
 			
 	}
 
@@ -88,9 +84,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			}
         };
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
-			
 		var onSuccess = function(response){
+			$scope.User=response.data;
 			$window.location.href = "index.html";
 			console.log(response);
 		};
@@ -98,6 +93,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var onError = function(error){
 			console.log(error);				
 		}
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
+			
+		
 					
 	}
 	
