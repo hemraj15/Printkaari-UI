@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app="httpTest">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <title>PrintKaari.com</title>		
+ <meta name="description" content="Blue One Page Creative HTML5 Template">
+ <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+ <meta name="author" content="">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" href="css/font-awesome.min.css">
+ <link rel="stylesheet" href="css/jquery.fancybox.css">
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+ <link rel="stylesheet" href="css/owl.carousel.css">
+ <link rel="stylesheet" href="css/slit-slider.css">
+ <link rel="stylesheet" href="css/animate.css">
+ <link rel="stylesheet" href="css/main.css">
+ <script src="js/modernizr-2.6.2.min.js"></script>
+ <script src="js/angular.min.js"></script>
+ <script type="text/javascript" src="js/test.js"></script>>
+
+</head>
+<style>
+  body,h1,h5 
+  {
+    font-family:"Raleway", sans-serif;
+  }
+  .panel-default
+  {
+   border-radius:0px;
+   box-shadow: 10px 10px 5px #888888;
+ }
+ 
+ .panel-info
+ {
+   border-radius:0px;
+   box-shadow: 10px 10px 5px #888888;
+ }
+ 
+</style>
+  
+</head>
+<body ng-app="httpTest">
+  <div ng-controller="FetchCountryController">
+  <select ng-model="method" aria-label="Request method">
+    <option>GET</option>
+    <option>JSONP</option>
+  </select>
+  <input type="text" ng-model="url" size="80" aria-label="URL" />
+  <button id="fetchbtn" ng-click="fetch()">fetch</button><br>
+  <button id="samplegetbtn" ng-click="updateModel('GET', 'http-hello.html')">Sample GET</button>
+  <button id="samplejsonpbtn"
+    ng-click="updateModel('JSONP',
+                  'https://angularjs.org/greet.php?name=Super%20Hero')">
+    Sample JSONP
+  </button>
+  <button id="invalidjsonpbtn"
+    ng-click="updateModel('JSONP', 'https://angularjs.org/doesntexist')">
+      Invalid JSONP
+    </button>
+  <pre>http status code: {{status}}</pre>
+  <pre>http response data: {{data}}</pre>
+</div>
+</body>
+</html>
+
+<!-- 
+Copyright 2017 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->
