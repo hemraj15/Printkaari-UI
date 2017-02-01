@@ -46,8 +46,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			}
         };
 			var onSuccess = function(response){
-			$('#signupBoxStepOne').hide(); 
-			$('#signupBoxStepTwo').show();
+				$scope.step1Data=response.data;
+			$window.location.href = "signupStep2.html";
 			console.log(response);
 		};
 		
@@ -55,16 +55,15 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			console.log(error);				
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
-
-
-		
-			
+	
 	}
 
+	
+	
 	$scope.SignUpFinal = function(){
 
 		var data = {
-			"emailToken"	: $scope.emailToken,
+			"emailToken"	: $scope.step1Data.emailToken,
 			"contactNo"		: $scope.contactNo,
 			"countryId"		: $scope.countryId,
 			"stateId"		: $scope.stateId,
@@ -86,7 +85,12 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var onSuccess = function(response){
 			$scope.User=response.data;
-			$window.location.href = "index.html";
+			if (User.userType =='CUSTOMER') {
+                   $window.location.href = "customerDashBoard.html";
+                } else {
+                         $window.location.href = "index.html";
+                       }
+			
 			console.log(response);
 		};
 		
