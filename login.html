@@ -277,20 +277,20 @@
                     </div>
                   </div>
 
-                  <div class="row"  ng-controller="locationController">
+                  <div class="row"  ng-controller="locationController" ng-init="getCountryList()">
                     <div class="col-md-3 col-md-offset-1">
                       <label for="country" class="control-label">Country</label><br>
-                        <select ng-model="countryId" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()'></select>
+                        <select ng-model="country" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()' value="{{country.id}}"></select>
                     </div>
 
                     <div class="col-md-3">
                       <label for="state" class="control-label">State</label><br>
-                        <select ng-model="stateId" ng-options="state.name for state in stateList track by state.id" ng-change='getCityListByStateId()'></select>
+                        <select ng-model="state" ng-options="state.name for state in stateList track by state.id" ng-change='getCityListByStateId()' value="{{state.id}}"></select>
                     </div>
 
                     <div class="col-md-offset-1 col-md-3">
                       <label for="city" class="control-label">City</label><br>
-                        <select ng-model="cityId" ng-options="city.name for city in cityList track by city.id"></select>
+                        <select ng-model="city" ng-options="city.name for city in cityList track by city.id" value="{{city.id}}"></select>
                     </div>
                   </div>
 

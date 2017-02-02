@@ -136,6 +136,7 @@ $scope.getCountryList=function(){
 	}
 	
 		$scope.getStateListByCountryId=function(){
+			console.log($scope.country);
 		
 		var data = {
 			//"countryId" : $scope.countryId
@@ -158,7 +159,7 @@ $scope.getCountryList=function(){
 			console.log(error);				
 		}
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.countryId+'/states' ,data,_config).then(onSuccess, onError);
+		$http.get('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.country.id+'/states').then(onSuccess, onError);
 	}
 	
 	$scope.getCityListByStateId=function(){
@@ -184,6 +185,6 @@ $scope.getCountryList=function(){
 			console.log(error);				
 		};
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.stateId+'/cities' ,data,_config).then(onSuccess, onError);
+		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
 	}
 }]);
