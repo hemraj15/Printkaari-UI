@@ -48,7 +48,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			var onSuccess = function(response){
 				$scope.step1Data=response.data;
 				emailToken=$scope.step1Data.emailToken;
-			$window.location.href = "signupStep2.html";
+				$('#signupBoxStepOne').hide(); 
+ -				$('#signupBoxStepTwo').show();
+			// $window.location.href = "signupStep2.html";
 			console.log(response);
 			console.log(step1Data.emailToken);
 		};
