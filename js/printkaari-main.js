@@ -69,9 +69,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var data = {
 			"emailToken"	: emailToken,
 			"contactNo"		: $scope.contactNo,
-			"countryId"		: $scope.countryId,
-			"stateId"		: $scope.stateId,
-			"cityId"		: $scope.cityId,
+			"countryId"		: $scope.country,
+			"stateId"		: $scope.state,
+			"cityId"		: $scope.city,
 			"zipCode"		: $scope.zipCode,
 			"userType"		: $scope.userType,
 			"houseNo"		: $scope.houseNo,
@@ -139,8 +139,8 @@ $scope.getCountryList=function(){
 			console.log($scope.country);
 		
 		var data = {
-			//"countryId" : $scope.countryId
-			"countryId" : 1
+			"countryId" : $scope.country.id
+			//"countryId" : 1
 			
 		}
 		console.log(data);
@@ -165,8 +165,8 @@ $scope.getCountryList=function(){
 	$scope.getCityListByStateId=function(){
 		
 		var data = {
-			//"stateId" : $scope.stateId
-			"stateId" : 1
+			"stateId" : $scope.state.id
+			//"stateId" : 1
 			
 		}
 		console.log(data);
