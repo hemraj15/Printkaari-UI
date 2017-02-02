@@ -29,7 +29,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 	}
 
-
+        var emailToken;
 	$scope.SignUpIntiate = function(){
 		var data = {
 			"firstName" : $scope.firstName,
@@ -47,8 +47,10 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
         };
 			var onSuccess = function(response){
 				$scope.step1Data=response.data;
+				emailToken=$scope.step1Data.emailToken;
 			$window.location.href = "signupStep2.html";
 			console.log(response);
+			console.log(step1Data.emailToken);
 		};
 		
 		var onError = function(error){
@@ -63,7 +65,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	$scope.SignUpFinal = function(){
 
 		var data = {
-			"emailToken"	: $scope.step1Data.emailToken,
+			"emailToken"	: emailToken,
 			"contactNo"		: $scope.contactNo,
 			"countryId"		: $scope.countryId,
 			"stateId"		: $scope.stateId,
@@ -85,6 +87,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var onSuccess = function(response){
 			$scope.User=response.data;
+			emailToken='';
 			if (User.userType =='CUSTOMER') {
                    $window.location.href = "customerDashBoard.html";
                 } else {
@@ -133,7 +136,8 @@ $scope.getCountryList=function(){
 		$scope.getStateListByCountryId=function(){
 		
 		var data = {
-			"countryId" : $scope.countryId
+			//"countryId" : $scope.countryId
+			"countryId" : 1
 			
 		}
 		console.log(data);
@@ -158,7 +162,8 @@ $scope.getCountryList=function(){
 	$scope.getCityListByStateId=function(){
 		
 		var data = {
-			"stateId" : $scope.stateId
+			//"stateId" : $scope.stateId
+			"stateId" : 1
 			
 		}
 		console.log(data);

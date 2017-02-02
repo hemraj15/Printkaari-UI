@@ -42,7 +42,7 @@
 </head>
 
 
-<body ng-controller="loginController">
+<body ng-controller="loginController" ng-app="printkaariApp">
 		 <!--
         Fixed Navigation
         ==================================== -->
@@ -240,13 +240,11 @@
                   <div class="input-group" style="margin-bottom: 25px">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">
-                      <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()" data-target='signupBoxStepTwo'>Next</a>
+                     <!-- <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()" data-target='signupBoxStepTwo'>Next</a> -->
+					  <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()">Next</a>
 
                     </div>
                   </div>
-
-
-
 
               </div>
             </div>
@@ -256,7 +254,96 @@
              </div> 
 
 
+        <div class="container"> 
+          <div id="signupBoxStepTwo"  style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+              <div class="panel-heading"  style="background-color:#009688 !important">
+                <div class="panel-title" style='color:white'>Sign Up Step 2</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Login In</a></div>
+              </div>  
+              <div class="panel-body" >
 
+                  <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                  </div>
+
+
+
+                  <div class="input-group" style="margin-bottom: 25px"> 
+                    <label for="mobile_no" class="col-md-3 control-label">Mobile No</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact No">
+                    </div>
+                  </div>
+
+                  <div class="row"  ng-controller="locationController">
+                    <div class="col-md-3 col-md-offset-1">
+                      <label for="country" class="control-label">Country</label><br>
+                        <select ng-model="countryId" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()'></select>
+                    </div>
+
+                    <div class="col-md-3">
+                      <label for="state" class="control-label">State</label><br>
+                        <select ng-model="stateId" ng-options="state.name for state in stateList track by state.id" ng-change='getCityListByStateId()'></select>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-3">
+                      <label for="city" class="control-label">City</label><br>
+                        <select ng-model="cityId" ng-options="city.name for city in cityList track by city.id"></select>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="zipcode" class="col-md-3 control-label">Zip Code</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="zipCode" ng-model="zipCode" placeholder="Zip Code">
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="house_number" class="col-md-3 control-label">House No</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="houseNo" ng-model="houseNo" placeholder="House No">
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="street" class="col-md-3 control-label">Street</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="street" ng-model="street" placeholder="Street">
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="landMark" class="col-md-3 control-label">Land Mark</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="landMark" ng-model="landMark" placeholder="Land Mark">
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="area" class="col-md-3 control-label">Area</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="area" ng-model="area" placeholder="Area">
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <!-- Button -->                                        
+                    <div class="col-md-offset-3 col-md-9">
+                      <button id="btn-signup" type="button" class="btn btn-info" ng-click="SignUpFinal()">Complete Sign Up </button>
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            </div>
+</div>
+  
+  
+  
         <footer id="footer"><!--Footer-->
 
 
