@@ -141,20 +141,20 @@
                       <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact Number">
                     </div>
                   </div>
+
                   <div class="row" ng-app='locationApp' ng-controller="locationController">
-                    <div class="input-group col-md-3 col-md-offset-1">
-                      <label for="country" class="control-label">Country</label>
-                        
+                    <div class="col-md-3 col-md-offset-1">
+                      <label for="country" class="control-label">Country</label><br>
                         <select ng-model="countryId" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()'></select>
                     </div>
 
-                    <div class="input-group col-md-3 col-md-offset-1">
-                      <label for="state" class="control-label">State</label>
+                    <div class="col-md-3">
+                      <label for="state" class="control-label">State</label><br>
                         <select ng-model="stateId" ng-options="state.name for state in stateList track by state.id" ng-change='getCityListByStateId()'></select>
                     </div>
 
-                    <div class="input-group col-md-offset-1 col-md-3">
-                      <label for="city" class="control-label">City</label>
+                    <div class="col-md-offset-1 col-md-3">
+                      <label for="city" class="control-label">City</label><br>
                         <select ng-model="cityId" ng-options="city.name for city in cityList track by city.id"></select>
                     </div>
                   </div>
