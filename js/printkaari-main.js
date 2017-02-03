@@ -3,7 +3,7 @@ var app = angular.module('printkaariApp',[]);
 app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
 	$scope.doLogin = function(){
 
-		
+		  var loggedinUser;
 		  var data = {
                         
                         "username": $scope.username,
@@ -16,8 +16,15 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 					 }
 		 };
 			var onSuccess = function(response){
-			$scope.User=response.data;
-			$window.location.href = "index.html";
+			$scope.loggedinUser=response.data;
+			
+			if ($scope.loggedinUser.userType ==="CUSTOMER") {
+				console.log(response.data.full_name);
+                   $window.location.href = "customerDashBoard.html";
+                } else {
+                         $window.location.href = "index.html";
+                       }
+			//$window.location.href = "index.html";
 			console.log(response);
 		};
 		
@@ -69,9 +76,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var data = {
 			"emailToken"	: emailToken,
 			"contactNo"		: $scope.contactNo,
-			"countryId"		: $scope.country,
-			"stateId"		: $scope.state,
-			"cityId"		: $scope.city,
+			"countryId"		: $scope.country.id,
+			"stateId"		: $scope.state.id,
+			"cityId"		: $scope.city.id,
 			"zipCode"		: $scope.zipCode,
 			"userType"		: $scope.userType,
 			"houseNo"		: $scope.houseNo,
@@ -90,7 +97,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var onSuccess = function(response){
 			$scope.User=response.data;
 			emailToken='';
-			if (User.userType =='CUSTOMER') {
+			if ($scope.User.userType === 'CUSTOMER') {
                    $window.location.href = "customerDashBoard.html";
                 } else {
                          $window.location.href = "index.html";
@@ -115,13 +122,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 				str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
 			return str.join("&");    
     }
-
-}]);
-
-
-app.controller('locationController',['$scope', '$http', '$window',function($scope,$http,$window){
-
-$scope.getCountryList=function(){
+	
+	$scope.getCountryList=function(){
 		
 		var onSuccess = function(response){
 			$scope.countryList=response.data;
@@ -187,4 +189,11 @@ $scope.getCountryList=function(){
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
 	}
+
+}]);
+
+
+app.controller('locationController',['$scope', '$http', '$window',function($scope,$http,$window){
+
+
 }]);

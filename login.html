@@ -125,7 +125,7 @@
             <div class="panel panel-default" style="border-radious:0px;">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:black'>Login In</div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px; "><a href="#" style='color:white'>Forgot password?</a></div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px; "><a href="#"  style='color:white' onclick="$('#loginbox').hide(); $('#forgotPassword').show()">Forgot password?</a></div>
               </div>     
 
               <div style="padding-top:30px" class="panel-body" >
@@ -277,7 +277,7 @@
                     </div>
                   </div>
 
-                  <div class="row"  ng-controller="locationController" ng-init="getCountryList()">
+                  <div class="row"   ng-init="getCountryList()">
                     <div class="col-md-3 col-md-offset-1">
                       <label for="country" class="control-label">Country</label><br>
                        <!-- <select ng-model="countryId" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()' value="{{country.id}}"></select> -->
@@ -344,7 +344,101 @@
             </div>
 </div>
   
-  
+  <!-- Forgot Paswword and Reset Password Section-->
+  <div class="container">
+  <div id="forgotPassword" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+              <div class="panel-heading"  style="background-color:#009688 !important">
+                <div class="panel-title" style='color:white'>Forgot Password </div>
+                
+              </div>  
+              <div class="panel-body" >
+
+                  <div id="signupalert" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                  </div>
+				  
+                
+                 <div class="input-group" style="margin-bottom: 25px">
+                    <label for="email" class="col-md-3 control-label">Email</label>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control" name="email" ng-model="email" placeholder="Email Address">
+                    </div>
+                  </div>
+                  
+                    <label for="userType" class="col-md-3 control-label">User Type</label>
+                    <div class="col-md-4">
+                      <input type="radio" name="user_type" ng-model="userType" value="EMPLOYEE">Employee</input>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="radio" name="user_type" ng-model="userType" value="CUSTOMER">Customer</input>
+                    </div>
+                  </div>
+
+                  <div class="input-group" style="margin-bottom: 25px">
+                    <!-- Button -->                                        
+                    <div class="col-md-offset-3 col-md-9">
+                     <!-- <a id="btn-signup" class="btn btn-info" ng-click="ForgotPassword()" data-target='signupBoxStepTwo'>Next</a> -->
+					  <a id="btn-signup" class="btn btn-info" ng-click="ForgotPassword()"> Submit </a>
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            </div>
+
+
+             </div> 
+
+			 
+			 <div id="resetPassword" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+              <div class="panel-heading"  style="background-color:#009688 !important">
+                <div class="panel-title" style='color:white'>Reset Password</div>
+                
+              </div>  
+              <div class="panel-body" >
+
+                  <div id="resetPasswordError" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                  </div>
+				  
+                
+                <div class="input-group" style="margin-bottom: 25px">
+                    <label for="password" class="col-md-3 control-label">New Password</label>
+                    <div class="col-md-9">
+                      <input type="password" class="form-control" name="password" ng-model="password" placeholder="New Password">
+                    </div>
+                  </div>
+				  
+				  <div class="input-group" style="margin-bottom: 25px">
+                    <label for="password" class="col-md-3 control-label">Confirm Password</label>
+                    <div class="col-md-9">
+                      <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password">
+                    </div>
+                  </div>
+                  
+                   
+
+                  <div class="input-group" style="margin-bottom: 25px">
+                    <!-- Button -->                                        
+                    <div class="col-md-offset-3 col-md-9">                    
+					  <a id="btn-signup" class="btn btn-info" ng-click="ResetPassword()"> Submit </a>
+
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            </div>
+
+
+             </div> 
+</div>
+  <!-- Forgot and Reset Password Section ends>  
   
         <footer id="footer"><!--Footer-->
 

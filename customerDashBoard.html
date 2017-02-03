@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" ng-app="printkaariApp">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@
 	<!-- End WOWSlider.com HEAD section --></head>
 
 
-	<body id="body">
+	<body id="body" ng-controller="loginController">
 		<div id="preloader">
 			<div class="loder-box">
 				<center>
@@ -113,7 +113,7 @@
 
 
         				<li><a href="#/"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-						Hello <span>{{User.name}}</span>
+						Hello   <p ng-bind='loggedinUser.full_name'></p>
         				<!--<li><a href=""><i class="fa fa-lock"></i> {{User.name}}</a></li> -->
         			</ul>
         		</div>
