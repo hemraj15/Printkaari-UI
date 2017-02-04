@@ -1,9 +1,9 @@
-var app = angular.module('printkaariApp',[]);
+var app = angular.module('printkaariApp',["ngRoute"]);
 
 app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
 	$scope.doLogin = function(){
 
-		
+		  var loggedinUser;
 		  var data = {
                         
                         "username": $scope.username,
@@ -16,8 +16,15 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 					 }
 		 };
 			var onSuccess = function(response){
-			$scope.User=response.data;
-			$window.location.href = "index.html";
+			$scope.loggedinUser=response.data;
+			
+			if ($scope.loggedinUser.userType ==="CUSTOMER") {
+				console.log(response.data.full_name);
+                   $window.location.href = "customerDashBoard.html";
+                } else {
+                         $window.location.href = "index.html";
+                       }
+			//$window.location.href = "index.html";
 			console.log(response);
 		};
 		
@@ -29,7 +36,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 	}
 
-
+        var emailToken;
 	$scope.SignUpIntiate = function(){
 		var data = {
 			"firstName" : $scope.firstName,
@@ -47,8 +54,12 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
         };
 			var onSuccess = function(response){
 				$scope.step1Data=response.data;
-			$window.location.href = "signupStep2.html";
+				emailToken=$scope.step1Data.emailToken;
+				$('#signupBoxStepOne').hide(); 
+ -				$('#signupBoxStepTwo').show();
+			// $window.location.href = "signupStep2.html";
 			console.log(response);
+			console.log(step1Data.emailToken);
 		};
 		
 		var onError = function(error){
@@ -63,11 +74,11 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	$scope.SignUpFinal = function(){
 
 		var data = {
-			"emailToken"	: $scope.step1Data.emailToken,
+			"emailToken"	: emailToken,
 			"contactNo"		: $scope.contactNo,
-			"countryId"		: $scope.countryId,
-			"stateId"		: $scope.stateId,
-			"cityId"		: $scope.cityId,
+			"countryId"		: $scope.country.id,
+			"stateId"		: $scope.state.id,
+			"cityId"		: $scope.city.id,
 			"zipCode"		: $scope.zipCode,
 			"userType"		: $scope.userType,
 			"houseNo"		: $scope.houseNo,
@@ -85,7 +96,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var onSuccess = function(response){
 			$scope.User=response.data;
-			if (User.userType =='CUSTOMER') {
+			emailToken='';
+			if ($scope.User.userType === 'CUSTOMER') {
                    $window.location.href = "customerDashBoard.html";
                 } else {
                          $window.location.href = "index.html";
@@ -110,13 +122,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 				str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
 			return str.join("&");    
     }
-
-}]);
-
-
-app.controller('locationController',['$scope', '$http', '$window',function($scope,$http,$window){
-
-$scope.getCountryList=function(){
+	
+	$scope.getCountryList=function(){
 		
 		var onSuccess = function(response){
 			$scope.countryList=response.data;
@@ -131,9 +138,11 @@ $scope.getCountryList=function(){
 	}
 	
 		$scope.getStateListByCountryId=function(){
+			console.log($scope.country);
 		
 		var data = {
-			"countryId" : $scope.countryId
+			"countryId" : $scope.country.id
+			//"countryId" : 1
 			
 		}
 		console.log(data);
@@ -152,13 +161,14 @@ $scope.getCountryList=function(){
 			console.log(error);				
 		}
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.countryId+'/states' ,data,_config).then(onSuccess, onError);
+		$http.get('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.country.id+'/states').then(onSuccess, onError);
 	}
 	
 	$scope.getCityListByStateId=function(){
 		
 		var data = {
-			"stateId" : $scope.stateId
+			"stateId" : $scope.state.id
+			//"stateId" : 1
 			
 		}
 		console.log(data);
@@ -177,6 +187,14 @@ $scope.getCountryList=function(){
 			console.log(error);				
 		};
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.stateId+'/cities' ,data,_config).then(onSuccess, onError);
+		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
 	}
+
+}]);
+
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	$routeProvider.
+	when('/', {templateUrl: 'partials/login.htm',   controller: 'loginController'}).
+	otherwise({redirectTo: '/'});
+
 }]);
