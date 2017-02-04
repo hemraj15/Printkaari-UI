@@ -189,6 +189,74 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
 	}
+	
+	//Forgot and Reset Password
+	
+	$scope.ForgotPassword=function(){
+		
+	      var data = {                        
+                        "username": $scope.username                       
+                    };
+
+		    var _config = {
+            headers: {'Content-Type' : 'application/json'
+					 }
+		 };
+			var onSuccess = function(response){
+			$scope.loggedinUser=response.data;
+			$scope.forogtPasswordData=response.data;
+				emailToken=$scope.forogtPasswordData.emailToken;
+				$('#forgotPasswordBox').hide();
+				$('#resetPasswordBox').show();						
+					
+			     console.log(response);
+		};
+		
+		var onError = function(error){
+			console.log(error);
+             alert(error.message);			
+		}
+		
+		$http.post('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId=hemraj.it12@gmail.com', data, _config).then(onSuccess, onError);
+		
+	}
+	
+	//Reset password
+	$scope.ResetPassword=function(){
+		
+	    var data = {                        
+                        "password": $scope.newPassword,
+						"confirmPwd":$scope.confirmPwd,
+						"emailToken":$scope.forogtPasswordData.emailToken;
+                    };
+
+	    var _config = {
+                   headers: {'Content-Type' : 'application/json'}
+		             };
+					 
+					 
+		var onSuccess = function(response){
+			    $scope.message=response.data;
+				$('#resetPasswordBox').hide();
+				$('#resetPasswordSuccessBox').show();						
+					
+			     console.log(response);
+		};
+		
+		var onError = function(error){
+			alert(error.message);
+			console.log(error);				
+		}
+		
+		if(angular.equals(password, confirmPwd){
+			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
+		}
+		else{
+		alert("New Password and Confirm Password are different");
+		}
+	}
+
+	//Forgot and Reset Password ENDS
 
 }]);
 
