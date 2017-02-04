@@ -227,7 +227,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	    var data = {                        
                         "password": $scope.newPassword,
 						"confirmPwd":$scope.confirmPwd,
-						"emailToken":$scope.forogtPasswordData.emailToken;
+						"emailToken":$scope.forogtPasswordData.emailToken
                     };
 
 	    var _config = {
