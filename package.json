@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/hemraj15/Printkaari-UI#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "browser-sync": "^2.18.7",
+    "gulp": "^3.9.1",
+    "gulp-watch": "^4.3.11"
   }
 }

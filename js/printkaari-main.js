@@ -1,4 +1,4 @@
-var app = angular.module('printkaariApp',[]);
+var app = angular.module('printkaariApp',["ngRoute"]);
 
 app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
 	$scope.doLogin = function(){
@@ -192,8 +192,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 
 }]);
 
-
-app.controller('locationController',['$scope', '$http', '$window',function($scope,$http,$window){
-
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	$routeProvider.
+	when('/', {templateUrl: 'partials/login.htm',   controller: 'loginController'}).
+	otherwise({redirectTo: '/'});
 
 }]);
