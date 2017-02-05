@@ -1,9 +1,9 @@
 <div class="container"  ng-controller="loginController">    
-          <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+          <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="loginBox">                    
             <div class="panel panel-default" style="border-radious:0px;">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:black'>Login In</div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px; "><a href="#"  style='color:white' onclick="$('#loginbox').hide(); $('#forgotPassword').show()">Forgot password?</a></div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px; "><a href="#"  style='color:white' onclick="$('#loginbox').hide(); $('#forgotPasswordBox').show()">Forgot password?</a></div>
               </div>     
 
               <div style="padding-top:30px" class="panel-body" >
@@ -21,9 +21,6 @@
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                     <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password">
                   </div>
-
-
-
                   <div class="input-group">
                     <div class="checkbox">
                       <label>
@@ -32,51 +29,39 @@
                     </div>
                   </div>
 
-
                   <div style="margin-top:10px" class="form-group">
                     <!-- Button -->
 
                     <div class="col-sm-12 controls">
                       <a id="btn-login" href="#" class="btn btn-success" ng-click="doLogin()">Login  </a>
-
-
                     </div>
                   </div>
-
-
                   <div class="form-group">
                     <div class="col-md-12 control">
                       <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                         Don't have an account! 
-                        <a href="#" onClick="$('#loginbox').hide(); $('#signupBoxStepOne').show()">
+                        <a ng-click="loginBox = !loginBox; signupBoxStepOne = !signupBoxStepOne">
                           Register here
                         </a>
                       </div>
                     </div>
                   </div>    
-                </form>     
-
-
-
+                </form>
+				
               </div>                     
             </div>  
           </div>
-          <div id="signupBoxStepOne" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div id="signupBoxStepOne" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepOne">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Sign Up 1</div>
                 <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Login In</a></div>
               </div>  
               <div class="panel-body" >
-
                   <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
                     <span></span>
                   </div>
-
-
-
-                  
                   <div class="input-group" style="margin-bottom: 25px" >
                     <label for="firstname" class="col-md-3 control-label">First Name</label>
                     <div class="col-md-9">
@@ -112,10 +97,7 @@
                       <input type="radio" name="user_type" ng-model="userType" value="CUSTOMER">Customer</input>
                     </div>
                   </div>
-
-
-
-                  <div class="input-group" style="margin-bottom: 25px">
+                <div class="input-group" style="margin-bottom: 25px">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">
                      <!-- <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()" data-target='signupBoxStepTwo'>Next</a> -->
@@ -123,17 +105,14 @@
 
                     </div>
                   </div>
-
+                </div>
               </div>
             </div>
-            </div>
-
-
-             </div> 
+         </div> 
 
 
         <div class="container"> 
-          <div id="signupBoxStepTwo"  style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div id="signupBoxStepTwo"  style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepTwo">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Sign Up Step 2</div>
@@ -145,9 +124,6 @@
                     <p>Error:</p>
                     <span></span>
                   </div>
-
-
-
                   <div class="input-group" style="margin-bottom: 25px"> 
                     <label for="mobile_no" class="col-md-3 control-label">Mobile No</label>
                     <div class="col-md-9">
@@ -216,15 +192,14 @@
 
                     </div>
                   </div>
-
               </div>
             </div>
             </div>
-</div>
+        </div>
   
   <!-- Forgot Paswword and Reset Password Section-->
   <div class="container">
-  <div id="forgotPassword" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div id="forgotPasswordBox" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="forgetPasswordBox">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Forgot Password </div>
@@ -253,25 +228,18 @@
                       <input type="radio" name="user_type" ng-model="userType" value="CUSTOMER">Customer</input>
                     </div>
                   </div>
-
                   <div class="input-group" style="margin-bottom: 25px">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">
                      <!-- <a id="btn-signup" class="btn btn-info" ng-click="ForgotPassword()" data-target='signupBoxStepTwo'>Next</a> -->
 					  <a id="btn-signup" class="btn btn-info" ng-click="ForgotPassword()"> Submit </a>
-
                     </div>
                   </div>
+               </div>
+             </div>   
 
-              </div>
-            </div>
-            </div>
-
-
-             </div> 
-
-			 
-			 <div id="resetPassword" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+	 <!-- Reset Password -->
+		<div id="resetPasswordBox" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"  ng-show="resetPasswordBox">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Reset Password</div>
@@ -282,8 +250,7 @@
                   <div id="resetPasswordError" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
                     <span></span>
-                  </div>
-				  
+                  </div>			  
                 
                 <div class="input-group" style="margin-bottom: 25px">
                     <label for="password" class="col-md-3 control-label">New Password</label>
@@ -297,23 +264,47 @@
                     <div class="col-md-9">
                       <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password">
                     </div>
-                  </div>
-                  
-                   
-
-                  <div class="input-group" style="margin-bottom: 25px">
+                  </div>     
+                <div class="input-group" style="margin-bottom: 25px">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">                    
-					  <a id="btn-signup" class="btn btn-info" ng-click="ResetPassword()"> Submit </a>
+					  <a id="btn-signup" class="btn btn-info" ng-click="ResetPassword()"> Reset Password </a>
+
+                    </div>
+                 </div>
+              </div>
+            </div>
+           </div>   
+ 
+        
+		<!-- ResetPassword Success Box Start-->
+	
+             
+		<div id="resetPasswordSuccessBox" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-info">
+              <div class="panel-heading"  style="background-color:#009688 !important">
+                <div class="panel-title" style='color:white'>Reset Password Success</div>
+                
+              </div>  
+              <div class="panel-body" >
+
+                  <div id="resetPasswordError" style="display:none" class="alert alert-danger">
+                    <p>Error:</p>
+                    <span></span>
+                  </div>				
+                  <div class="input-group" style="margin-bottom: 25px">
+                    <!-- Button -->                                        
+                    <div class="col-md-offset-3 col-md-9"> 
+					Password Changed SuccussFully Please <div style="float:right; font-size: 80%; position: relative; top:-10px; "><a href="#"  style='color:white' onclick="$('#resetPasswordSuccessBox').hide(); $('#loginbox').show()"> Click here to login</a></div>
+					 <!-- <a id="btn-login" class="btn btn-info" onClick=""> Submit </a> -->
 
                     </div>
                   </div>
-
               </div>
             </div>
-            </div>
-
-
-             </div> 
-</div>
-  <!-- Forgot and Reset Password Section ends>
+           </div>
+		</div>
+           <!-- ResetPassword Success Box END -->
+	
+            <!-- Forgot and Reset Password Section ends>
+  
