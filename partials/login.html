@@ -1,5 +1,5 @@
 <div class="container"  ng-controller="loginController">    
-          <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+          <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="loginBox">                    
             <div class="panel panel-default" style="border-radious:0px;">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:black'>Login In</div>
@@ -40,7 +40,7 @@
                     <div class="col-md-12 control">
                       <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                         Don't have an account! 
-                        <a href="#" onClick="$('#loginbox').hide(); $('#signupBoxStepOne').show()">
+                        <a ng-click="loginBox = !loginBox; signupBoxStepOne = !signupBoxStepOne">
                           Register here
                         </a>
                       </div>
@@ -51,7 +51,7 @@
               </div>                     
             </div>  
           </div>
-          <div id="signupBoxStepOne" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+          <div id="signupBoxStepOne" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepOne">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Sign Up 1</div>
@@ -111,8 +111,8 @@
          </div> 
 
 
-        <div class="container" ng-controller="loginController"> 
-          <div id="signupBoxStepTwo"  style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="container"> 
+          <div id="signupBoxStepTwo"  style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepTwo">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Sign Up Step 2</div>
@@ -198,8 +198,8 @@
         </div>
   
   <!-- Forgot Paswword and Reset Password Section-->
-  <div class="container" ng-controller="loginController">
-      <div id="forgotPasswordBox" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div class="container">
+      <div id="forgotPasswordBox" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="forgetPasswordBox">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Forgot Password </div>
@@ -239,7 +239,7 @@
              </div>   
 
 	 <!-- Reset Password -->
-		<div id="resetPasswordBox" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div id="resetPasswordBox" style="display:none; margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"  ng-show="resetPasswordBox">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Reset Password</div>

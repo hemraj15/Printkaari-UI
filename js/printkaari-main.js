@@ -1,6 +1,13 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
 app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
+
+	$scope.loginBox = true;
+	$scope.signupBoxStepOne = false;
+	$scope.signupBoxStepTwo = false;
+	$scope.resetPasswordBox = false;
+	$scope.forgotPasswordBox = false;
+
 	$scope.doLogin = function(){
 
 		  var loggedinUser;
@@ -137,7 +144,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/countries').then(onSuccess, onError);
 	}
 	
-		$scope.getStateListByCountryId=function(){
+		$scope.getStateListByCountryId = function(){
 			console.log($scope.country);
 		
 		var data = {
@@ -248,21 +255,19 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			console.log(error);				
 		}
 		
-		if(angular.equals(password, confirmPwd){
+		if(angular.equals(password, confirmPwd)){
 			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
 		}
 		else{
-		alert("New Password and Confirm Password are different");
+			alert("New Password and Confirm Password are different");
 		}
 	}
-
-	//Forgot and Reset Password ENDS
 
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider.
-	when('/', {templateUrl: 'partials/login.htm',   controller: 'loginController'}).
+	when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'}).
 	otherwise({redirectTo: '/'});
 
 }]);
