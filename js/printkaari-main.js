@@ -6,7 +6,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	$scope.signupBoxStepOne = false;
 	$scope.signupBoxStepTwo = false;
 	$scope.resetPasswordBox = false;
-	$scope.forgotPasswordBox = false;
+	$scope.forgetPasswordBox = false;
 
 	$scope.doLogin = function(){
 
