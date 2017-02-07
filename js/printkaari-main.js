@@ -7,6 +7,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	$scope.signupBoxStepTwo = false;
 	$scope.resetPasswordBox = false;
 	$scope.forgetPasswordBox = false;
+	$scope.resetPasswordSuccessBox=false;
 
 	$scope.doLogin = function(){
 
@@ -31,7 +32,6 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
                 } else {
                          $window.location.href = "index.html";
                        }
-			//$window.location.href = "index.html";
 			console.log(response);
 		};
 		
@@ -62,9 +62,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			var onSuccess = function(response){
 				$scope.step1Data=response.data;
 				emailToken=$scope.step1Data.emailToken;
-				$('#signupBoxStepOne').hide(); 
- -				$('#signupBoxStepTwo').show();
-			// $window.location.href = "signupStep2.html";
+				$scope.signupBoxStepOne=false;
+				$scope.signupBoxStepTwo=true;
+				
 			console.log(response);
 			console.log(step1Data.emailToken);
 		};
@@ -117,8 +117,6 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			console.log(error);				
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
-			
-		
 					
 	}
 	
@@ -149,8 +147,6 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var data = {
 			"countryId" : $scope.country.id
-			//"countryId" : 1
-			
 		}
 		console.log(data);
 		
@@ -175,8 +171,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		
 		var data = {
 			"stateId" : $scope.state.id
-			//"stateId" : 1
-			
+					
 		}
 		console.log(data);
 		
@@ -202,7 +197,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 	$scope.ForgotPassword=function(){
 		
 	      var data = {                        
-                        "username": $scope.username                       
+                        "username": $scope.email                       
                     };
 
 		    var _config = {
@@ -213,9 +208,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			$scope.loggedinUser=response.data;
 			$scope.forogtPasswordData=response.data;
 				emailToken=$scope.forogtPasswordData.emailToken;
-				$('#forgotPasswordBox').hide();
-				$('#resetPasswordBox').show();						
-					
+				$scope.forgetPasswordBox = false;
+				$scope.resetPasswordBox=true;
+				
 			     console.log(response);
 		};
 		
@@ -224,16 +219,16 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
              alert(error.message);			
 		}
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId=hemraj.it12@gmail.com', data, _config).then(onSuccess, onError);
+		$http.get('http://localhost:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
 		
 	}
 	
 	//Reset password
-	$scope.ResetPassword=function(){
+	$scope.ResetPassword = function(){
 		
 	    var data = {                        
-                        "password": $scope.newPassword,
-						"confirmPwd":$scope.confirmPwd,
+                        "newPassword": $scope.newPassword,
+						"confirmPassword":$scope.confirmPwd,
 						"emailToken":$scope.forogtPasswordData.emailToken
                     };
 
@@ -244,8 +239,8 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 					 
 		var onSuccess = function(response){
 			    $scope.message=response.data;
-				$('#resetPasswordBox').hide();
-				$('#resetPasswordSuccessBox').show();						
+				$scope.resetPasswordBox=false;				
+				$scope.resetPasswordSuccessBox=true;
 					
 			     console.log(response);
 		};
@@ -255,8 +250,10 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 			console.log(error);				
 		}
 		
-		if(angular.equals(password, confirmPwd)){
-			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
+		if(angular.equals($scope.newPassword, $scope.confirmPwd)){
+			
+			console.log(angular.equals($scope.newPassword, $scope.confirmPwd));
+			$http.put('http://localhost:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
 		}
 		else{
 			alert("New Password and Confirm Password are different");
