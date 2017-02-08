@@ -1,6 +1,6 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
-app.controller('loginController',['$scope', '$http', '$window',function($scope,$http,$window){
+app.controller('loginController',['$scope', '$http', '$window', '$routeParams',function($scope,$http,$window, $routeParams){
 
 	$scope.loginBox = true;
 	$scope.signupBoxStepOne = false;
@@ -133,6 +133,13 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 		var onSuccess = function(response){
 			$scope.countryList=response.data;
 			console.log(response);
+			console.log($routeParams);
+
+			if($routeParams.tokenId !== undefined ){
+				console.log("token Id is not undefined");
+				$scope.loginBox = false;
+				$scope.signupBoxStepTwo = true;
+			}
 		};
 		
 		var onError = function(error){
@@ -263,8 +270,9 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope,$
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-	$routeProvider.
-	when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'}).
-	otherwise({redirectTo: '/'});
+	$routeProvider
+	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
+	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
+	.otherwise({redirectTo: '/'});
 
 }]);
