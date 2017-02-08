@@ -72,7 +72,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		var onError = function(error){
 			console.log(error);				
 		}
-		$http.post('http://localhost:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
 	
 	}
 
@@ -116,7 +116,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		var onError = function(error){
 			console.log(error);				
 		}
-		$http.post('http://localhost:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
+		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
 					
 	}
 	
@@ -233,7 +233,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
              alert(error.message);			
 		}
 		
-		$http.get('http://localhost:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
+		$http.get('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
 		
 	}
 	
@@ -273,7 +273,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		if(angular.equals($scope.newPassword, $scope.confirmPwd)){
 			
 			console.log(angular.equals($scope.newPassword, $scope.confirmPwd));
-			$http.put('http://localhost:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
+			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
 		}
 		else{
 			alert("New Password and Confirm Password are different");
