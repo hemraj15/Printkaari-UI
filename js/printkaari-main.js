@@ -72,7 +72,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		var onError = function(error){
 			console.log(error);				
 		}
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
+		$http.post('http://localhost:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
 	
 	}
 
@@ -81,7 +81,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 	$scope.SignUpFinal = function(){
 
 		var data = {
-			"emailToken"	: emailToken,
+			"emailToken"	: $scope.emailToken,
 			"contactNo"		: $scope.contactNo,
 			"countryId"		: $scope.country.id,
 			"stateId"		: $scope.state.id,
@@ -116,7 +116,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		var onError = function(error){
 			console.log(error);				
 		}
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
+		$http.post('http://localhost:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
 					
 	}
 	
@@ -139,6 +139,13 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 				console.log("token Id is not undefined");
 				$scope.loginBox = false;
 				$scope.signupBoxStepTwo = true;
+			}
+			
+			if($routeParams.tokenForPwd !== undefined ){
+				console.log("tokenForPwd  is not undefined");
+				$scope.emailToken=$routeParams.tokenForPwd;
+				$scope.loginBox = false;
+				$scope.resetPasswordBox = true;
 			}
 		};
 		
@@ -214,7 +221,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 			var onSuccess = function(response){
 			$scope.loggedinUser=response.data;
 			$scope.forogtPasswordData=response.data;
-				emailToken=$scope.forogtPasswordData.emailToken;
+				$scope.emailToken=$scope.forogtPasswordData.emailToken;
 				$scope.forgetPasswordBox = false;
 				$scope.resetPasswordBox=true;
 				
@@ -232,11 +239,17 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 	
 	//Reset password
 	$scope.ResetPassword = function(){
-		
+		var emailTokenId;
+		if($scope.passwordToken !== undefined){
+			emailTokenId=$scope.passwordToken;			
+		}
+		else{
+			emailTokenId=$scope.emailToken ;
+		}
 	    var data = {                        
                         "newPassword": $scope.newPassword,
 						"confirmPassword":$scope.confirmPwd,
-						"emailToken":$scope.forogtPasswordData.emailToken
+						"emailToken":emailTokenId
                     };
 
 	    var _config = {
@@ -273,6 +286,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	$routeProvider
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
+	.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.otherwise({redirectTo: '/'});
 
 }]);
