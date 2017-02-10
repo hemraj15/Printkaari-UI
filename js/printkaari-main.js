@@ -62,7 +62,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
         };
 			var onSuccess = function(response){
 				$scope.step1Data=response.data;
-				emailToken=$scope.step1Data.emailToken;
+				$scope.emailToken=$scope.step1Data.emailToken;
 				$scope.signupBoxStepOne=false;
 				$scope.signupBoxStepTwo=true;
 				
