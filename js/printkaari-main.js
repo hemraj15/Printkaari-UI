@@ -1,6 +1,6 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
-app.controller('loginController',['$scope', '$http', '$window', '$routeParams',function($scope,$http,$window, $routeParams){
+app.controller('loginController',['$scope', '$http', '$window', '$routeParams','loginDataService',function($scope,$http,$window, $routeParams,loginDataService){
 
 	$scope.loginBox = true;
 	$scope.signupBoxStepOne = false;
@@ -25,7 +25,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		 };
 			var onSuccess = function(response){
 			$scope.loggedinUser=response.data;
-			
+			loginDataService.setLoginData($scope.loggedinUser);
 			if ($scope.loggedinUser.userType ==="CUSTOMER") {
 				console.log(response.data.full_name);
                    $window.location.href = "customerDashBoard.html";
@@ -36,7 +36,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);	
+            $scope.errorCode = error.data.errorCode;			
 		}
 		
 		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
@@ -70,7 +71,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);		
+             $scope.error = error.status;			
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
 	
@@ -103,6 +105,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 		
 		var onSuccess = function(response){
 			$scope.User=response.data;
+			loginDataService.setLoginData($scope.User);
 			emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
                    $window.location.href = "customerDashBoard.html";
@@ -282,6 +285,30 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams',f
 
 }]);
 
+app.controller('loginDataController',['$scope', '$http', '$window', '$routeParams','loginDataService',function($scope,$http,$window, $routeParams,loginDataService){
+	
+	
+	$scope.loginData = loginDataService.getLoginData();
+	
+	            
+	
+	
+}]);
+
+app.service('loginDataService', function($window){
+	
+	var service = this;
+	var loginData;
+	
+	service.setLoginData = function(data){
+		$window.localStorage.loginData = JSON.stringify(data);			
+	};
+		
+    service.getLoginData = function(){
+		return JSON.parse($window.localStorage.loginData);
+	};
+		
+});
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})

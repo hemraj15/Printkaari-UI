@@ -19,6 +19,7 @@
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input id="login-username" type="email" class="form-control" name="username" value="" placeholder=" Email " ng-model="username" ng-minlength="6" 
         ng-maxlength="100" required>
+		<span ng-show="loginform.username.$invalid">incorrect email id</span>
         <!--   <p ng-show="loginform.username.$error.minlength">email id is too short. min length 6</p>
 			<p ng-show="loginform.username.$error.maxlength">email id is too long. max length 100 </p>
 			<p ng-show="userForm.username.$error.required">Your User Name is required.</p>	-->		
@@ -29,9 +30,10 @@
             <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password" ng-minlength="5" 
         ng-maxlength="15" required>
 			<!--  <p ng-show="loginform.password.$error.minlength">Password is too short. min length 5</p>
-			<p ng-show="loginform.password.$error.maxlength">Password is too long. max length 15 </p>
-			<p ng-show="userForm.password.$error.required">Your Password is required.</p> -->	
-
+			<p ng-show="loginform.password.$error.maxlength">Password is too long. max length 15 </p> -->
+			<p ng-show="loginform.login-password.$error.required">Your Password is required.</p> 	
+			 <p ng-bind='errorCode'></p>
+             <p>{{errorCode}}</p>
           </div>
           
           <div class="input-group">
@@ -46,7 +48,9 @@
             <div class="col-sm-12 controls">
               <a id="btn-login" href="#" class="btn btn-success" ng-click="doLogin()">Login  </a>
             </div>
+			
           </div>
+		  
 
           <div class="form-group">
             <div class="col-md-12 control">
