@@ -80,8 +80,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 
 	
 	
-	$scope.SignUpFinal = function(){
-
+	$scope.SignUpFinal = function(){	
+	
 		var data = {
 			"emailToken"	: $scope.emailToken,
 			"contactNo"		: $scope.contactNo,
@@ -106,7 +106,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		var onSuccess = function(response){
 			$scope.User=response.data;
 			loginDataService.setLoginData($scope.User);
-			emailToken='';
+			$scope.emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
                    $window.location.href = "customerDashBoard.html";
                 } else {
@@ -140,13 +140,14 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 
 			if($routeParams.tokenId !== undefined ){
 				console.log("token Id is not undefined");
+				$scope.emailToken=$routeParams.tokenId;
 				$scope.loginBox = false;
 				$scope.signupBoxStepTwo = true;
 			}
 			
 			if($routeParams.tokenForPwd !== undefined ){
 				console.log("tokenForPwd  is not undefined");
-				$scope.emailToken=$routeParams.tokenForPwd;
+				$scope.passwordToken=$routeParams.tokenForPwd;
 				$scope.loginBox = false;
 				$scope.resetPasswordBox = true;
 			}
@@ -222,7 +223,6 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 					 }
 		 };
 			var onSuccess = function(response){
-			$scope.loggedinUser=response.data;
 			$scope.forogtPasswordData=response.data;
 				$scope.emailToken=$scope.forogtPasswordData.emailToken;
 				$scope.forgetPasswordBox = false;
@@ -262,6 +262,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 					 
 		var onSuccess = function(response){
 			    $scope.message=response.data;
+				emailTokenId='';
 				$scope.resetPasswordBox=false;				
 				$scope.resetPasswordSuccessBox=true;
 					
