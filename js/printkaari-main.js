@@ -67,7 +67,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 				$scope.signupBoxStepTwo=true;
 				
 			console.log(response);
-			console.log(step1Data.emailToken);
+			console.log($scope.step1Data.emailToken);
 		};
 		
 		var onError = function(error){
