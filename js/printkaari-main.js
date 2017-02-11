@@ -291,9 +291,40 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 	
 	$scope.loginData = loginDataService.getLoginData();
 	
-	            
+}]);
+
+
+app.controller('loginTabController',['$scope', 'loginDataService', function($scope, loginDataService){
 	
-	
+	$scope.isLogin = true;
+	$scope.user = {
+		name : "kamlesh"
+	};
+
+
+	$scope.init = function(){
+		var data = loginDataService.getLoginData();
+
+		if(isValidData(data)){
+			$scope.isLogin = true;
+			$scope.user = {};
+		}
+
+	}
+
+	function isValidData(data){
+
+		if(data == 'undefined'){
+			return false;
+		}
+
+		// check validation of data
+		return true;
+	}
+}]);
+
+app.controller('dashboardController', ['$scope', function(){
+	// abhi toh party suru hui h
 }]);
 
 app.service('loginDataService', function($window){
@@ -315,6 +346,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
+	.when('/dashboard' ,{templateUrl: 'partials/dashboard.html',   controller: 'dashboardController'})
 	.otherwise({redirectTo: '/'});
 
 }]);
