@@ -1,6 +1,6 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
-app.controller('loginController',['$scope', '$http', '$window', '$routeParams','loginDataService',function($scope,$http,$window, $routeParams,loginDataService){
+app.controller('loginController',['$scope', '$http', '$window', '$routeParams','loginDataService','$location',function($scope,$http,$window, $routeParams,loginDataService,$location){
 
 	$scope.loginBox = true;
 	$scope.signupBoxStepOne = false;
@@ -28,9 +28,14 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			loginDataService.setLoginData($scope.loggedinUser);
 			if ($scope.loggedinUser.userType ==="CUSTOMER") {
 				console.log(response.data.full_name);
-                   $window.location.href = "customerDashBoard.html";
+                  // $window.location.href = "customerDashBoard.html";
+				 // $window.location.href = "/login.html#!/dashboard";
+				  // $window.location.pathname = "/login.html#!/dashboard";
+				    $location.path('/dashboard');
+
                 } else {
                          $window.location.href = "index.html";
+						 
                        }
 			console.log(response);
 		};
@@ -108,7 +113,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			loginDataService.setLoginData($scope.User);
 			$scope.emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
-                   $window.location.href = "customerDashBoard.html";
+                  // $window.location.href = "customerDashBoard.html"; 
+				  $window.location.href = "dashboard.html";
                 } else {
                          $window.location.href = "index.html";
                        }
@@ -296,25 +302,24 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 
 app.controller('loginTabController',['$scope', 'loginDataService', function($scope, loginDataService){
 	
-	$scope.isLogin = true;
-	$scope.user = {
-		name : "kamlesh"
-	};
+	$scope.isLogin = false;
+	
 
 
 	$scope.init = function(){
-		var data = loginDataService.getLoginData();
+		$scope.data = loginDataService.getLoginData();
 
-		if(isValidData(data)){
+		if(isValidData($scope.data)){
 			$scope.isLogin = true;
-			$scope.user = {};
+			$scope.loginData = $scope.data;
+			console.log("inside loginTabController isLogin=true");
 		}
 
 	}
 
 	function isValidData(data){
 
-		if(data == 'undefined'){
+		if(data === 'undefined'){
 			return false;
 		}
 
