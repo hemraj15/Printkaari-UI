@@ -26,15 +26,16 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			var onSuccess = function(response){
 			$scope.loggedinUser=response.data;
 			loginDataService.setLoginData($scope.loggedinUser);
+			
 			if ($scope.loggedinUser.userType ==="CUSTOMER") {
 				console.log(response.data.full_name);
                   // $window.location.href = "customerDashBoard.html";
 				 // $window.location.href = "/login.html#!/dashboard";
 				  // $window.location.pathname = "/login.html#!/dashboard";
-				    $location.path('/dashboard');
+				     $location.path('/custDashboard');
 
                 } else {
-                         $window.location.href = "index.html";
+                         $location.path('/admin');
 						 
                        }
 			console.log(response);
@@ -114,9 +115,11 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			$scope.emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
                   // $window.location.href = "customerDashBoard.html"; 
-				  $window.location.href = "dashboard.html";
+				 // $window.location.href = "dashboard.html";
+				  $location.path('/custDashboard');
                 } else {
-                         $window.location.href = "index.html";
+                        // $window.location.href = "index.html";
+						 $location.path('/admin');
                        }
 			
 			console.log(response);
@@ -302,20 +305,30 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 
 app.controller('loginTabController',['$scope', 'loginDataService', function($scope, loginDataService){
 	
-	$scope.isLogin = false;
+	    $scope.isLogin = false;
 	
 
 
-	$scope.init = function(){
+	    $scope.init = function(){
+		
+		
 		$scope.data = loginDataService.getLoginData();
-
+        if(angular.isUndefined($scope.data)){
+				$scope.isLogin=false;
+			}
+			else{
+				$scope.isLogin=true;
+				$scope.loginData = $scope.data;
+			}
 		if(isValidData($scope.data)){
-			$scope.isLogin = true;
-			$scope.loginData = $scope.data;
+			//$scope.isLogin = true;
+			
 			console.log("inside loginTabController isLogin=true");
 		}
 
 	}
+	
+	$scope.init();
 
 	function isValidData(data){
 
@@ -351,7 +364,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
-	.when('/dashboard' ,{templateUrl: 'partials/dashboard.html',   controller: 'dashboardController'})
+	.when('/custDashboard' ,{templateUrl: 'partials/custDashboard.html',   controller: 'dashboardController'})
+	.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
 	.otherwise({redirectTo: '/'});
 
 }]);
