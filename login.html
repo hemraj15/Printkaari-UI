@@ -117,9 +117,10 @@
           <a href="login.html" ng-show="!isLogin"><i class="fa fa-lock"></i> Login</a>
           <a class="dropdown-toggle" ng-show="isLogin"> {{loginData.full_name}} <i class="fa fa-angle-down"></i></a>
           <ul ng-show="isLogin" class="dropdown-menu">
+		    <li><a>My Profile</a></li>
             <li><a>User Setting</a></li>
-            <li><a>Logout</a></li>
-			<li><a>My Profile</a></li>
+            <li><a  ng-click="logout()">Logout</a></li>
+			
 			
           </ul>       
         </li>
