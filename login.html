@@ -112,7 +112,17 @@
 
         <li><a href="college/minor.html">College Projects</a></li> 
         <li><a href="login.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-        <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+        
+        <li ng-controller='loginTabController' ng-class="{dropdown : isLogin}">
+          <a href="login.html" ng-show="!isLogin"><i class="fa fa-lock"></i> Login</a>
+          <a class="dropdown-toggle" ng-show="isLogin"> {{loginData.full_name}} <i class="fa fa-angle-down"></i></a>
+          <ul ng-show="isLogin" class="dropdown-menu">
+            <li><a>User Setting</a></li>
+            <li><a>Logout</a></li>
+			<li><a>My Profile</a></li>
+			
+          </ul>       
+        </li>
       </ul>
     </div>
   </div>
