@@ -1,55 +1,65 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
 app.controller('loginController',['$scope', '$http', '$window', '$routeParams','loginDataService','$location',function($scope,$http,$window, $routeParams,loginDataService,$location){
-
+    
+	$scope.errorMessage = "";
 	$scope.loginBox = true;
 	$scope.signupBoxStepOne = false;
 	$scope.signupBoxStepTwo = false;
 	$scope.resetPasswordBox = false;
 	$scope.forgetPasswordBox = false;
-	$scope.resetPasswordSuccessBox=false;
+	$scope.resetPasswordSuccessBox = false;
+	
+	
+	// var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+    // var zipCodeRegex = new RegExp("^[1-9][0-9]{4,5;
+    // var expRegex = new RegExp("^[0-9]{1,10}$");
+    // var currencyRegex = new RegExp("^[a-zA-Z]*$");
+    // var urlRegex = /https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/;
+    // var docRegex = new RegExp("(.?)\.(docx|doc)$");
 
 	$scope.doLogin = function(){
-
 		  var loggedinUser;
 		  var data = {
                         
                         "username": $scope.username,
                         "password": $scope.password
                     };
-
-		var requestData = $scope.transformRequestForFormEncoded(data);
-        var _config = {
-            headers: {'Content-Type' : 'application/json'
-					 }
-		 };
-			var onSuccess = function(response){
-			$scope.loggedinUser=response.data;
-			loginDataService.setLoginData($scope.loggedinUser);
-			if ($scope.loggedinUser.userType ==="CUSTOMER") {
-				console.log(response.data.full_name);
+          var requestData = $scope.transformRequestForFormEncoded(data);
+          var _config = {
+				headers: {
+							'Content-Type' : 'application/json'
+						 }
+			};
+		var onSuccess = function(response){
+				$scope.loggedinUser=response.data;
+				loginDataService.setLoginData($scope.loggedinUser);
+				
+				if ($scope.loggedinUser.userType ==="CUSTOMER") {
+					console.log(response.data.full_name);
                   // $window.location.href = "customerDashBoard.html";
-				 // $window.location.href = "/login.html#!/dashboard";
-				  // $window.location.pathname = "/login.html#!/dashboard";
-				    $location.path('/dashboard');
+				     $location.path('/custDashboard');
 
                 } else {
-                         $window.location.href = "index.html";
+                         $location.path('/admin');
 						 
                        }
 			console.log(response);
 		};
 		
-		var onError = function(error){
+	    var onError = function(error){
 			console.log(error);	
-            $scope.errorCode = error.data.errorCode;			
+            $scope.errorMessage = error.data.errorCode;		
+			console.log($scope.errorMessage);
+            $window.alert(error.data.errorCode);
+            return false;			
 		}
 		
 		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
 		
 	}
 
-        var emailToken;
+    var emailToken;
 	$scope.SignUpIntiate = function(){
 		var data = {
 			"firstName" : $scope.firstName,
@@ -76,17 +86,14 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		};
 		
 		var onError = function(error){
-			console.log(error);		
+			console.log(error);	
+            $window.alert(error.data.errorCode);			
              $scope.error = error.status;			
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
 	
-	}
-
-	
-	
+	}	
 	$scope.SignUpFinal = function(){	
-	
 		var data = {
 			"emailToken"	: $scope.emailToken,
 			"contactNo"		: $scope.contactNo,
@@ -114,21 +121,23 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			$scope.emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
                   // $window.location.href = "customerDashBoard.html"; 
-				  $window.location.href = "dashboard.html";
+				 // $window.location.href = "dashboard.html";
+				  $location.path('/custDashboard');
                 } else {
-                         $window.location.href = "index.html";
+                        // $window.location.href = "index.html";
+						 $location.path('/admin');
                        }
 			
 			console.log(response);
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);
+            $window.alert(error.data.errorCode);			
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
 					
 	}
-	
 	
 	$scope.transformRequestForFormEncoded = function(obj) {
 			var str = [];
@@ -160,7 +169,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);
+            $window.alert(error.data.errorCode);			
 		};
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/countries').then(onSuccess, onError);
@@ -182,6 +192,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		var onSuccess = function(response){
 			$scope.stateList=response.data;
 			console.log(response);
+			$window.alert(error.data.errorCode);
 		};
 		
 		var onError = function(error){
@@ -210,7 +221,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);
+            $window.alert(error.data.errorCode);			
 		};
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
@@ -239,7 +251,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		
 		var onError = function(error){
 			console.log(error);
-             alert(error.message);			
+             //alert(error.message);
+            $window.alert(error.data.errorCode);			 
 		}
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
@@ -276,7 +289,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		};
 		
 		var onError = function(error){
-			alert(error.message);
+			//alert(error.message);
+			$window.alert(error.data.errorCode);
 			console.log(error);				
 		}
 		
@@ -286,8 +300,37 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
 		}
 		else{
-			alert("New Password and Confirm Password are different");
+			$window.alert("New Password and Confirm Password are different");
 		}
+	}
+	
+	
+	$scope.analyzeEmailId = function(email){
+		 var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+		 $scope.isEmailIdvalid = "";
+			if(angular.isDefined(email) && !reg.test(email)){
+			  $scope.isEmailIdvalid = "Enter Valid Email Id";
+			}
+			else if(!angular.isDefined(email) || email === "" || email === null){
+			  $scope.isEmailIdvalid = "Email Id is required";
+			}
+			else {
+			$scope.isEmailIdvalid = "";
+			}
+	}	
+		$scope.nalayzePassword=function(password){
+				var reg= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{5,15}$/;
+				$scope.isPasswordValid = "";
+			if(angular.isDefined(password) && !reg.test(password)){
+			   $scope.isEmailIdvalid = "Enter Valid Password";
+			}
+			else if(!angular.isDefined(password) || password === "" || password === null){
+			  $scope.isEmailIdvalid = "Password is required";
+			}
+			else {
+			$scope.isPasswordValid = "";
+			}
+				
 	}
 
 }]);
@@ -300,26 +343,40 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 }]);
 
 
-app.controller('loginTabController',['$scope', 'loginDataService', function($scope, loginDataService){
+app.controller('loginTabController',['$scope','$window','$location','loginDataService', function($scope,$window,$location,loginDataService){
 	
-	$scope.isLogin = false;
-	
-
-
-	$scope.init = function(){
-		$scope.data = loginDataService.getLoginData();
-
-		if(isValidData($scope.data)){
-			$scope.isLogin = true;
-			$scope.loginData = $scope.data;
-			console.log("inside loginTabController isLogin=true");
+	    $scope.isLogin = false;
+	    $scope.init = function(){
+		$scope.errorMessage = "";	
+			$scope.data = loginDataService.getLoginData();
+			if(angular.isUndefined($scope.data)){
+					$scope.isLogin=false;
+			}
+			else{
+					$scope.isLogin=true;
+					$scope.loginData = $scope.data;
+				}
+				if(isValidData($scope.data)){
+					//$scope.isLogin = true;				
+					console.log("inside loginTabController isLogin=true");
+				}
 		}
-
+	
+	$scope.init();
+	$scope.logout=function(){		
+				
+		console.log("clearing all data");
+		console.log($window.localStorage.loginData);
+		$window.localStorage.clear();
+		$window.alert("You Have Logged out Success Fully redirect to Home");
+		console.log($window.localStorage.loginData);
+		$location.path('/logout');
+		
 	}
 
-	function isValidData(data){
+	         function isValidData(data){
 
-		if(data === 'undefined'){
+		       if(data === 'undefined'){
 			return false;
 		}
 
@@ -342,7 +399,12 @@ app.service('loginDataService', function($window){
 	};
 		
     service.getLoginData = function(){
-		return JSON.parse($window.localStorage.loginData);
+		if(angular.isDefined($window.localStorage.loginData)){
+			return JSON.parse($window.localStorage.loginData);
+		}else{
+			return undefined;
+		}
+		
 	};
 		
 });
@@ -351,7 +413,9 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
 	.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
-	.when('/dashboard' ,{templateUrl: 'partials/dashboard.html',   controller: 'dashboardController'})
-	.otherwise({redirectTo: '/'});
+	.when('/custDashboard' ,{templateUrl: 'partials/custDashboard.html',   controller: 'dashboardController'})
+	.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
+	.when('/logout' ,{redirectTo: '/login.html'})
+	.otherwise({redirectTo: '/' });
 
 }]);

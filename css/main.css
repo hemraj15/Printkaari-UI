@@ -2055,3 +2055,8 @@ a:hover{
     cursor: pointer;
 }
 
+.erorr-alignment {
+	margin-top: -16px;
+    color: red;
+    margin-left: 32px;
+}
