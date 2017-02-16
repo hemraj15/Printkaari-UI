@@ -1,6 +1,6 @@
 var app = angular.module('printkaariApp',["ngRoute"]);
 
-app.controller('loginController',['$scope', '$http', '$window', '$routeParams','loginDataService','$location',function($scope,$http,$window, $routeParams,loginDataService,$location){
+app.controller('loginController',['$scope', '$http', '$window', '$route','$routeParams','loginDataService','$location',function($scope,$http,$window, $route,$routeParams,loginDataService,$location){
     
 	$scope.errorMessage = "";
 	$scope.loginBox = true;
@@ -19,14 +19,14 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
     // var docRegex = new RegExp("(.?)\.(docx|doc)$");
 
 	$scope.doLogin = function(){
-		  var loggedinUser;
-		  var data = {
+		 var loggedinUser;
+		 var data = {
                         
                         "username": $scope.username,
                         "password": $scope.password
                     };
-          var requestData = $scope.transformRequestForFormEncoded(data);
-          var _config = {
+         var requestData = $scope.transformRequestForFormEncoded(data);
+         var _config = {
 				headers: {
 							'Content-Type' : 'application/json'
 						 }
@@ -39,9 +39,13 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 					console.log(response.data.full_name);
                   // $window.location.href = "customerDashBoard.html";
 				     $location.path('/custDashboard');
+					//$route.reload();
+					$window.location.reload();
 
                 } else {
                          $location.path('/admin');
+						 //$route.reload();
+						 $window.location.reload();
 						 
                        }
 			console.log(response);
@@ -59,7 +63,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		
 	}
 
-    var emailToken;
+        var emailToken;
 	$scope.SignUpIntiate = function(){
 		var data = {
 			"firstName" : $scope.firstName,
@@ -75,7 +79,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
             	'Content-Type' : 'application/json',
 			}
         };
-			var onSuccess = function(response){
+		var onSuccess = function(response){
 				$scope.step1Data=response.data;
 				$scope.emailToken=$scope.step1Data.emailToken;
 				$scope.signupBoxStepOne=false;
@@ -88,7 +92,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		var onError = function(error){
 			console.log(error);	
             $window.alert(error.data.errorCode);			
-             $scope.error = error.status;			
+             //$scope.error = error.status;	
+            return false;			 
 		}
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
 	
@@ -120,21 +125,25 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			loginDataService.setLoginData($scope.User);
 			$scope.emailToken='';
 			if ($scope.User.userType === 'CUSTOMER') {
-                  // $window.location.href = "customerDashBoard.html"; 
-				 // $window.location.href = "dashboard.html";
 				  $location.path('/custDashboard');
-                } else {
-                        // $window.location.href = "index.html";
-						 $location.path('/admin');
-                       }
+				  $window.location.reload();
+                } 
+			else {
+         			$location.path('/admin');
+					//$route.reload();
+					$window.location.reload();
+						 
+                  }
 			
 			console.log(response);
 		};
 		
 		var onError = function(error){
 			console.log(error);
-            $window.alert(error.data.errorCode);			
+            $window.alert(error.data.errorCode);
+            return false;			
 		}
+		
 		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
 					
 	}
@@ -170,7 +179,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		
 		var onError = function(error){
 			console.log(error);
-            $window.alert(error.data.errorCode);			
+            $window.alert(error.data.errorCode);
+            return false;			
 		};
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/countries').then(onSuccess, onError);
@@ -196,7 +206,9 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		};
 		
 		var onError = function(error){
-			console.log(error);				
+			console.log(error);	
+            $window.alert(error.data.errorCode);
+            return false;			
 		}
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.country.id+'/states').then(onSuccess, onError);
@@ -222,26 +234,26 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		
 		var onError = function(error){
 			console.log(error);
-            $window.alert(error.data.errorCode);			
+            $window.alert(error.data.errorCode);
+             return false;			
 		};
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
 	}
 	
-	//Forgot and Reset Password
-	
+	//Forgot and Reset Password	
 	$scope.ForgotPassword=function(){
 		
-	      var data = {                        
+	    var data = {                        
                         "username": $scope.email                       
                     };
 
-		    var _config = {
+		var _config = {
             headers: {'Content-Type' : 'application/json'
 					 }
 		 };
-			var onSuccess = function(response){
-			$scope.forogtPasswordData=response.data;
+		var onSuccess = function(response){
+		        $scope.forogtPasswordData=response.data;
 				$scope.emailToken=$scope.forogtPasswordData.emailToken;
 				$scope.forgetPasswordBox = false;
 				$scope.resetPasswordBox=true;
@@ -252,7 +264,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		var onError = function(error){
 			console.log(error);
              //alert(error.message);
-            $window.alert(error.data.errorCode);			 
+            $window.alert(error.data.errorCode);
+            return false;			
 		}
 		
 		$http.get('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
@@ -276,8 +289,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 
 	    var _config = {
                    headers: {'Content-Type' : 'application/json'}
-		             };
-					 
+		             };		 
 					 
 		var onSuccess = function(response){
 			    $scope.message=response.data;
@@ -291,7 +303,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 		var onError = function(error){
 			//alert(error.message);
 			$window.alert(error.data.errorCode);
-			console.log(error);				
+			console.log(error);
+            return false;			
 		}
 		
 		if(angular.equals($scope.newPassword, $scope.confirmPwd)){
@@ -306,8 +319,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 	
 	
 	$scope.analyzeEmailId = function(email){
-		 var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
-		 $scope.isEmailIdvalid = "";
+		var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+		    $scope.isEmailIdvalid = "";
 			if(angular.isDefined(email) && !reg.test(email)){
 			  $scope.isEmailIdvalid = "Enter Valid Email Id";
 			}
@@ -318,7 +331,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			$scope.isEmailIdvalid = "";
 			}
 	}	
-		$scope.nalayzePassword=function(password){
+	$scope.analayzePassword=function(password){
 				var reg= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{5,15}$/;
 				$scope.isPasswordValid = "";
 			if(angular.isDefined(password) && !reg.test(password)){
@@ -331,6 +344,15 @@ app.controller('loginController',['$scope', '$http', '$window', '$routeParams','
 			$scope.isPasswordValid = "";
 			}
 				
+	}
+	
+	$scope.isFieldValid=function(fieldStr){
+		
+		  $scope.isFieldStrValid="";
+		  if(!angular.isDefined(fieldStr)|| fieldStr ==="" || fieldStr ===null){
+			  
+			 $scope.isFieldStrValid="This Field is Required"; 
+		  }
 	}
 
 }]);
@@ -371,10 +393,12 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
 		$window.alert("You Have Logged out Success Fully redirect to Home");
 		console.log($window.localStorage.loginData);
 		$location.path('/logout');
+		//$route.reload();
+		$window.location.reload();
 		
 	}
 
-	         function isValidData(data){
+	     function isValidData(data){
 
 		       if(data === 'undefined'){
 			return false;
