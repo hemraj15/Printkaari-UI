@@ -332,12 +332,12 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			}
 	}	
 	$scope.analayzePassword=function(password){
-				var reg= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{5,15}$/;
+				//var reg= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{5,15}$/;
 				$scope.isPasswordValid = "";
-			if(angular.isDefined(password) && !reg.test(password)){
-			   $scope.isEmailIdvalid = "Enter Valid Password";
-			}
-			else if(!angular.isDefined(password) || password === "" || password === null){
+			//if(angular.isDefined(password) && !reg.test(password)){
+			//   $scope.isEmailIdvalid = "Enter Valid Password";
+			//}
+			if(!angular.isDefined(password) || password === "" || password === null){
 			  $scope.isEmailIdvalid = "Password is required";
 			}
 			else {
@@ -369,7 +369,7 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
 	
 	    $scope.isLogin = false;
 	    $scope.init = function(){
-		$scope.errorMessage = "";	
+		    $scope.errorMessage = "";	
 			$scope.data = loginDataService.getLoginData();
 			if(angular.isUndefined($scope.data)){
 					$scope.isLogin=false;
@@ -406,6 +406,9 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
 
 		// check validation of data
 		return true;
+	}
+	$scope.userDeatils=function(){
+		
 	}
 }]);
 
