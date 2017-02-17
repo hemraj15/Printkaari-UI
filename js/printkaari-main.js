@@ -274,7 +274,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 	
 	//Reset password
 	$scope.ResetPassword = function(){
-		var emailTokenId;
+		var emailTokenId="";
 		if($scope.passwordToken !== undefined){
 			emailTokenId=$scope.passwordToken;			
 		}
@@ -331,14 +331,17 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			$scope.isEmailIdvalid = "";
 			}
 	}	
-	$scope.analayzePassword=function(password){
+	$scope.analayzePassword=function(pwd){
 				//var reg= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{5,15}$/;
+				var pwdReg=/^.{5,15}$/;
 				$scope.isPasswordValid = "";
-			//if(angular.isDefined(password) && !reg.test(password)){
-			//   $scope.isEmailIdvalid = "Enter Valid Password";
-			//}
-			if(!angular.isDefined(password) || password === "" || password === null){
-			  $scope.isEmailIdvalid = "Password is required";
+				
+				//$window.alert(pwd.length);
+			if(angular.isDefined(pwd) && !pwdReg.test(pwd)){
+			   $scope.isPasswordValid = "Enter Valid Password of length between 5 to 15";
+			}
+			else if(!angular.isDefined(pwd) || pwd === "" || pwd === null ){
+			  $scope.isPasswordValid = "Password is required  ";
 			}
 			else {
 			$scope.isPasswordValid = "";
