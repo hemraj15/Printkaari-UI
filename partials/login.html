@@ -1,12 +1,11 @@
-<div class="container"  ng-controller="loginController">    
-  
+<div class="container"  ng-controller="loginController" >  
 
-  <div id="loginbox" style="margin-top:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="loginBox">  
+  <div id="loginbox" style="margin-top: 100px; margin-bottom: 34px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="loginBox">  
     <div class="panel panel-default" style="border-radious:0px;">
       <div class="panel-heading"  style="background-color:#009688 !important">
         <div class="panel-title" style='color:black'>Login In</div>
         <div style="float:right; font-size: 80%; position: relative; top:-10px; ">
-          <a style='color:white' ng-click="loginBox = !loginBox; forgetPasswordBox = true">Forgot password?</a>
+          <a style='color:white' ng-click="loginBox = !loginBox; forgetPasswordBox = true">Forgot password ?</a>
         </div>
       </div>     
 
@@ -17,13 +16,13 @@
 
           <div style="margin-bottom: 25px" class="input-group">
             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-            <input id="login-username" type="email" class="form-control" name="username" value="" placeholder="Email" ng-model="username" required  maxlength="100" data-ng-blur="analyzeEmailId(username)" />
+            <input id="login-username" type="email" class="form-control" name="username" value="" placeholder="Email" ng-model="username" required  maxlength="50" data-ng-blur="analyzeEmailId(username)" />
 		</div>
 		<p style="margin-top: -12px; color: red; margin-left: 36px;" data-ng-if="isEmailIdvalid !== ''" class="error-msg">{{isEmailIdvalid}}</p>
 			
           <div style="margin-bottom: 25px" class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password" ng-minlength="5"  required minlength="5" maxlength="15" data-ng-blur="nalayzePassword(password)" >	
+            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password"  required minlength="5" maxlength="15" data-ng-blur="analayzePassword(password)" >	
          </div>
 		  <span style="color: red;" ng-bind="errorMessage" >{{errorMessage}}</span>
           <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="isPasswordValid !== ''" class="error-msg">{{isPasswordValid}}</p>
@@ -60,7 +59,7 @@
   </div>
 
 
-  <div id="signupBoxStepOne" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepOne">
+  <div id="signupBoxStepOne" style="margin-top:100px; margin-bottom: 34px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepOne">
     <div class="panel panel-info">
       <div class="panel-heading"  style="background-color:#009688 !important">
         <div class="panel-title" style='color:white'>Sign Up Step 1</div>
@@ -74,72 +73,63 @@
         </div>
         <form id="signupStepOneForm" class="form-horizontal" role="form">
 		
-        <div class="input-group" style="margin-bottom: 25px" >
-        <!--  <label for="firstname" class="col-md-3 control-label">First Name</label> -->
-          <div class="col-md-9">
-            <input type="text" class="form-control" name="firstname" ng-model="firstName" placeholder="First Name">
-          </div>
-        </div>
-				
-        <div class="input-group" style="margin-bottom: 25px">
+        <div row="sign_step_name col-sm-12">
 		
-        <!--  <label for="lastname" class="col-md-3 control-label">Last Name</label> -->
-          <div class="col-md-9">
-            <input type="text" class="form-control" name="lastname" ng-model="lastName" placeholder="Last Name">
-          </div>
-        </div>
+			<div class="input-group" style="margin-bottom: 25px">
+			  <div class="col-md-6">
+				<input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" name="firstname" ng-model="firstName" placeholder="First Name">
+			  </div>
+			 		
+					
+					  <div class="col-md-6">
+						<input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" name="lastname" ng-model="lastName" placeholder="Last Name">
+					  </div>
+					  
 				
-        <div class="input-group" style="margin-bottom: 25px">
-		<span class="input-group-addon"><i class="fa fa-user"></i></span>
-         <!-- <label for="email" class="col-md-3 control-label">Email</label> --> 
-         
-            <input type="text" class="form-control" name="email" ng-model="email" placeholder="Email Address">
-          
-        </div>
+			 
+			</div>
+		</div>
+			
 
-       <!-- <div class="input-group" style="margin-bottom: 25px">
-		 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-         <!--<label for="password" class="col-md-3 control-label">Password</label> 
-          <div class="col-md-9">
-            <input type="password" class="form-control" name="password" ng-model="password" placeholder="Password">
-          </div>
-        </div> -->
-                  
-	     <div style="margin-bottom: 25px" class="input-group">
+         <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input id="login-username" type="email" class="form-control" name="email"  placeholder="Email Address" ng-model="email" required  maxlength="50" data-ng-blur="analyzeEmailId(email)" />
+		</div>
+		<p style="margin-top: -12px; color: red; margin-left: 36px;" data-ng-if="isEmailIdvalid !== ''" class="error-msg">{{isEmailIdvalid}}</p>
+       
+        <div style="margin-bottom: 25px" class="input-group">
             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-            <input id="login-password" type="password" class="form-control" name="password" placeholder="Password" ng-model="password" ng-minlength="5" 
-        ng-maxlength="15" required>
-		<!--	<p ng-show="loginform.password.$error.minlength">Password is too short. min length 5</p>
-			<p ng-show="loginform.password.$error.maxlength">Password is too long. max length 15 </p>
-			<p ng-show="userForm.password.$error.required">Your Password is required.</p> --> 
+            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password"   required minlength="5" maxlength="15" data-ng-blur="analayzePassword(password)" >	
+         </div>
+		  <span style="color: red;" ng-bind="errorMessage" >{{errorMessage}}</span>
+          <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="isPasswordValid !== ''" class="error-msg">{{isPasswordValid}}</p> 
+			<div row="userType">
+				<div style="">
+				  <div class="col-md-4"><label for="userType" control-label"="" style="margin-left: 0px;">User Type</label></div>
+				  <div class="col-md-4">
+					<input style="margin-left: -26px; width: 25px;" type="radio" name="user_type" ng-model="userType" value="EMPLOYEE" class="ng-pristine ng-untouched ng-valid ng-empty">Employee
+				  </div>
+				  <div class="col-md-4">
+					<input type="radio" name="user_type" ng-model="userType" value="CUSTOMER" class="ng-pristine ng-untouched ng-valid ng-empty">Customer
+				  </div>
+				</div>
+			</div>
+          </div>
+		 
 
-          </div>
         <div class="input-group" style="margin-bottom: 25px">
-          <label for="userType" class="col-md-3 control-label">User Type</label>
-          <div class="col-md-4">
-            <input type="radio" name="user_type" ng-model="userType" value="EMPLOYEE">Employee</input>
-          </div>
-          <div class="col-md-4">
-            <input type="radio" name="user_type" ng-model="userType" value="CUSTOMER">Customer</input>
-          </div>
-        </div>
-
-        <div class="input-group" style="margin-bottom: 25px">
-          <div class="col-md-offset-3 col-md-9">
+         <div class="col-md-offset-3 col-md-9" style="margin-left: 225px;">
 					  <a id="btn-signup" class="btn btn-info" ng-click="SignUpIntiate()">Next</a>
           </div>
         </div>
 		</form>
       </div>
     </div>
-  </div>
-  
-  <div id="signupBoxStepTwo"  style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepTwo">
-    <div class="panel panel-info">
+   <div id="signupBoxStepTwo"  style="margin-top:100px ;margin-bottom: 34px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="signupBoxStepTwo">
+     <div class="panel panel-info">
       <div class="panel-heading"  style="background-color:#009688 !important">
         <div class="panel-title" style='color:white'>Sign Up Step 2</div>
-      </div>  
-  
+      </div>   
       <div class="panel-body" >
         <div id="signupalert" style="display:none" class="alert alert-danger">
           <p>Error:</p>
@@ -147,36 +137,35 @@
         </div>
              <form id="signupStepTwoForm" class="form-horizontal" role="form">    
         <div class="input-group" style="margin-bottom: 25px"> 
-		
-        <!--  <label for="mobile_no" class="col-md-3 control-label">Contact No</label> -->
-		<label for="mobile_no" class="col-md-3 control-label">  </label> 
+		  <label for="mobile_no" class="col-md-3 control-label">  </label> 
           <div class="col-md-9">
-            <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact No">
+            <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact No" required minlength="10" maxlength="10" >
           </div>
         </div>
 
         <div class="row"   ng-init="getCountryList()">
-          <div class="col-md-3 col-md-offset-1">
-            <label for="country" class="control-label">Country</label><br>
-            <select ng-model="country" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()' value="{{country.id}}"></select>
-					</div>
-
+            <div class="col-md-3 col-md-offset-1">
+              <label for="country" class="control-label">Country</label><br>
+               <select ng-model="country" ng-options="country.name for country in countryList track by country.id " ng-change='getStateListByCountryId()' value="{{country.id}}"></select>
+		   </div>
+       
           <div class="col-md-3">
             <label for="state" class="control-label">State</label><br>
             <select ng-model="state" ng-options="state.name for state in stateList track by state.id" ng-change='getCityListByStateId()' value="{{state.id}}" ></select>
           </div>
 
-          <div class="col-md-offset-1 col-md-3">
+           <div class="col-md-offset-1 col-md-3">
             <label for="city" class="control-label">City</label><br>
             <select ng-model="city" ng-options="city.name for city in cityList track by city.id" value="{{city.id}}"></select>
-          </div>
-        </div>
-
+            </div>
+			
+         </div>
+         
         <div class="input-group">
-         <!-- <label for="zipcode" class="col-md-3 control-label">Zip Code</label> -->
+         
 		 <label for="zipcode" class="col-md-3 control-label">  </label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="zipCode" ng-model="zipCode" placeholder="Zip Code">
+            <input type="text" class="form-control" name="zipCode" ng-model="zipCode" placeholder="Zip Code" required minlength="6" maxlength="6">
           </div>
         </div>
 
@@ -184,7 +173,7 @@
         <!--  <label for="house_number" class="col-md-3 control-label">House No</label> -->
 		<label for="house_number" class="col-md-3 control-label">  </label> 
           <div class="col-md-9">
-            <input type="text" class="form-control" name="houseNo" ng-model="houseNo" placeholder="House No">
+            <input type="text" class="form-control" name="houseNo" ng-model="houseNo" placeholder="House No" required maxlength="6">
           </div>
         </div>
 
@@ -192,7 +181,7 @@
         <!--  <label for="street" class="col-md-3 control-label">Street</label> -->
 		<label for="street" class="col-md-3 control-label">  </label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="street" ng-model="street" placeholder="Street">
+            <input type="text" class="form-control" name="street" ng-model="street" placeholder="Street" required maxlength="4">
           </div>
         </div>
 
@@ -200,7 +189,7 @@
          <!-- <label for="landMark" class="col-md-3 control-label">Land Mark</label>-->
 		 <label for="landMark" class="col-md-3 control-label">  </label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="landMark" ng-model="landMark" placeholder="Land Mark">
+            <input type="text" class="form-control" name="landMark" ng-model="landMark" placeholder="Land Mark" required maxlength="100">
           </div>
         </div>
 
@@ -208,7 +197,7 @@
        <!--   <label for="area" class="col-md-3 control-label">Area</label> -->
 	   <label for="area" class="col-md-3 control-label">  </label>
           <div class="col-md-9">
-            <input type="text" class="form-control" name="area" ng-model="area" placeholder="Area">
+            <input type="text" class="form-control" name="area" ng-model="area" placeholder="Area" required maxlength="100">
           </div>
         </div>
 
@@ -221,10 +210,11 @@
       </form>
       </div>
     </div>
-  </div>
+   </div>
+
 <!-- =========================== Forget Password ================================================================-->
   
-  <div id="forgetPasswordBox" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="forgetPasswordBox">
+  <div id="forgetPasswordBox" style="margin-top:100px ;margin-bottom:75px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="forgetPasswordBox">
     <div class="panel panel-info">
       <div class="panel-heading"  style="background-color:#009688 !important">
         <div class="panel-title" style='color:white'>Forgot Password </div>
@@ -235,27 +225,14 @@
           <p>Error:</p>
           <span></span>
         </div>
-		<form id="forgetPasswordForm" class="form-horizontal" role="form">  
-                
-        <div class="input-group" style="margin-bottom: 25px">
-		<span class="input-group-addon"><i class="fa fa-user"></i></span>
-         <!-- <label for="email" class="col-md-3 control-label">Email</label> -->
+		<form id="forgetPasswordForm" class="form-horizontal" role="form">            
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input id="login-username" type="email" class="form-control" name="email"  placeholder="Email Address" ng-model="email" required  maxlength="50" data-ng-blur="analyzeEmailId(email)" />
+		</div>
+		<p style="margin-top: -12px; color: red; margin-left: 36px;" data-ng-if="isEmailIdvalid !== ''" class="error-msg">{{isEmailIdvalid}}</p>
           
-            <input type="email" class="form-control" name="email" ng-model="email" placeholder="Email Address">
-          
-        </div>
-          
-       <!-- <div class="row">        
-          <label for="userType" class="col-md-3 control-label">User Type</label>
-          <div class="col-md-4">
-            <input type="radio" name="user_type" ng-model="userType" value="EMPLOYEE">Employee</input>
-          </div>
-          <div class="col-md-4">
-            <input type="radio" name="user_type" ng-model="userType" value="CUSTOMER">Customer</input>
-          </div>
-        </div>
-		-->
-        
         <div class="input-group" style="margin-bottom: 25px">
           <div class="col-md-offset-3 col-md-9">
 					  <a id="btn-signup" class="btn btn-info" ng-click="ForgotPassword()"> Submit </a>
@@ -267,9 +244,9 @@
   </div>
 
 	<!-- =========================== Reset Password ================================================================-->
-	<div id="resetPasswordBox" style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"  ng-show="resetPasswordBox">
-            <div class="panel panel-info">
-              <div class="panel-heading"  style="background-color:#009688 !important">
+    <div id="resetPasswordBox" style="margin-top:100px;margin-bottom:75px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"  ng-show="resetPasswordBox">
+        <div class="panel panel-info">
+            <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Reset Password</div>
                 
               </div>  
@@ -279,22 +256,25 @@
                     <p>Error:</p>
                     <span></span>
                   </div>			  
-                <form id="forgetPasswordForm" class="form-horizontal" role="form">  
-                <div class="input-group" style="margin-bottom: 25px">
-				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <!-- <label for="password" class="col-md-3 control-label">New Password</label> -->
-                    
-                      <input type="password" class="form-control" name="newPassword" ng-model="newPassword" placeholder="New Password">
-                    
-                  </div>
-				  
-				  <div class="input-group" style="margin-bottom: 25px">
-                  <!--  <label for="passwordConfirm" class="col-md-3 control-label">Confirm Password</label> -->
-				  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    
-                      <input type="password" class="form-control" name="confirmPwd" ng-model="confirmPwd" placeholder="Confirm Password">
-                    
-                  </div>     
+                <form id="forgetPasswordForm" class="form-horizontal" role="form"> 
+
+
+             <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input id="login-password1" type="password" class="form-control" name="newPassword" placeholder="New Password" ng-model="newPassword"   required  maxlength="15" data-ng-blur="analayzePassword(newPassword)" >	
+         </div>
+		  <span style="color: red;" ng-bind="errorMessage" >{{errorMessage}}</span>
+          <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="isPasswordValid !== ''" class="error-msg">{{isPasswordValid}}</p>			
+
+			
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input id="login-password2" type="password" class="form-control" name="confirmPwd" placeholder="Confirm Password" ng-model="confirmPwd"   required  maxlength="15" data-ng-blur="analayzePassword(confirmPwd)" >	
+         </div>
+		  <span style="color: red;" ng-bind="errorMessage" >{{errorMessage}}</span>
+          <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="isPasswordValid !== ''" class="error-msg">{{isPasswordValid}}</p>			
+		  
                 <div class="input-group" style="margin-bottom: 25px">
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9">                    
@@ -304,14 +284,14 @@
                  </div>
 				 </form>
               </div>
-            </div>
-           </div>   
+        </div>
+    </div>   
  
         
 		<!-- ResetPassword Success Box Start-->
 	
              
-		<div id="resetPasswordSuccessBox"  style="margin-top:100px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="resetPasswordSuccessBox">
+		<div id="resetPasswordSuccessBox"  style="margin-top:150px ;margin-bottom:100px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ng-show="resetPasswordSuccessBox">
             <div class="panel panel-info">
               <div class="panel-heading"  style="background-color:#009688 !important">
                 <div class="panel-title" style='color:white'>Reset Password Success</div>
@@ -327,14 +307,13 @@
                     <!-- Button -->                                        
                     <div class="col-md-offset-3 col-md-9"> 
 					Password Changed Succussfully  <a href="#"  style='color:black' ng-click="resetPasswordSuccessBox= !resetPasswordSuccessBox; loginbox= !loginbox"> Click here to login</a> </div>
-					 <!-- <a id="btn-login" class="btn btn-info" onClick=""> Submit </a> -->
-
-                    </div>
+					
                   </div>
+                </div>
               </div>
-            </div>
-           </div>
-		</div>
+         </div>
+    </div>
+		
            <!-- ResetPassword Success Box END -->
 	
             <!-- Forgot and Reset Password Section ends>
