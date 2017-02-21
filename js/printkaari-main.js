@@ -9,6 +9,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 	$scope.resetPasswordBox = false;
 	$scope.forgetPasswordBox = false;
 	$scope.resetPasswordSuccessBox = false;
+	$scope.customerDetailsBox=true;
 	
 	
 	// var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
@@ -106,7 +107,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			"stateId"		: $scope.state.id,
 			"cityId"		: $scope.city.id,
 			"zipCode"		: $scope.zipCode,
-			"userType"		: $scope.userType,
+			//"userType"		: $scope.userType,
+			"userType"      :"CUSTOMER",
 			"houseNo"		: $scope.houseNo,
 			"street"		: $scope.street,
 			"landMark"		: $scope.landMark,
@@ -369,7 +371,8 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 
 
 app.controller('loginTabController',['$scope','$window','$location','loginDataService', function($scope,$window,$location,loginDataService){
-	
+	    
+		
 	    $scope.isLogin = false;
 	    $scope.init = function(){
 		    $scope.errorMessage = "";	
@@ -410,13 +413,39 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
 		// check validation of data
 		return true;
 	}
-	$scope.userDeatils=function(){
+	$scope.userDeatils = function(){
 		
-	}
+		var _config = {
+                   headers: {'Content-Type' : 'application/json'}
+		             };		 
+					 
+		var onSuccess = function(response){
+			    $scope.loggedinUserDetails=response.data;
+				
+				$scope.customerDetailsBox=true	;
+					
+			     console.log(response);
+		};
+		
+		var onError = function(error){
+			//alert(error.message);
+			$window.alert(error.data.errorCode);
+			console.log(error);
+            return false;			
+		}
+			$http.put('http://162.220.61.86:8080/printkaari-api/customers/profile'+$scope.userMail, data, _config).then(onSuccess, onError);
+		
+	
+	
+		
+		
+	};
+
 }]);
 
 app.controller('dashboardController', ['$scope', function(){
 	// abhi toh party suru hui h
+		
 }]);
 
 app.service('loginDataService', function($window){
