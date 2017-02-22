@@ -109,7 +109,6 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			"cityId"		: $scope.city.id,
 			"zipCode"		: $scope.zipCode,
 			//"userType"		: $scope.userType,
-			"userType"      :"CUSTOMER",
 			"houseNo"		: $scope.houseNo,
 			"street"		: $scope.street,
 			"landMark"		: $scope.landMark,
