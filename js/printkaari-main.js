@@ -71,7 +71,8 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			"lastName"  : $scope.lastName,
 			"email"     : $scope.email,
 			"password"  : $scope.password,
-			"userType"  : $scope.userType,
+			//"userType"  : $scope.userType,
+			"userType" : "CUSTOMER"
 		}
 		console.log(data);
 		var requestData = $scope.transformRequestForFormEncoded(data);
