@@ -370,28 +370,28 @@ app.controller('loginDataController',['$scope', '$http', '$window', '$routeParam
 }]);
 
 
-app.controller('loginTabController',['$scope','$window','$location','loginDataService', function($scope,$window,$location,loginDataService){
+app.controller('navTabController',['$window','$location','loginDataService', function($window,$location,loginDataService){
 	    
 		
-	    $scope.isLogin = false;
-	    $scope.init = function(){
-		    $scope.errorMessage = "";	
-			$scope.data = loginDataService.getLoginData();
-			if(angular.isUndefined($scope.data)){
-					$scope.isLogin=false;
-			}
-			else{
-					$scope.isLogin=true;
-					$scope.loginData = $scope.data;
-				}
-				if(isValidData($scope.data)){
-					//$scope.isLogin = true;				
-					console.log("inside loginTabController isLogin=true");
-				}
+	this.isLogin = false;
+    
+    this.init = function(){
+	    this.errorMessage = "";	
+		this.data = loginDataService.getLoginData();
+		if(angular.isUndefined(this.data)){
+				this.isLogin=false;
 		}
+		else{
+				this.isLogin=true;
+				this.loginData = $scope.data;
+			}
+			if(isValidData(this.data)){
+				//$scope.isLogin = true;				
+				console.log("inside loginTabController isLogin=true");
+			}
+	}
 	
-	$scope.init();
-	$scope.logout=function(){		
+	this.logout=function(){		
 				
 		console.log("clearing all data");
 		console.log($window.localStorage.loginData);
@@ -404,25 +404,26 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
 		
 	}
 
-	     function isValidData(data){
+    function isValidData(data){
 
-		       if(data === 'undefined'){
+	    if(data === 'undefined'){
 			return false;
 		}
 
 		// check validation of data
 		return true;
 	}
-	$scope.userDeatils = function(){
+	
+	this.userDeatils = function(){
 		
 		var _config = {
                    headers: {'Content-Type' : 'application/json'}
 		             };		 
 					 
 		var onSuccess = function(response){
-			    $scope.loggedinUserDetails=response.data;
+			    this.loggedinUserDetails=response.data;
 				
-				$scope.customerDetailsBox=true	;
+				this.customerDetailsBox=true	;
 					
 			     console.log(response);
 		};
@@ -434,11 +435,6 @@ app.controller('loginTabController',['$scope','$window','$location','loginDataSe
             return false;			
 		}
 			$http.put('http://162.220.61.86:8080/printkaari-api/customers/profile'+$scope.userMail, data, _config).then(onSuccess, onError);
-		
-	
-	
-		
-		
 	};
 
 }]);
@@ -467,6 +463,7 @@ app.service('loginDataService', function($window){
 	};
 		
 });
+
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})

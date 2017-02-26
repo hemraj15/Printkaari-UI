@@ -1,0 +1,88 @@
+/*this should be maintain single one because try to adopt new style schema*/
+.td_container{}
+.td_margin_from_header{/*No need for media query as fit for both*/
+
+	margin-top: 50px;
+
+}
+/*No class found in bootstrap hence no need for td prefix*/
+.page-section{
+
+	margin-top: 6rem;
+	margin-bottom: 3rem;
+
+}
+@media(min-width: 800px){
+	.page-section{
+
+		margin-top: 6rem;
+
+		margin-bottom: 6rem;
+
+	}
+
+}
+.wrapper{
+	max-width: 1200px;
+	margin: 0 auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+.headline{
+	font-size: 2.2rem;
+	text-transform: capitalize;
+	padding: 1rem 0;
+}
+@media(min-width: 800px){
+	.headline{
+
+		font-size: 4rem;
+
+	}
+
+}
+.headline--center{
+
+	text-align: center;
+
+}
+.profile-section{
+	border: solid black 1px;
+	border-radius: 10px;
+	margin: 0 auto;
+}
+@media(min-width: 800px){
+	.profile-section{
+
+		max-width: 600px;
+
+	}
+
+}
+.profile-section-item{
+
+	margin: 1rem;
+
+	border: solid grey 1px;
+
+	border-radius: 12px;
+
+	cursor: pointer;
+
+}
+.profile-section-item__title{
+
+	text-align: center;
+
+	font-size: 2.5rem;
+
+}
+.profile-section-item__description{
+
+	font-size: 1.5rem;
+
+	text-align: center;
+
+	padding: 0 2rem;
+
+}

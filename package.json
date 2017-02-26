@@ -17,8 +17,17 @@
   },
   "homepage": "https://github.com/hemraj15/Printkaari-UI#readme",
   "devDependencies": {
+    "autoprefixer": "^6.7.5",
     "browser-sync": "^2.18.7",
     "gulp": "^3.9.1",
-    "gulp-watch": "^4.3.11"
+    "gulp-postcss": "^6.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-watch": "^4.3.11",
+    "postcss-import": "^9.1.0",
+    "postcss-mixins": "^5.4.1",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^3.0.0",
+  },
+  "dependencies": {
   }
 }
