@@ -465,13 +465,15 @@ app.service('loginDataService', function($window){
 });
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+	
 	$routeProvider
-	.when('/', {templateUrl: 'partials/login.html',   controller: 'loginController'})
-	.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
-	.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
-	.when('/custDashboard' ,{templateUrl: 'partials/custDashboard.html',   controller: 'dashboardController'})
-	.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
-	.when('/logout' ,{redirectTo: '/login.html'})
-	.otherwise({redirectTo: '/' });
-
+		.when('/', {templateUrl: 'partials/main.html',   controller: 'loginController'})
+		.when('/login', {templateUrl: 'partials/login.html',   controller: 'loginController'})
+		.when('/emailtoken/:tokenId', {templateUrl: 'partials/login.html',   controller: 'loginController'})
+		.when('/reset-password/:tokenForPwd' ,{templateUrl: 'partials/login.html',   controller: 'loginController'})
+		.when('/custDashboard' ,{templateUrl: 'partials/custDashboard.html',   controller: 'dashboardController'})
+		.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
+		.when('/logout' ,{redirectTo: '/login.html'})
+		.otherwise({redirectTo: '/' });
+	$locationProvider.html5Mode(true);
 }]);
