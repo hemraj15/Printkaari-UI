@@ -475,5 +475,5 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
 		.when('/logout' ,{redirectTo: '/login.html'})
 		.otherwise({redirectTo: '/' });
-	$locationProvider.html5Mode(true);
+	
 }]);
