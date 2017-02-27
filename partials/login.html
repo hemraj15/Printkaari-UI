@@ -126,9 +126,8 @@
           <span></span>
         </div>
         <form id="signupStepTwoForm" class="form-horizontal" role="form">
-          <div class="input-group" style="margin-bottom: 25px">
-            <label for="mobile_no" class="col-md-3 control-label">  </label>
-            <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-9 col-md-offset-1">
               <input type="text" class="form-control" name="contactNo" ng-model="contactNo" placeholder="Contact No" required minlength="10" maxlength="10" >
             </div>
           </div>
@@ -149,43 +148,33 @@
       
     </div>
     
-    <div class="input-group">
-      
-      <label for="zipcode" class="col-md-3 control-label">  </label>
-      <div class="col-md-9">
+    <div class="row" style="margin-bottom: 10px; margin-top: 20px;">
+      <div class="col-md-9 col-md-offset-1">
         <input type="text" class="form-control" name="zipCode" ng-model="zipCode" placeholder="Zip Code" required minlength="6" maxlength="6">
       </div>
     </div>
-    <div class="input-group">
-      <!--  <label for="house_number" class="col-md-3 control-label">House No</label> -->
-      <label for="house_number" class="col-md-3 control-label">  </label>
-      <div class="col-md-9">
+    
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-9 col-md-offset-1">
         <input type="text" class="form-control" name="houseNo" ng-model="houseNo" placeholder="House No" required maxlength="6">
       </div>
     </div>
-    <div class="input-group">
-      <!--  <label for="street" class="col-md-3 control-label">Street</label> -->
-      <label for="street" class="col-md-3 control-label">  </label>
-      <div class="col-md-9">
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-9 col-md-offset-1">
         <input type="text" class="form-control" name="street" ng-model="street" placeholder="Street" required maxlength="4">
       </div>
     </div>
-    <div class="input-group">
-      <!-- <label for="landMark" class="col-md-3 control-label">Land Mark</label>-->
-      <label for="landMark" class="col-md-3 control-label">  </label>
-      <div class="col-md-9">
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-9 col-md-offset-1">
         <input type="text" class="form-control" name="landMark" ng-model="landMark" placeholder="Land Mark" required maxlength="100">
       </div>
     </div>
-    <div class="input-group">
-      <!--   <label for="area" class="col-md-3 control-label">Area</label> -->
-      <label for="area" class="col-md-3 control-label">  </label>
-      <div class="col-md-9">
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-md-9 col-md-offset-1">
         <input type="text" class="form-control" name="area" ng-model="area" placeholder="Area" required maxlength="100">
       </div>
     </div>
-    <div class="input-group">
-      <label for="btn-signup" class="col-md-3 control-label">  </label>
+    <div class="row" >
       <div class="col-md-offset-3 col-md-9">
         <button id="btn-signup" type="button" class="btn btn-info" ng-click="SignUpFinal()">Complete Sign Up </button>
       </div>
