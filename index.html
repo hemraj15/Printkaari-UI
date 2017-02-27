@@ -46,19 +46,15 @@
     
     </style>
   </head>
-  <body>
+  <body ng-controller="mainController as main">
     
     <!-- Code for Header goes here -->
-    <div ng-controller='navTabController as navCtl' ng-init="navCtl.init()">
-      <div ng-include="'/partials/header.html'"></div>
-    </div>
+    <page-header></page-header>
     
     <!-- All Dynamic uploads will go here-->
     <div ng-view></div>
     <!-- Code for Footer goes here -->
-    <div>
-      <div ng-include="'/partials/footer.html'"></div>
-    </div>
+    <page-footer></page-footer>
     
     
     <!-- Twitter Bootstrap -->
