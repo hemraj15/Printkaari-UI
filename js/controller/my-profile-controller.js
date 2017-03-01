@@ -14,6 +14,6 @@ app.controller('myProfileController',['$http', function($http){
 	
 	$http.get(url)
 		.then(function(res){
-			console.log(res.data);
+			profile.customerDetail = res.data;
 		});
 }]); 
