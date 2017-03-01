@@ -1,0 +1,20 @@
+.info{
+	width: 100%;
+
+	@mixin atMedium{
+		width: 500px;
+		margin: 0 auto;
+	}
+
+	&_element{
+		padding: 10px;
+	}
+
+	&__property{
+		font-size: 2rem;
+	}
+
+	&__value{
+		font-size: 2rem;
+	}
+}

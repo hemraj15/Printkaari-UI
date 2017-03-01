@@ -86,3 +86,31 @@
 	padding: 0 2rem;
 
 }
+.info{
+	width: 100%;
+}
+@media(min-width: 800px){
+	.info{
+
+		width: 500px;
+
+		margin: 0 auto;
+
+	}
+
+}
+.info_element{
+
+	padding: 10px;
+
+}
+.info__property{
+
+	font-size: 2rem;
+
+}
+.info__value{
+
+	font-size: 2rem;
+
+}
