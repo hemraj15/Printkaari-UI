@@ -8,6 +8,6 @@ app.controller('myOrderController', ['$http', function($http){
 	
 	$http.get(url)
 		.then(function(res){
-			console.log(res.data);
+			order.orderDetails = res.data;
 		});
 }]);
