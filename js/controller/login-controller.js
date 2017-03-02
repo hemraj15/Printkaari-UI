@@ -1,4 +1,4 @@
-app.controller('loginController',['$scope', '$http', '$window', '$route','$routeParams','loginDataService','$location',function($scope,$http,$window, $route,$routeParams,loginDataService,$location){
+app.controller('loginController',['$scope', '$http', '$window', '$route','$routeParams','loginDataService','$location', 'locationFactory', 'authFactory', '$rootScope', function($scope,$http,$window, $route,$routeParams,loginDataService,$location,locationFactory, authFactory, $rootScope){
     
 	$scope.errorMessage = "";
 	$scope.loginBox = true;
@@ -17,88 +17,71 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
     // var urlRegex = /https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/;
     // var docRegex = new RegExp("(.?)\.(docx|doc)$");
 
-	$scope.doLogin = function(){
-		 var loggedinUser;
-		 var data = {
-                        
-                        "username": $scope.username,
-                        "password": $scope.password
-                    };
-         var requestData = $scope.transformRequestForFormEncoded(data);
-         var _config = {
-				headers: {
-							'Content-Type' : 'application/json'
-						 }
-			};
-		var onSuccess = function(response){
-				$scope.loggedinUser=response.data;
-				loginDataService.setLoginData($scope.loggedinUser);
-				
-				if ($scope.loggedinUser.userType ==="CUSTOMER") {
-					console.log(response.data.full_name);
-                  // $window.location.href = "customerDashBoard.html";
-				     $location.path('/custDashboard');
-					//$route.reload();
-					$window.location.reload();
 
-                } else {
-                         $location.path('/admin');
-						 //$route.reload();
-						 $window.location.reload();
-						 
-                       }
-			console.log(response);
+	$scope.doLogin = function(){
+		
+		var params = {      
+			"username": $scope.username,
+			"password": $scope.password
 		};
+
+		authFactory.login(params)
+			.then(function(response){
 		
-	    var onError = function(error){
-			console.log(error);	
-            $scope.errorMessage = error.data.errorCode;		
-			console.log($scope.errorMessage);
-            $window.alert(error.data.errorCode);		
-		}
+				var loggedinUser=response.data;
+				loginDataService.setLoginData(loggedinUser);
+
+				// to update navbar when ever as success login happen
+				$rootScope.$emit('login', loggedinUser);
+
+				if (loggedinUser.userType ==="CUSTOMER") {
 		
-		$http.post('http://162.220.61.86:8080/printkaari-api/app/login', data, _config).then(onSuccess, onError);
+					console.log(response.data.full_name);
+					$location.path('/custDashboard');
+				} else {
 		
+					$location.path('/admin');
+				}
+
+			}, function(error){
+
+				console.log(error);	
+	            $scope.errorMessage = error.data.errorCode;		
+				console.log($scope.errorMessage);
+	            $window.alert(error.data.errorCode);		
+			});
 	}
 
-        var emailToken;
 	$scope.SignUpIntiate = function(){
-		var data = {
+		var params = {
 			"firstName" : $scope.firstName,
 			"lastName"  : $scope.lastName,
 			"email"     : $scope.email,
 			"password"  : $scope.password,
 			//"userType"  : $scope.userType,
 			"userType" : "CUSTOMER"
-		}
-		console.log(data);
-		var requestData = $scope.transformRequestForFormEncoded(data);
-        var _config = {
-            headers: {
-            	'Content-Type' : 'application/json',
-			}
-        };
-		var onSuccess = function(response){
+		};
+				
+		authFactory.intiateSignUp(params)
+			.then(function(response){
 				$scope.step1Data=response.data;
 				$scope.emailToken=$scope.step1Data.emailToken;
 				$scope.signupBoxStepOne=false;
 				$scope.signupBoxStepTwo=true;
-				
-			console.log(response);
-			console.log($scope.step1Data.emailToken);
-		};
-		
-		var onError = function(error){
-			console.log(error);	
-            $window.alert(error.data.errorCode);			
-             //$scope.error = error.status;	
-            return false;			 
-		}
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/initiate', data, _config).then(onSuccess, onError);
-	
+
+				console.log(response);
+				console.log($scope.step1Data.emailToken);
+
+			}, function(error){
+				console.log(error);	
+				$window.alert(error.data.errorCode);			
+				//$scope.error = error.status;	
+				return false;			 
+			});
 	}	
+
 	$scope.SignUpFinal = function(){	
-		var data = {
+		var params = {
 			"emailToken"	: $scope.emailToken,
 			"contactNo"		: $scope.contactNo,
 			"countryId"		: $scope.country.id,
@@ -110,51 +93,51 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			"street"		: $scope.street,
 			"landMark"		: $scope.landMark,
 			"area"			: $scope.area
-		}
-
-		var requestData = $scope.transformRequestForFormEncoded(data);
-        var _config = {
-            headers: {
-            	'Content-Type' : 'application/json'
-			}
-        };
-		
-		var onSuccess = function(response){
-			$scope.User=response.data;
-			loginDataService.setLoginData($scope.User);
-			$scope.emailToken='';
-			if ($scope.User.userType === 'CUSTOMER') {
-				  $location.path('/custDashboard');
-				  $window.location.reload();
-                } 
-			else {
-         			$location.path('/admin');
-					//$route.reload();
-					$window.location.reload();
-						 
-                  }
-			
-			console.log(response);
 		};
 		
-		var onError = function(error){
-			console.log(error);
-            $window.alert(error.data.errorCode);
-            return false;			
-		}
-		
-		$http.post('http://162.220.61.86:8080/printkaari-api/signup/complete', data, _config).then(onSuccess, onError);
+		authFactory.completeSignUp(params)
+			.then(function(response){
+				$scope.User=response.data;
+				loginDataService.setLoginData($scope.User);
+				$scope.emailToken='';
+				
+				if ($scope.User.userType === 'CUSTOMER') {
+					
+					$location.path('/custDashboard');
+					$window.location.reload();
+				} else {
+					
+					$location.path('/admin');
+					//$route.reload();
+					$window.location.reload();
+				}
+
+				console.log(response);		
+			}, function(error){
+
+				console.log(error);
+	            $window.alert(error.data.errorCode);
+	            return false;			
+			});
 					
 	}
 	
 	$scope.transformRequestForFormEncoded = function(obj) {
-			var str = [];
-			for (var p in obj)
-				str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
-			return str.join("&");    
+		var str = [];
+		
+		for (var p in obj){
+			str.push(encodeURIComponent( p ) + "=" + encodeURIComponent(obj[p]));
+		}
+		
+		return str.join("&");    
     }
 	
 	$scope.getCountryList=function(){
+
+		locationFactory.getCountryList()
+			.then(function(response){
+				$scope.countryList = response.data; 
+			});
 		
 		var onSuccess = function(response){
 			$scope.countryList=response.data;
@@ -175,141 +158,80 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 				$scope.resetPasswordBox = true;
 			}
 		};
-		
-		var onError = function(error){
-			console.log(error);
-            $window.alert(error.data.errorCode);
-            return false;			
-		};
-		
-		$http.get('http://162.220.61.86:8080/printkaari-api/location/countries').then(onSuccess, onError);
 	}
 	
-		$scope.getStateListByCountryId = function(){
-			console.log($scope.country);
-		
-		var data = {
-			"countryId" : $scope.country.id
-		}
-		console.log(data);
-		
-        var _config = {
-            headers: {
-            	'Content-Type' : 'application/json',
-			}
-        };
-		var onSuccess = function(response){
-			$scope.stateList=response.data;
-			console.log(response);
-			$window.alert(error.data.errorCode);
-		};
-		
-		var onError = function(error){
-			console.log(error);	
-            $window.alert(error.data.errorCode);
-            return false;			
-		}
-		
-		$http.get('http://162.220.61.86:8080/printkaari-api/location/country/'+$scope.country.id+'/states').then(onSuccess, onError);
-	}
+	$scope.getStateListByCountryId = function(){
 	
+		locationFactory.getStateListByCountryId($scope.country.id)
+			.then(function(response){
+				$scope.stateList = response.data;
+				console.log(response.data);
+			});
+	}
+
 	$scope.getCityListByStateId=function(){
-		
-		var data = {
-			"stateId" : $scope.state.id
-					
-		}
-		console.log(data);
-		
-        var _config = {
-            headers: {
-            	'Content-Type' : 'application/json',
-			}
-        };
-		var onSuccess = function(response){
-			$scope.cityList=response.data;
-			console.log(response);
-		};
-		
-		var onError = function(error){
-			console.log(error);
-            $window.alert(error.data.errorCode);
-             return false;			
-		};
-		
-		$http.get('http://162.220.61.86:8080/printkaari-api/location/states/'+$scope.state.id+'/cities').then(onSuccess, onError);
+
+		locationFactory.getCityListByStateId($scope.state.id)
+			.then(function(response){
+				$scope.cityList = response.data;
+			});
 	}
 	
 	//Forgot and Reset Password	
 	$scope.ForgotPassword=function(){
 		
-	    var data = {                        
-                        "username": $scope.email                       
-                    };
-
-		var _config = {
-            headers: {'Content-Type' : 'application/json'
-					 }
-		 };
-		var onSuccess = function(response){
+		authFactory.forgetPassword($scope.email)
+			.then(function(response){
+				
 		        $scope.forogtPasswordData=response.data;
 				$scope.emailToken=$scope.forogtPasswordData.emailToken;
 				$scope.forgetPasswordBox = false;
 				$scope.resetPasswordBox=true;
+			}, function(error){
 				
-			     console.log(response);
-		};
-		
-		var onError = function(error){
-			console.log(error);
-             //alert(error.message);
-            $window.alert(error.data.errorCode);
-            return false;			
-		}
-		
-		$http.get('http://162.220.61.86:8080/printkaari-api/password/forgot?emailId='+$scope.email, data, _config).then(onSuccess, onError);
-		
+				console.log(error);
+	             //alert(error.message);
+	            $window.alert(error.data.errorCode);
+	            return false;			
+			});
 	}
 	
 	//Reset password
 	$scope.ResetPassword = function(){
+		
 		var emailTokenId="";
+		
 		if($scope.passwordToken !== undefined){
 			emailTokenId=$scope.passwordToken;			
 		}
 		else{
 			emailTokenId=$scope.emailToken ;
 		}
-	    var data = {                        
-                        "newPassword": $scope.newPassword,
-						"confirmPassword":$scope.confirmPwd,
-						"emailToken":emailTokenId
-                    };
-
-	    var _config = {
-                   headers: {'Content-Type' : 'application/json'}
-		             };		 
-					 
-		var onSuccess = function(response){
-			    $scope.message=response.data;
-				emailTokenId='';
-				$scope.resetPasswordBox=false;				
-				$scope.resetPasswordSuccessBox=true;
-					
-			     console.log(response);
-		};
-		
-		var onError = function(error){
-			//alert(error.message);
-			$window.alert(error.data.errorCode);
-			console.log(error);
-            return false;			
-		}
-		
+	    
+	    var params = {                        
+            "newPassword": $scope.newPassword,
+			"confirmPassword":$scope.confirmPwd,
+			"emailToken":emailTokenId
+        }; 
+				
 		if(angular.equals($scope.newPassword, $scope.confirmPwd)){
 			
-			console.log(angular.equals($scope.newPassword, $scope.confirmPwd));
-			$http.put('http://162.220.61.86:8080/printkaari-api/password/reset', data, _config).then(onSuccess, onError);
+			authFactory.resetPassword(params)
+				.then(function(response){
+					
+				    $scope.message=response.data;
+					emailTokenId='';
+					$scope.resetPasswordBox=false;				
+					$scope.resetPasswordSuccessBox=true;
+						
+				     console.log(response);
+			}, function(error){
+				
+				//alert(error.message);
+				$window.alert(error.data.errorCode);
+				console.log(error);
+	            return false;			
+			});
 		}
 		else{
 			$window.alert("New Password and Confirm Password are different");
