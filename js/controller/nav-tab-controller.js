@@ -14,20 +14,26 @@ app.controller('navTabController',['$window','$location','loginDataService', '$r
 			this.loginData = data;
 		}
 	}
-
-	$rootScope.$on('login', function(event, data){
-		navCtl.init();
-	});
 	
+	/*
+	 logout function should not concern with user activity,
+	 it enchance user xp
+	 */
 	this.logout=function(){		
 				
 		$window.localStorage.clear();
 		$window.alert("You Have Logged out Success Fully redirect to Home");
-		$location.path('/logout');
-		$window.location.reload();
-		
+		this.isLogin = false;
+		this.loginData = {};	
 	}
 
+	/*
+	To update nav-bar whenever login happen 
+	 */
+	$rootScope.$on('login', function(event, data){
+		navCtl.init();
+	});
+   
     function isValidData(data){
 
 	    if(angular.isUndefined(data)){
