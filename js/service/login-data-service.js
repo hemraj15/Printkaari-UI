@@ -1,19 +1,24 @@
-app.service('loginDataService', function($window){
+app.service('loginDataService',['store', function(store){
 	
 	var service = this;
-	var loginData;
 	
 	service.setLoginData = function(data){
-		$window.localStorage.loginData = JSON.stringify(data);			
+		store.set('loginData', data);			
 	};
 		
     service.getLoginData = function(){
-		if(angular.isDefined($window.localStorage.loginData)){
-			return JSON.parse($window.localStorage.loginData);
-		}else{
-			return undefined;
-		}
+    	
+    	var loginData = store.get('loginData');
 		
+		if(angular.isDefined(loginData)){
+			return loginData;
+		}
+
+		return undefined;
+	};
+
+	service.clearLoginData = function(){
+		store.remove('loginData');
 	};
 		
-});
+}]);

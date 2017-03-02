@@ -1,4 +1,4 @@
-var app = angular.module('printkaariApp',["ngRoute"]);
+var app = angular.module('printkaariApp',["ngRoute", "angular-storage"]);
 
 
 app.controller('mainController',['$http', function($http){

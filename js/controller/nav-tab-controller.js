@@ -20,8 +20,8 @@ app.controller('navTabController',['$window','$location','loginDataService', '$r
 	 it enchance user xp
 	 */
 	this.logout=function(){		
-				
-		$window.localStorage.clear();
+		
+		loginDataService.clearLoginData();
 		$window.alert("You Have Logged out Success Fully redirect to Home");
 		this.isLogin = false;
 		this.loginData = {};	
