@@ -63,7 +63,7 @@
         <li><a href=""><i class="fa fa-shopping-cart"></i> Cart</a></li>
         
         <li ng-class="{dropdown : navCtl.isLogin}">
-          <a href="#!login" ng-show="!navCtl.isLogin"><i class="fa fa-lock"></i> Login</a>
+          <a href="#!auth/login" ng-show="!navCtl.isLogin"><i class="fa fa-lock"></i> Login</a>
           <a class="dropdown-toggle" ng-show="navCtl.isLogin"> {{navCtl.loginData.full_name}} <i class="fa fa-angle-down"></i></a>
           <ul ng-show="navCtl.isLogin" class="dropdown-menu">
 		        <li><a  href="#!myprofile">My Profile</a></li>
