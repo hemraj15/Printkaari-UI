@@ -4,7 +4,7 @@ app.service('authService',['store', function(store){
 	
 	service.setAuthData = function(data){
 		store.set('authData', data);
-		service.initAuthData();			
+		service._initAuthData();			
 	};
 
 	service._initAuthData = function(){

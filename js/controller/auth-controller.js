@@ -48,7 +48,7 @@ app.controller('authController',['$scope', '$http', '$window', '$route','$routeP
 			.then(function(response){
 		
 				var loggedinUser=response.data;
-				authService.setLoginData(loggedinUser);
+				authService.setAuthData(loggedinUser);
 
 				// to update navbar when ever as success login happen
 				$rootScope.$emit('login', loggedinUser);
