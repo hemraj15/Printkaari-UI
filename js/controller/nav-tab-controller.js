@@ -1,17 +1,17 @@
-app.controller('navTabController',['$window','$location','loginDataService', '$rootScope', function($window,$location,loginDataService, $rootScope){
+app.controller('navTabController',['$window','$location','authService', '$rootScope', function($window,$location,authService, $rootScope){
 	    
 	var navCtl = this;
-	this.isLogin = false;
+	navCtl.isLogin = false;
     
     /*
     While page load this init function check for tokens, if exists then it will display the profile
      */
-    this.init = function(){
-		var data = loginDataService.getLoginData();
+    navCtl.init = function(){
+		var data = authService.getAuthData();
 	
-		if(isValidData(data)){
-			this.isLogin=true;
-			this.loginData = data;
+		if(data){
+			navCtl.isLogin=true;
+			navCtl.loginData = data;
 		}
 	}
 	
@@ -19,12 +19,12 @@ app.controller('navTabController',['$window','$location','loginDataService', '$r
 	 logout function should not concern with user activity,
 	 it enchance user xp
 	 */
-	this.logout=function(){		
+	navCtl.logout=function(){		
 		
-		loginDataService.clearLoginData();
+		authService.clearAuthData();
 		$window.alert("You Have Logged out Success Fully redirect to Home");
-		this.isLogin = false;
-		this.loginData = {};	
+		navCtl.isLogin = false;
+		navCtl.loginData = {};	
 	}
 
 	/*
@@ -33,17 +33,7 @@ app.controller('navTabController',['$window','$location','loginDataService', '$r
 	$rootScope.$on('login', function(event, data){
 		navCtl.init();
 	});
-   
-    function isValidData(data){
-
-	    if(angular.isUndefined(data)){
-			return false;
-		}
-
-		// check validation of data
-		return true;
-	}
-	
+   	
 	this.init();
 }]);
 

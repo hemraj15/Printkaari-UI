@@ -20,3 +20,7 @@ app.directive('pageFooter', function(){
 		templateUrl: 'partials/footer.html'
 	}
 });
+
+app.config(function ($httpProvider) {
+	$httpProvider.interceptors.push('httpRequestInterceptor');
+});

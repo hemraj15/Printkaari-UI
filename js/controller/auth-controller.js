@@ -1,13 +1,12 @@
-app.controller('loginController',['$scope', '$http', '$window', '$route','$routeParams','loginDataService','$location', 'locationFactory', 'authFactory', '$rootScope', function($scope,$http,$window, $route,$routeParams,loginDataService,$location,locationFactory, authFactory, $rootScope){
+app.controller('authController',['$scope', '$http', '$window', '$route','$routeParams','authService','$location', 'locationFactory', 'authFactory', '$rootScope', function($scope,$http,$window, $route,$routeParams,authService,$location,locationFactory, authFactory, $rootScope){
     
 	$scope.errorMessage = "";
-	$scope.loginBox = true;
+	$scope.loginBox = false;
 	$scope.signupBoxStepOne = false;
 	$scope.signupBoxStepTwo = false;
 	$scope.resetPasswordBox = false;
 	$scope.forgetPasswordBox = false;
 	$scope.resetPasswordSuccessBox = false;
-	$scope.customerDetailsBox=true;
 	
 	
 	// var  reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
@@ -16,6 +15,26 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
     // var currencyRegex = new RegExp("^[a-zA-Z]*$");
     // var urlRegex = /https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}/;
     // var docRegex = new RegExp("(.?)\.(docx|doc)$");
+    
+    var action = $routeParams.action,
+    token = $routeParams.token;
+    if(action === 'login'){
+    	
+    	$scope.loginBox = true;
+    }else if(action === 'signup' && angular.isUndefined(token)){
+
+    	$scope.signupBoxStepOne = true;
+    }else if(action === 'signup' && angular.isString(token)){
+
+    	$scope.signupBoxStepTwo = true;
+    }else if(action === 'resetpassword' && angular.isString(token)){
+
+    	$scope.resetPasswordBox = true;
+    }else{
+
+    	$window.alert('Bad URL, redirecting to home page');
+    	$location.path('/');
+    }
 
 
 	$scope.doLogin = function(){
@@ -29,7 +48,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 			.then(function(response){
 		
 				var loggedinUser=response.data;
-				loginDataService.setLoginData(loggedinUser);
+				authService.setLoginData(loggedinUser);
 
 				// to update navbar when ever as success login happen
 				$rootScope.$emit('login', loggedinUser);
@@ -98,7 +117,7 @@ app.controller('loginController',['$scope', '$http', '$window', '$route','$route
 		authFactory.completeSignUp(params)
 			.then(function(response){
 				$scope.User=response.data;
-				loginDataService.setLoginData($scope.User);
+				authService.setLoginData($scope.User);
 				$scope.emailToken='';
 				
 				if ($scope.User.userType === 'CUSTOMER') {
