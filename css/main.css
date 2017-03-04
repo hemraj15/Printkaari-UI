@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
 
+
 body {
     background-color: #fff;
     font-family: 'Poiret One', cursive;
@@ -150,9 +151,7 @@ main > section {
 			transform: scaleX(1);
 }
 
-.sec-title {
-    margin-bottom: 50px;
-}
+
 
 .sec-title.white {
     color: #fff;
@@ -193,9 +192,11 @@ main > section {
 
 .clearfix p{
     font-size: 16px;
+    font-family: 'Poiret One', cursive;
 }
 .clearfix span {
     font-size :  20px;
+    font-family: 'Poiret One', cursive;
 }
 /**
 /*	Preloader
@@ -596,7 +597,9 @@ ul.dropdown-menu {
 ==================================================================*/
 
 #about{
-    background-color:#4d4d4d;
+    background-color:#ffc266;
+    padding-top:50px;
+    padding-bottom:50px;
 }
 
 #about h3 {
@@ -609,14 +612,14 @@ ul.dropdown-menu {
 
 
 .message-body  p {
-     color: #fff;
-     font-size: 20px;
+    color: #fff;
+    font-size: 18px;
     line-height: 2.0em;
-    margin-bottom: -76px;
+    /*margin-bottom: -76px;*/
     text-align:center;
-    padding-right: 15px;\
+    padding-right: 15px;
     padding-left:15px;
-   
+    font-family: 'Poiret One', cursive;
     
 }
 
