@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>PrintKaari.com</title>
     <meta name="description" content="Blue One Page Creative HTML5 Template">
-    <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+    <meta name="keywords" content="print online bhopal, printkaari, print t-shirt online, print template, print college project, print paper online, print on cup">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
@@ -19,13 +19,41 @@
     <link rel="stylesheet" href="dest/styles/td-style.css">
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/modernizr-2.6.2.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Single Page Nav -->
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <!-- jquery.fancybox.pack -->
+    <script src="js/jquery.fancybox.pack.js"></script>
+    <!-- Google Map API 
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    -->
+    <!-- Owl Carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- jquery easing -->
+    <script src="js/jquery.easing.min.js"></script>
+    <!-- Fullscreen slider -->
+    <script src="js/jquery.slitslider.js"></script>
+    <script src="js/jquery.ba-cond.min.js"></script>
+    <!-- onscroll animation -->
+    <script src="js/wow.min.js"></script>
+    
     <script src="js/angular.min.js"></script>
+    <script src="node_modules/angular-storage/dist/angular-storage.js"></script>
     <script src="js/angular-route.min.js"></script>
+    
     <script type="text/javascript" src="js/printkaari-main.js"></script>
     <script type="text/javascript" src="js/routing.js"></script>
     <script type="text/javascript" src="js/controller/nav-tab-controller.js"></script>
-    <script type="text/javascript" src="js/controller/login-controller.js"></script>
-    <script type="text/javascript" src="js/service/login-data-service.js"></script>
+    <script type="text/javascript" src="js/controller/dashboard-controller.js"></script>
+    <script type="text/javascript" src="js/controller/welcome-page-controller.js"></script>
+    <script type="text/javascript" src="js/controller/auth-controller.js"></script>
+    <script type="text/javascript" src="js/controller/my-profile-controller.js"></script>
+    <script type="text/javascript" src="js/controller/my-order-controller.js"></script>
+    <script type="text/javascript" src="js/service/auth-service.js"></script>
+    <script type="text/javascript" src="js/factory/location-factory.js"></script>
+    <script type="text/javascript" src="js/factory/auth-factory.js"></script>
+    <script type="text/javascript" src="js/interceptor/request-interceptor.js"></script>
     
     <style>
     body,h1,h5
@@ -46,39 +74,17 @@
     
     </style>
   </head>
-  <body>
+  <body ng-controller="mainController as main">
     
     <!-- Code for Header goes here -->
-    <div ng-controller='navTabController as navCtl' ng-init="navCtl.init()">
-      <div ng-include="'/partials/header.html'"></div>
-    </div>
+    <page-header></page-header>
     
     <!-- All Dynamic uploads will go here-->
     <div ng-view></div>
     <!-- Code for Footer goes here -->
-    <div>
-      <div ng-include="'/partials/footer.html'"></div>
-    </div>
+    <page-footer></page-footer>
     
     
     <!-- Twitter Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Single Page Nav -->
-    <script src="js/jquery.singlePageNav.min.js"></script>
-    <!-- jquery.fancybox.pack -->
-    <script src="js/jquery.fancybox.pack.js"></script>
-    <!-- Google Map API -->
-    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <!-- Owl Carousel -->
-    <script src="js/owl.carousel.min.js"></script>
-    <!-- jquery easing -->
-    <script src="js/jquery.easing.min.js"></script>
-    <!-- Fullscreen slider -->
-    <script src="js/jquery.slitslider.js"></script>
-    <script src="js/jquery.ba-cond.min.js"></script>
-    <!-- onscroll animation -->
-    <script src="js/wow.min.js"></script>
-    <!-- Custom Functions -->
-    <script src="js/main.js"></script>
   </body>
 </html>

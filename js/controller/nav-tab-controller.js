@@ -1,69 +1,39 @@
-app.controller('navTabController',['$window','$location','loginDataService', function($window,$location,loginDataService){
+app.controller('navTabController',['$window','$location','authService', '$rootScope', function($window,$location,authService, $rootScope){
 	    
-		
-	this.isLogin = false;
+	var navCtl = this;
+	navCtl.isLogin = false;
     
-    this.init = function(){
-	    this.errorMessage = "";	
-		this.data = loginDataService.getLoginData();
-		if(angular.isUndefined(this.data)){
-				this.isLogin=false;
+    /*
+    While page load this init function check for tokens, if exists then it will display the profile
+     */
+    navCtl.init = function(){
+		var data = authService.getAuthData();
+	
+		if(data){
+			navCtl.isLogin=true;
+			navCtl.loginData = data;
 		}
-		else{
-				this.isLogin=true;
-				this.loginData = $scope.data;
-			}
-			if(isValidData(this.data)){
-				//$scope.isLogin = true;				
-				console.log("inside loginTabController isLogin=true");
-			}
 	}
 	
-	this.logout=function(){		
-				
-		console.log("clearing all data");
-		console.log($window.localStorage.loginData);
-		$window.localStorage.clear();
+	/*
+	 logout function should not concern with user activity,
+	 it enchance user xp
+	 */
+	navCtl.logout=function(){		
+		
+		authService.clearAuthData();
 		$window.alert("You Have Logged out Success Fully redirect to Home");
-		console.log($window.localStorage.loginData);
-		$location.path('/logout');
-		//$route.reload();
-		$window.location.reload();
-		
+		navCtl.isLogin = false;
+		navCtl.loginData = {};	
 	}
 
-    function isValidData(data){
-
-	    if(data === 'undefined'){
-			return false;
-		}
-
-		// check validation of data
-		return true;
-	}
-	
-	this.userDeatils = function(){
-		
-		var _config = {
-                   headers: {'Content-Type' : 'application/json'}
-		             };		 
-					 
-		var onSuccess = function(response){
-			    this.loggedinUserDetails=response.data;
-				
-				this.customerDetailsBox=true	;
-					
-			     console.log(response);
-		};
-		
-		var onError = function(error){
-			//alert(error.message);
-			$window.alert(error.data.errorCode);
-			console.log(error);
-            return false;			
-		}
-			$http.put('http://162.220.61.86:8080/printkaari-api/customers/profile'+$scope.userMail, data, _config).then(onSuccess, onError);
-	};
-
+	/*
+	To update nav-bar whenever login happen 
+	 */
+	$rootScope.$on('login', function(event, data){
+		navCtl.init();
+	});
+   	
+	this.init();
 }]);
 
