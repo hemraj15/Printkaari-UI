@@ -1738,6 +1738,8 @@ font-size: 12px;
 
 @media only screen and (max-width: 767px) {
 
+
+
     body {
         font-size: 14px;
     }
@@ -1883,6 +1885,8 @@ font-size: 12px;
 ==============================================================*/
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
 
     .sec-title h2:after {
         left: 38%;
@@ -2062,4 +2066,8 @@ a:hover{
 	margin-top: -16px;
     color: red;
     margin-left: 32px;
+}
+
+#portfolio .carousel-indicators li {
+    visibility: hidden;
 }
