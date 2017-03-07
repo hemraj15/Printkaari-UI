@@ -1,8 +1,8 @@
-app.controller('navTabController',['$window','$location','authService', '$rootScope', function($window,$location,authService, $rootScope){
+app.controller('navTabController',['$window','$location','authService', 'cartService', '$rootScope', function($window,$location,authService,cartService,$rootScope){
 	    
 	var navCtl = this;
 	navCtl.isLogin = false;
-    
+    navCtl.cart = null;
     /*
     While page load this init function check for tokens, if exists then it will display the profile
      */

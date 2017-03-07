@@ -8,6 +8,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/myprofile' ,{templateUrl: 'partials/my-profile.html',   controller: 'myProfileController', controllerAs: 'myProfile'})
 		.when('/myorder' ,{templateUrl: 'partials/my-order.html',   controller: 'myOrderController', controllerAs: 'myOrder'})
 		.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
+		.when('/product/college' ,{templateUrl: 'partials/college-minor.html',   controller: 'productController', controllerAs: 'product'})
+		.when('/cart' ,{templateUrl: 'partials/cart.html',   controller: 'cartController', controllerAs: 'cart'})
 		.otherwise({redirectTo: '/' });
 	
 }]);
