@@ -21,6 +21,22 @@ app.directive('pageFooter', function(){
 	}
 });
 
+// to support input[file] data-binding
+app.directive('fileInput', function(){
+	return {
+		scope : {
+			file : '='
+		},
+		link : function(scope, element){
+
+			element.bind('change', function(event){
+				scope.file = event.target.files[0];
+				scope.$apply(scope.file);
+			});
+		}
+	}
+});
+
 app.config(function ($httpProvider) {
 	$httpProvider.interceptors.push('httpRequestInterceptor');
 });

@@ -37,5 +37,9 @@ app.service('cartService',['store', function(store){
 		return service.cartData.length;
 	};
 	
+	service.getCartData = function(){
+		return service.cartData;
+	};
+	
 	service._initCartData();
 }]);
