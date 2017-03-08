@@ -212,3 +212,17 @@
 	margin-right: 10px;
 	float: right;
 }
+
+.float::after{
+	content: " ";
+	clear: both;
+	display: block;
+}
+
+.float__left{
+	float: left;
+}
+
+.float__right{
+	float: right;
+}
