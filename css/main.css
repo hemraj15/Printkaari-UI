@@ -2071,3 +2071,7 @@ a:hover{
 #portfolio .carousel-indicators li {
     visibility: hidden;
 }
+.custom-item img {
+    max-height:222px;
+    height:222px;
+}
