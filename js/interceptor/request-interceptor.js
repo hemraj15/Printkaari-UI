@@ -5,8 +5,10 @@ app.factory('httpRequestInterceptor', ['authService', function (authService) {
 	return {
 		request: function (config) {
 
-			if(authService.getAccessToken()){
-				config.headers['Authorization'] = 'Bearer ' + loginDataService.getAccessToken;
+			console.log(config.url);
+
+			if(authService.getAccessToken() && config.method == 'POST'){
+				config.headers['Authorization'] = 'Bearer ' + authService.getAccessToken();
 			}
 			// config.headers['Accept'] = 'application/json;odata=verbose';
 

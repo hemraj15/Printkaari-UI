@@ -154,15 +154,7 @@
 	background: rgba(255,255,255,0.8);
 }
 
-.bg-img-1 {
-	background-image: url(../img/slider/img2.jpg);
-}
-.bg-img-2 {
-	background-image: url(../img/slider/img3.jpg);
-}
-.bg-img-3 {
-	background-image: url(../img/slider/Mugs.jpg);
-}
+
 
 
 /* Animations for content elements */
@@ -190,7 +182,7 @@
 	-ms-animation: fadeOut 1s ease-in-out both;
 	animation: fadeOut 1s ease-in-out both;
 }
-.sl-trans-back-elems .caption-content span,,
+.sl-trans-back-elems .caption-content span,
 .sl-trans-back-elems .caption-content a {
 	-webkit-animation: fadeOut 1s linear both;
 	-moz-animation: fadeOut 1s linear both;
