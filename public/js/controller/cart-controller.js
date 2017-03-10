@@ -18,7 +18,7 @@ app.controller('cartController',['cartService', function(cartService){
 		hash: $hash,
 		txnid: $txnid,
 		amount: amount,
-		firstname: firstname
+		firstname: firstname,
 		email: email,
 		phone: phone,
 		productinfo: productinfo,
