@@ -17,11 +17,11 @@ gulp.task('default', function(){
 		}
 	});
 
-	watch('./js/**/*.js',function(){
+	watch('./public/js/**/*.js',function(){
 		browserSync.reload();
 	});
 
-	watch('./**/*.html',function(){
+	watch('./public/**/*.html',function(){
 		browserSync.reload();
 	});
 
@@ -31,7 +31,7 @@ gulp.task('default', function(){
 });
 
 gulp.task('cssInject',['td-style'], function(){
-	gulp.src('./dest/styles/td-style.css')
+	gulp.src('./public/css/td-style.css')
 		.pipe(browserSync.stream());
 });
 
@@ -43,5 +43,5 @@ gulp.task('td-style', function(){
 	    	this.emit('end');
 	    })
 	    .pipe(rename('td-style.css'))
-	    .pipe(gulp.dest('./dest/styles/'));
+	    .pipe(gulp.dest('./public/css/'));
 });
