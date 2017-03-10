@@ -8,7 +8,7 @@ app.controller('mainController',['$http', function($http){
 
 app.directive('pageHeader', function(){
 	return {
-		templateUrl: 'partials/header.html',
+		templateUrl: '/partials/header.html',
 		controller: 'navTabController',
 		controllerAs: 'navCtl'
 	}
@@ -17,7 +17,7 @@ app.directive('pageHeader', function(){
 
 app.directive('pageFooter', function(){
 	return {
-		templateUrl: 'partials/footer.html'
+		templateUrl: '/partials/footer.html'
 	}
 });
 
@@ -35,8 +35,4 @@ app.directive('fileInput', function(){
 			});
 		}
 	}
-});
-
-app.config(function ($httpProvider) {
-	$httpProvider.interceptors.push('httpRequestInterceptor');
 });

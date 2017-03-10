@@ -16,3 +16,7 @@ app.factory('httpRequestInterceptor', ['authService', function (authService) {
 		}
 	};
 }]);
+
+app.config(function ($httpProvider) {
+	$httpProvider.interceptors.push('httpRequestInterceptor');
+});

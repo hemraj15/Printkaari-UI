@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +30,9 @@
     "postcss-simple-vars": "^3.0.0"
   },
   "dependencies": {
-    "angular-storage": "0.0.15"
+    "angular-storage": "0.0.15",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "gulp-nodemon": "^2.2.1"
   }
 }
