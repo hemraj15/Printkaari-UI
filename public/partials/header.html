@@ -60,13 +60,13 @@
         </li> 
 
         <li><a href="college/minor.html">College Projects</a></li> 
-        <li><a href="#!cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">{{navCtl.cart}}</span></a></li>
+        <li><a href="/#!cart"><i class="fa fa-shopping-cart"></i> Cart <span class="badge">{{navCtl.cart}}</span></a></li>
         
         <li ng-class="{dropdown : navCtl.isLogin}">
-          <a href="#!auth/login" ng-show="!navCtl.isLogin"><i class="fa fa-lock"></i> Login</a>
+          <a href="/#!auth/login" ng-show="!navCtl.isLogin"><i class="fa fa-lock"></i> Login</a>
           <a class="dropdown-toggle" ng-show="navCtl.isLogin"> {{navCtl.loginData.full_name}} <i class="fa fa-angle-down"></i></a>
           <ul ng-show="navCtl.isLogin" class="dropdown-menu">
-		        <li><a  href="#!myprofile">My Profile</a></li>
+		        <li><a  href="/#!myprofile">My Profile</a></li>
             <li><a>User Setting</a></li>
             <li><a  ng-click="navCtl.logout()">Logout</a></li>
 				  </ul>       
