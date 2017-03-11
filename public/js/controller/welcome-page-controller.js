@@ -92,22 +92,6 @@ app.controller('welcomePageController', ['$http', function($http){
 			}, function() {
 			  angular.element(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 			});
-
-
-			angular.element('#nav').singlePageNav({
-				offset: angular.element('#nav').outerHeight(),
-				filter: ':not(.external)',
-				speed: 2000,
-				currentClass: 'current',
-				easing: 'easeInOutExpo',
-				updateHash: true,
-				beforeStart: function() {
-					console.log('begin scrolling');
-				},
-				onComplete: function() {
-					console.log('done scrolling');
-				}
-			});
 			
 		    angular.element(window).scroll(function () {
 		        if (angular.element(window).scrollTop() > 400) {
