@@ -2,10 +2,9 @@
 
  */
 
-app.controller('productController', ['cartService', 'orderFactory', '$rootScope', function(cartService,orderFactory,$rootScope){
+app.controller('productController', ['cartService', 'orderFactory', '$rootScope',function(cartService,orderFactory,$rootScope){
 
 	var product = this;
-
 
 	product.addProduct = function(){
 		console.log(product.bindingType);

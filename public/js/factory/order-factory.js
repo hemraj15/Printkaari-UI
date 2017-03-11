@@ -11,4 +11,7 @@ app.factory('orderFactory', ['$http', function($http){
 
 		return $http.post(baseURL + 'college-order-upload-files', params, _config);
 	}
+
+
+	return orderFactory;
 }]);

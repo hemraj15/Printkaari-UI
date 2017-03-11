@@ -9,6 +9,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 		.when('/myorder' ,{templateUrl: 'partials/my-order.html',   controller: 'myOrderController', controllerAs: 'myOrder'})
 		.when('/admin' ,{templateUrl: 'partials/empDashboard.html',   controller: 'dashboardController'})
 		.when('/product/college' ,{templateUrl: 'partials/college-minor.html',   controller: 'productController', controllerAs: 'product'})
+		.when('/category/:categoryIdentifier' ,{templateUrl: 'partials/category.html',   controller: 'categoryController', controllerAs: 'category'})
+		.when('/category/:categoryIdentifier/product/:productIdentifier' ,{templateUrl: 'partials/product.html',   controller: 'categoryProductController', controllerAs: 'cpCtl'})
 		.when('/cart' ,{templateUrl: 'partials/cart.html',   controller: 'cartController', controllerAs: 'cart'})
 		.otherwise({redirectTo: '/' });
 	
