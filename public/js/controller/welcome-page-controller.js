@@ -4,16 +4,6 @@ app.controller('welcomePageController', ['$http', function($http){
 	wc.init = function(){
 
 
-		angular.element(window).load(function(){
-
-			angular.element("#preloader").fadeOut("slow");
-			console.log("this started ");
-
-		});
-
-
-
-
 		/* ========================================================================= */
 		/*  Welcome Section Slider
 		/* ========================================================================= */
