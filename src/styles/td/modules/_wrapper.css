@@ -9,4 +9,8 @@
 			width: 500px;
 		}
 	}
+
+	&--xlarge{
+		max-width: 1300px;
+	}
 }
