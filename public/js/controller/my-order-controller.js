@@ -1,12 +1,12 @@
 
 
-app.controller('myOrderController', ['$http', function($http){
+app.controller('myOrderController', ['$http', 'authService',function($http, authService){
 	var order = this;
 
 	var customerId = 8,
-	url = "http://printkaari.com:8080/printkaari-api/customers/"+ customerId +"/my-orders";
+	url = "http://printkaari.com:8080/printkaari-api/customers/my-orders";
 	
-	$http.get(url)
+	$http.get(url, {headers:{'Authorization' : 'Bearer '+ authService.getAccessToken()}})
 		.then(function(res){
 			order.orderDetails = res.data;
 		});
