@@ -7,20 +7,15 @@
 app.factory('paymentFactory', ['$http', function($http){
 	var paymentFactory = {},
 	baseUrl = 'http://162.220.61.86:8080/printkaari-api/',
-	config = {
-		headers: {
-		'Content-Type' : 'application/json'
-		'Authorization' : ''
-		}
-	};
+	config = {};
 
 	
-	paymentFactory.getMerchantCreds = function(){
-		return $http.get(baseUrl + 'payment/getCreds' );
+	paymentFactory.getMerchantCreds = function(orderId){
+		return $http.get(baseUrl + 'payment/getCreds/' + orderId);
 	}
 
-	paymentFactory.resetPassword = function(params){
-		return $http.put(baseUrl + 'password/reset', params, config);
+	paymentFactory.initiateOrder = function(orderId){
+		return $http.get(baseUrl + 'customers/confirm-college-order/' + orderId);
 	}
 	
 	return paymentFactory;

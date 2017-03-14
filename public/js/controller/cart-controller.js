@@ -1,17 +1,23 @@
 
 
-app.controller('cartController', ['cartService', '$http', function(cartService, $http){
+app.controller('cartController', ['cartService', '$http', 'paymentFactory',function(cartService, $http, paymentFactory){
 	
 	var cart = this;
 
 
 	cart.init = function(){
 		cart.cartData = cartService.getCartData();
+		cart.total = cartService.getTotal();
+		cart.noOfProduct = cartService.getProductCount();
 	};
+
  
 	cart.checkout = function(){
 
-		$http.get('/api/payment')
+		paymentFactory.getMerchantCreds(cart.cartData[0].order_id)
+			.then(function(response){
+				return $http.post('/api/payment/generatehash', response.data);
+			})
 			.then(function(res){
 				cart.params = res.data;
 				cart.generateAndSubmitForm();

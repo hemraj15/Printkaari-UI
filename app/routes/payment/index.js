@@ -4,7 +4,15 @@ var router = express.Router();
 var paymentCtl = require("../../controllers/payment.controller");
 
 router.
-	route('/generateHash')
+	route('/generatehash')
 	.post(paymentCtl.generateHash);
+
+router
+	.route('/success')
+	.post(paymentCtl.processSuccess);
+
+router
+	.route('/failure')
+	.post(paymentCtl.processFailure);
 
 module.exports = router;

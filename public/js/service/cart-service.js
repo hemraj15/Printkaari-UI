@@ -36,10 +36,22 @@ app.service('cartService',['store', function(store){
 
 		return service.cartData.length;
 	};
+
+
+	service.getTotal = function() {
+		
+		var total = 0;
+		
+		for (var i = 0; i < service.cartData.length; i++) {
+			total += service.cartData[i].total_price;
+		}
+
+		return total;
+	}
 	
 	service.getCartData = function(){
 		return service.cartData;
 	};
-	
+
 	service._initCartData();
 }]);

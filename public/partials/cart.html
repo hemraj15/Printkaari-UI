@@ -2,7 +2,7 @@
 	<div class="page-section">
 		<div class="wrapper">
 			<h1 class="headline headline--center">Cart</h1>
-			<p>You Need to Pay &#x20B9; 1234234</p>
+			<p>You Need to Pay &#x20B9; {{cart.total}} for {{cart.noOfProduct}} products</p>
 			<div class="float">
 				<div class="btn btn-primary float__right" ng-click="cart.checkout()">checkout</div>
 			</div>

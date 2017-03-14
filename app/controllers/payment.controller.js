@@ -17,8 +17,8 @@ var initialParams = {
 	email: '',
 	phone: '',
 	productinfo: '',
-	surl: "http://printkaari.com/#!/payment/success",
-	furl: "http://printkaari.com/#!/payment/failure",
+	surl: "http://printkaari.com/api/payment/success",
+	furl: "http://printkaari.com/api/payment/failure",
 	service_provider: "payu_paisa",
 	udf1: 'a',
 	udf2: 'b',
@@ -31,11 +31,11 @@ var finalParams = {};
 
 var hashParams = ['key','txnid','amount','productinfo','firstname','email','udf1','udf2','udf3','udf4','udf5','a','b','c','d','e'];
 
-paymentCtl.populateParams = function(){
+paymentCtl.populateParams = function(tansactionId){
 
 	var resParams = {
-		txnid: 3,
-		amount: 400,
+		txnid: tansactionId,
+		amount: 1,
 		firstname: 'kamlesh',
 		email: 'kdfl@kdlfj.ocm',
 		phone: '9754325905',
@@ -53,8 +53,7 @@ paymentCtl.generateHash = function(req, res){
 	var string = '';
 	var hash = '';
 	
-	console.log(req.body);
-	paymentCtl.populateParams();
+	paymentCtl.populateParams(req.body.tansactionId);
 	for (var i = 0; i < hashParams.length; i++) {
 		string += finalParams[hashParams[i]] || '';
 		string += '|';
@@ -80,12 +79,14 @@ paymentCtl.generateHash = function(req, res){
 }
 
 paymentCtl.processSuccess = function(req, res){
-
+	console.log(req.body);
+	res.redirect('/#!/payment/success');
 };
 
 
 paymentCtl.processFailure = function(req, res){
-
+	console.log(req.body);
+	res.redirect('/#!/payment/failure');
 };
 
 module.exports = paymentCtl;

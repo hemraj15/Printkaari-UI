@@ -13,7 +13,7 @@ app.controller('productController', ['cartService', 'orderFactory', '$rootScope'
 		fd.append('file', product.file);
 		fd.append('fileType', 'pdf');
 		fd.append('bindingType', product.bindingType);
-		fd.append('totalPages', product.noOfPage + product.noOfColoredPage);
+		fd.append('totalPages', parseInt(product.noOfPage) + parseInt(product.noOfColoredPage));
 		fd.append('glossyColorPages', product.noOfPage);
 		fd.append('nonGlossyColorPages', product.noOfColoredPage);
 		fd.append('anyOtherRequest', product.comment);
