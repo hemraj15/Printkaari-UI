@@ -22,6 +22,7 @@ app.service('authService',['store', function(store){
 
 	service.clearAuthData = function(){
 		store.remove('authData');
+		service._initAuthData();
 	};
 
 	service.getAccessToken = function(){

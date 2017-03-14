@@ -33,6 +33,7 @@
   "dependencies": {
     "angular-storage": "0.0.15",
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "js-sha512": "^0.3.0"
   }
 }

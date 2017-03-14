@@ -7,9 +7,12 @@ app.factory('orderFactory', ['$http', function($http){
 	_config = {};
 
 
-	orderFactory.addProduct = function(params){
+	orderFactory.addProduct = function(fd){
 
-		return $http.post(baseURL + 'college-order-upload-files', params, _config);
+		return $http.post(baseURL + 'college-order-upload-files', fd, {
+		   transformRequest: angular.identity,
+		   headers: {'Content-Type': undefined}
+		});
 	}
 
 

@@ -1,6 +1,6 @@
 
 
-app.controller('cartController',['cartService', function(cartService){
+app.controller('cartController', ['cartService', '$http', function(cartService, $http){
 	
 	var cart = this;
 
@@ -10,11 +10,19 @@ app.controller('cartController',['cartService', function(cartService){
 	};
  
 	cart.checkout = function(){
-		//cart.buildParams();
 
+		$http.get('/api/payment')
+			.then(function(res){
+				cart.params = res.data;
+				cart.generateAndSubmitForm();
+			});
+	};
+
+	cart.generateAndSubmitForm = function(){
+		
 	    var form = document.createElement('form');
 	    form.method = 'POST';
-	    form.action = "https://test.payu.in/_payment";
+	    form.action = "https://secure.payu.in/_payment";
 
 	    angular.forEach(cart.params, function(value, key){
 
@@ -23,8 +31,7 @@ app.controller('cartController',['cartService', function(cartService){
 	    });
 	    document.body.appendChild(form);
 	    form.submit();
-
-	};
+	}
 
 	cart.createInput = function(name, value){
 		var input = document.createElement('input');
@@ -40,37 +47,7 @@ app.controller('cartController',['cartService', function(cartService){
 		return input;
 	}
 
-	cart.buildParams = function(){
-
-		cart.params = {
-			key: $MERCHANT_KEY,
-			hash: $hash,
-			txnid: $txnid,
-			amount: amount,
-			firstname: firstname,
-			email: email,
-			phone: phone,
-			productinfo: productinfo,
-			surl: "http://printkaari.com/#!/payment/success",
-			furl: "http://printkaari.com/#!/payment/failure",
-			service_provider: "payu_paisa",
-			//Optional Parameter
-			lastname: lastname,
-			curl: "http://printkaari.com/#!/payment/cancel",
-			address1: "",
-			address2: "",
-			city: "",
-			state: "",
-			country: "",
-			zipcode: "",
-			udf1: "",
-			udf2: "",
-			udf3: "",
-			udf4: "",
-			udf5: "",
-			pg: ""
-		}
-	}
+	
 
 
 	cart.init();
