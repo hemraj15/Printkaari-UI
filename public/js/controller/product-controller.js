@@ -6,13 +6,18 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 
 	var product = this;
 
+	product.bindingType = [
+		{name: 'Hard Binding', value: 'hard'},
+		{name: 'Spiral Binding', value: 'spiral'}
+	];
+
 	product.addProduct = function(){
 
 		var fd = new FormData();
 		
 		fd.append('file', product.file);
 		fd.append('fileType', 'pdf');
-		fd.append('bindingType', product.bindingType);
+		fd.append('bindingType', product.selectedbindingType.value);
 		fd.append('totalPages', product.noOfPage);
 		fd.append('glossyColorPages', product.noOfGlossyColoredPage);
 		fd.append('nonGlossyColorPages', product.noOfNonGlossyColoredPage);

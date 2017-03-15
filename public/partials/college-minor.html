@@ -9,7 +9,7 @@
 			<div class="col-sm-6 custom-item">
 				<p>Hard Binding</p>
 				<img src="/img/college/hardbind-02.jpg" class="img-responsive" style="width:100%" alt="Image">
-				<div class='btn-area'>
+				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[0]">
 					<a class="btn btn-default"><i class="fa fa-eye"></i> Buy Now</a>
 				</div>
 				
@@ -17,7 +17,7 @@
 			<div class="col-sm-6 custom-item">
 				<p>Spiral Binding</p>
 				<img src="/img/college/spiral-bound-book-printing-product-shot-2.png" class="img-responsive" style="width:100%" alt="Image">
-				<div class='btn-area'>
+				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[1]">
 					<a class="btn btn-default"><i class="fa fa-eye"></i> Buy Now</a>
 				</div>
 			</div>
@@ -29,9 +29,7 @@
 		<form>
 			<div class="form-group">
 				<label for="sel1">Select the type of binding</label>
-				<select class="form-control" id="sel1" ng-model="product.bindingType">
-					<option value="hard">Hard Binding</option>
-					<option value="spiral">Spiral binding</option>
+				<select class="form-control" id="sel1" ng-model="product.selectedbindingType" ng-options="bindingType.name for bindingType in product.bindingType">
 				</select>
 			</div>
 			<div class="form-group">
