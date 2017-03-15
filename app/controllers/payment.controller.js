@@ -31,7 +31,7 @@ var finalParams = {};
 
 var hashParams = ['key','txnid','amount','productinfo','firstname','email','udf1','udf2','udf3','udf4','udf5','a','b','c','d','e'];
 
-paymentCtl.populateParams = function(tansactionId){
+paymentCtl._populateParams = function(tansactionId){
 
 	var resParams = {
 		txnid: tansactionId,
@@ -49,44 +49,63 @@ paymentCtl.populateParams = function(tansactionId){
 	}
 };
 
-paymentCtl.generateHash = function(req, res){
+paymentCtl._generateString = function(params){
 	var string = '';
-	var hash = '';
 	
-	paymentCtl.populateParams(req.body.tansactionId);
+	paymentCtl._populateParams(params.tansactionId);
+	
 	for (var i = 0; i < hashParams.length; i++) {
 		string += finalParams[hashParams[i]] || '';
 		string += '|';
 	}
 
 	string+= creds.merchantSalt;
-	hash = sha512(string);
 
-	console.log(string);
+	return string;
+}
+
+paymentCtl.generateParams = function(req, res){
+	var hash = sha512(paymentCtl._generateString(req.body));
 
 	finalParams['hash'] = hash;
 	
-	var data = {
-		params : finalParams,
-		header : {
-			Authorization: creds.authHeader
-		}
-	}
-
 	res
 		.status(200)
 		.json(finalParams);
 }
 
+paymentCtl._validateParams = function(params){
+	return true;
+};
+
+paymentCtl._encodeParams = function(params){
+
+	var string = '';
+
+	for(var key in params){
+		if(params.hasOwnProperty(key)){
+			string = key + '=' + encodeURIComponent(params[key]);
+		}
+	}
+
+	return string;
+}
+
 paymentCtl.processSuccess = function(req, res){
-	console.log(req.body);
-	res.redirect('/#!/payment/success');
+	
+	if (paymentCtl._validateParams(req.body)) {
+		var querystring = paymentCtl._encodeParams(req.body);
+		res.redirect('/#!/payment/success?' + querystring);
+	}
 };
 
 
 paymentCtl.processFailure = function(req, res){
-	console.log(req.body);
-	res.redirect('/#!/payment/failure');
+	
+	if(paymentCtl._validateParams(req.body)){
+		var querystring = paymentCtl._encodeParams(req.body);
+		res.redirect('/#!/payment/failure?' + querystring);
+	}
 };
 
 module.exports = paymentCtl;

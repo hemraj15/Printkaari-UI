@@ -4,8 +4,8 @@ var router = express.Router();
 var paymentCtl = require("../../controllers/payment.controller");
 
 router.
-	route('/generatehash')
-	.post(paymentCtl.generateHash);
+	route('/generateparams')
+	.post(paymentCtl.generateParams);
 
 router
 	.route('/success')

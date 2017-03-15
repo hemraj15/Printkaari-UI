@@ -14,9 +14,9 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory',funct
  
 	cart.checkout = function(){
 
-		paymentFactory.getMerchantCreds(cart.cartData[0].order_id)
+		paymentFactory.initiateTransaction(cart.cartData[0].order_id)
 			.then(function(response){
-				return $http.post('/api/payment/generatehash', response.data);
+				return $http.post('/api/payment/generateparams', response.data);
 			})
 			.then(function(res){
 				cart.params = res.data;

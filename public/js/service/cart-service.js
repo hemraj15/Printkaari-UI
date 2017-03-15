@@ -18,6 +18,11 @@ app.service('cartService',['store', function(store){
 		service.cartData = store.get('cartData') || [];
 	};
 
+	service.emptyCart = function(){
+		store.remove('cartData');
+		service._initCartData();
+	};
+
 	service.removeProduct = function(productId){
 
 		for (var i = 0; i < service.cartData.length; i++) {

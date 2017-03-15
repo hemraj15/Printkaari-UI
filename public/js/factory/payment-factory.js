@@ -10,12 +10,12 @@ app.factory('paymentFactory', ['$http', function($http){
 	config = {};
 
 	
-	paymentFactory.getMerchantCreds = function(orderId){
-		return $http.get(baseUrl + 'payment/getCreds/' + orderId);
+	paymentFactory.updateTransaction = function(orderId, params){
+		return $http.post(baseUrl + 'customers/confirm-college-order/' + orderId, params);
 	}
 
-	paymentFactory.initiateOrder = function(orderId){
-		return $http.get(baseUrl + 'customers/confirm-college-order/' + orderId);
+	paymentFactory.initiateTransaction = function(orderId){
+		return $http.get(baseUrl + 'payment/getCreds/' + orderId);
 	}
 	
 	return paymentFactory;
