@@ -8,11 +8,15 @@ app.controller('navTabController',['$window','$location','authService', 'cartSer
      */
     navCtl.init = function(){
 		var data = authService.getAuthData();
-	
+		var noOfProduct = cartService.getProductCount();
+		noOfProduct = isFinite(noOfProduct) ? noOfProduct : null;
+
 		if(data){
 			navCtl.isLogin=true;
 			navCtl.loginData = data;
 		}
+
+		navCtl.noOfProduct = noOfProduct;
 	}
 	
 	/*
@@ -34,6 +38,13 @@ app.controller('navTabController',['$window','$location','authService', 'cartSer
 		navCtl.init();
 	});
    	
+
+   	/*
+   	To update num of product to be diplayed for numver of cart
+   	 */
+   	$rootScope.$on('updateCart', function(event, data){
+   		navCtl.init();
+   	});
 	this.init();
 }]);
 

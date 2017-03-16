@@ -15,7 +15,7 @@ var initialParams = {
 	amount: '',
 	firstname: '',
 	email: '',
-	phone: '',
+	phone: '9876543210',
 	productinfo: '',
 	surl: "http://printkaari.com/api/payment/success",
 	furl: "http://printkaari.com/api/payment/failure",
@@ -31,28 +31,21 @@ var finalParams = {};
 
 var hashParams = ['key','txnid','amount','productinfo','firstname','email','udf1','udf2','udf3','udf4','udf5','a','b','c','d','e'];
 
-paymentCtl._populateParams = function(tansactionId){
-
-	var resParams = {
-		txnid: tansactionId,
-		amount: 1,
-		firstname: 'kamlesh',
-		email: 'kdfl@kdlfj.ocm',
-		phone: '9754325905',
-		productinfo: 'huale haule'
-	};
+paymentCtl._populateParams = function(resParams){
 
 	for (var prop in initialParams) {
 		if (initialParams.hasOwnProperty(prop)) {
 			finalParams[prop] = resParams[prop] || initialParams[prop];
 		} 
 	}
+
+	finalParams.amount = 1; // to over-ride amount for testing purpose
 };
 
 paymentCtl._generateString = function(params){
 	var string = '';
 	
-	paymentCtl._populateParams(params.tansactionId);
+	paymentCtl._populateParams(params);
 	
 	for (var i = 0; i < hashParams.length; i++) {
 		string += finalParams[hashParams[i]] || '';

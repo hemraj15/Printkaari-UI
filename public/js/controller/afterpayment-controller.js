@@ -1,6 +1,6 @@
 
 
-app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymentFactory', function($routeParams, cartService, paymentFactory){
+app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymentFactory', '$rootScope',function($routeParams, cartService, paymentFactory, $rootScope){
 
 	var afterpayment = this;
 
@@ -9,7 +9,7 @@ app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymen
 	if($routeParams.action == 'success'){
 		
 		cartService.emptyCart();
-
+		$rootScope.$emit('updateCart', {});
 		afterpayment.message = "Your payment is successful";
 		afterpayment.description = "Thanks for placing order with us, we will shortly process this order,You can track you order anytime under my order section";
 	}else{
@@ -23,4 +23,4 @@ app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymen
 				
 			});
 	}
-}]);
+}]);	

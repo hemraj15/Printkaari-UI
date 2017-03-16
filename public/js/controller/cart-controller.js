@@ -16,7 +16,18 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory',funct
 
 		paymentFactory.initiateTransaction(cart.cartData[0].order_id)
 			.then(function(response){
-				return $http.post('/api/payment/generateparams', response.data);
+				var params = {
+					txnid: response.data.tansactionId,
+					amount: response.data.orderPrice,
+					firstname : response.data.customerFirstName,
+					email: response.data.customerEmail,
+					phone: response.data.custContactNum,
+					productinfo: "this is need to ask in next request cycle",
+					udf1: response.data.orderId,
+					udf2: response.data.customerId
+				}
+
+				return $http.post('/api/payment/generateparams', params);
 			})
 			.then(function(res){
 				cart.params = res.data;

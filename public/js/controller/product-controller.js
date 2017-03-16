@@ -2,7 +2,7 @@
 
  */
 
-app.controller('productController', ['cartService', 'orderFactory', '$location', function(cartService,orderFactory,$location){
+app.controller('productController', ['cartService', 'orderFactory', '$location', '$rootScope',function(cartService,orderFactory,$location,$rootScope){
 
 	var product = this;
 
@@ -27,6 +27,7 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 			.then(function(response){
 				cartService.addProduct(response.data);
 				console.log(response.data);
+				$rootScope.$emit('updateCart', {});
 				$location.path('cart');
 			});
 	};
