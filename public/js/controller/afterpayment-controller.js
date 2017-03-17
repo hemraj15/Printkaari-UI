@@ -17,10 +17,26 @@ app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymen
 		afterpayment.description = "Unfortunetly you payment has not been made, you can try again by going to cart section again";
 	}
 
+	afterpayment._buildParams = function(){
+
+		var params = {};
+
+		for(var key in $routeParams){
+			
+			if(key == 'action'){
+				continue;
+			}
+
+			params[key] = $routeParams[key];
+		}
+	};
+
 	afterpayment.updateTransaction = function(){
-		paymentFactory.updateTransaction()
+		paymentFactory.updateTransaction($routeParams.orderId ,afterpayment._buildParams())
 			.then(function(response){
 				
 			});
-	}
+	};
+
+	//afterpayment.updateTransaction();
 }]);	

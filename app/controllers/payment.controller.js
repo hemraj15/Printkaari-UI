@@ -27,6 +27,27 @@ var initialParams = {
 	udf5: 'e'
 };
 
+var mappedParams = {
+	mihpayid : 'paymentGatewayTrxId',
+	mode : 'paymentMode',
+	status: 'trxStatus',
+	txnid: 'transactionNo',
+	udf1: 'orderId',
+	amount: 'amount',
+	addedon: 'transactonDate',
+	firstname: 'custFirstName',
+	lastname: 'custLastName',
+	field8: 'trxMessage',
+	field9: 'custTrxAction',
+	bank_ref_num: 'bankRefNum',
+	bankcode: 'bankCode',
+	error: 'errorCode',
+	error_Message : 'errorMessage',
+	payuMoneyId: 'payYouMoneyId',
+	discount: 'discount',
+	net_amount_debit: 'netAmountPaid'
+};
+
 var finalParams = {};
 
 var hashParams = ['key','txnid','amount','productinfo','firstname','email','udf1','udf2','udf3','udf4','udf5','a','b','c','d','e'];
@@ -57,6 +78,15 @@ paymentCtl._generateString = function(params){
 	return string;
 }
 
+paymentCtl._generateMappedParams = function(params){
+
+	for(key in mappedParams){
+		if(mappedParams.hasOwnProperty(key)){
+			finalParams[mappedParams[key]] = params[key];
+		}
+	}
+}
+
 paymentCtl.generateParams = function(req, res){
 	var hash = sha512(paymentCtl._generateString(req.body));
 
@@ -77,17 +107,20 @@ paymentCtl._encodeParams = function(params){
 
 	for(var key in params){
 		if(params.hasOwnProperty(key)){
-			string = key + '=' + encodeURIComponent(params[key]);
+			string += key + '=' + encodeURIComponent(params[key]);
+			string += '&';
 		}
 	}
-
+	string = string.substr(0, string.length - 1);
 	return string;
 }
 
 paymentCtl.processSuccess = function(req, res){
 	
 	if (paymentCtl._validateParams(req.body)) {
-		var querystring = paymentCtl._encodeParams(req.body);
+
+		paymentCtl._generateMappedParams(req.body);
+		var querystring = paymentCtl._encodeParams(finalParams);
 		res.redirect('/#!/payment/success?' + querystring);
 	}
 };
@@ -96,7 +129,8 @@ paymentCtl.processSuccess = function(req, res){
 paymentCtl.processFailure = function(req, res){
 	
 	if(paymentCtl._validateParams(req.body)){
-		var querystring = paymentCtl._encodeParams(req.body);
+		paymentCtl._generateMappedParams(req.body);
+		var querystring = paymentCtl._encodeParams(finalParams);
 		res.redirect('/#!/payment/failure?' + querystring);
 	}
 };
