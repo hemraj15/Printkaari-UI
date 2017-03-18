@@ -77,6 +77,8 @@ paymentCtl._generateString = function(params){
 
 paymentCtl._generateMappedParams = function(params){
 
+	finalParams = {};
+
 	for(key in mappedParams){
 		if(mappedParams.hasOwnProperty(key)){
 			finalParams[mappedParams[key]] = params[key];
