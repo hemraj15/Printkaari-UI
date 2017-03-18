@@ -9,7 +9,7 @@ app.controller('navTabController',['$window','$location','authService', 'cartSer
     navCtl.init = function(){
 		var data = authService.getAuthData();
 		var noOfProduct = cartService.getProductCount();
-		noOfProduct = isFinite(noOfProduct) ? noOfProduct : null;
+		noOfProduct = noOfProduct || null;
 
 		if(data){
 			navCtl.isLogin=true;

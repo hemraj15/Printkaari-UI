@@ -6,16 +6,16 @@
 
 app.factory('paymentFactory', ['$http', function($http){
 	var paymentFactory = {},
-	baseUrl = 'http://162.220.61.86:8080/printkaari-api/',
+	baseUrl = 'http://162.220.61.86:8080/printkaari-api/payment/',
 	config = {};
 
 	
-	paymentFactory.updateTransaction = function(orderId, params){
-		return $http.post(baseUrl + 'customers/confirm-college-order/' + orderId, params);
+	paymentFactory.updateTransaction = function(params){
+		return $http.post(baseUrl + 'trxComplete/', params);
 	}
 
 	paymentFactory.initiateTransaction = function(orderId){
-		return $http.get(baseUrl + 'payment/trxInitiate/' + orderId);
+		return $http.get(baseUrl + 'trxInitiate/' + orderId);
 	}
 	
 	return paymentFactory;

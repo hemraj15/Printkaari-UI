@@ -29,14 +29,16 @@ app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymen
 
 			params[key] = $routeParams[key];
 		}
+
+		return params;
 	};
 
 	afterpayment.updateTransaction = function(){
-		paymentFactory.updateTransaction($routeParams.orderId ,afterpayment._buildParams())
+		paymentFactory.updateTransaction(afterpayment._buildParams())
 			.then(function(response){
-				
+				console.log(response.data);
 			});
 	};
 
-	//afterpayment.updateTransaction();
+	afterpayment.updateTransaction();
 }]);	
