@@ -50,6 +50,7 @@ var finalParams = {};
 var hashParams = ['key','txnid','amount','productinfo','firstname','email','udf1','udf2','udf3','udf4','udf5','a','b','c','d','e'];
 
 paymentCtl._populateParams = function(resParams){
+	finalParams = {};
 
 	for (var prop in initialParams) {
 		if (initialParams.hasOwnProperty(prop)) {
@@ -81,7 +82,7 @@ paymentCtl._generateMappedParams = function(params){
 
 	for(key in mappedParams){
 		if(mappedParams.hasOwnProperty(key)){
-			finalParams[mappedParams[key]] = params[key];
+			finalParams[mappedParams[key]] = params[key] || "";
 		}
 	}
 }
