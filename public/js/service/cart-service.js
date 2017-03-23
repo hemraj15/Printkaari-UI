@@ -48,7 +48,7 @@ app.service('cartService',['store', function(store){
 		var total = 0;
 		
 		for (var i = 0; i < service.cartData.length; i++) {
-			total += service.cartData[i].total_price;
+			total += service.cartData[i].amountToBePaid;
 		}
 
 		return total;
