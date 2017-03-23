@@ -14,7 +14,7 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory',funct
  
 	cart.checkout = function(){
 
-		paymentFactory.initiateTransaction(cart.cartData[0].order_id)
+		paymentFactory.initiateTransaction(cart.cartData[0].orderId)
 			.then(function(response){
 				var params = {
 					txnid: response.data.tansactionId,

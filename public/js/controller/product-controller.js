@@ -19,8 +19,9 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 		fd.append('fileType', 'pdf');
 		fd.append('bindingType', product.selectedbindingType.value);
 		fd.append('totalPages', product.noOfPage);
-		fd.append('glossyColorPages', product.noOfGlossyColoredPage);
-		fd.append('nonGlossyColorPages', product.noOfNonGlossyColoredPage);
+		fd.append('totalColorPage', product.noOfColoredPage);
+		fd.append('colorPages', product.coloredPageToPrint);
+		fd.append('quantity', product.printQuantity);
 		fd.append('anyOtherRequest', product.comment);
 
 		orderFactory.addProduct(fd)

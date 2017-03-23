@@ -9,16 +9,16 @@
 			<div class="col-sm-6 custom-item">
 				<p>Hard Binding</p>
 				<img src="/img/college/hardbind-02.jpg" class="img-responsive" style="width:100%" alt="Image">
-				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[0]">
-					<a class="btn btn-default"><i class="fa fa-eye"></i> Buy Now</a>
+				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[0]"><br>
+					<a class="btn btn-warning"> Select</a>
 				</div>
 				
 			</div>
 			<div class="col-sm-6 custom-item">
 				<p>Spiral Binding</p>
 				<img src="/img/college/spiral-bound-book-printing-product-shot-2.png" class="img-responsive" style="width:100%" alt="Image">
-				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[1]">
-					<a class="btn btn-default"><i class="fa fa-eye"></i> Buy Now</a>
+				<div class='btn-area' ng-click="product.selectedbindingType = product.bindingType[1]"><br>
+					<a class="btn btn-warning"> Select</a>
 				</div>
 			</div>
 			
@@ -33,29 +33,37 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="sel1">Number of glossy colored pages</label>
-				<span>
-					<a data-toggle="tooltip" data-placement="top" title="No additional charges till 4 pages after 4 pages Rs. +12/- will be charged per extra page!"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-				</span>
-				<input class="form-control" id="sel1" ng-model="product.noOfGlossyColoredPage"></input>        
-			</div>
-			<div class="form-group">
-				<label for="sel1">Number of non glossy colored pages</label>
-				<span>
-					<a data-toggle="tooltip" data-placement="top" title="No additional charges till 30 pages after 30 pages Rs. +3/- will be charged per extra page!"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-				</span>
-				<input class="form-control" id="sel1" ng-model="product.noOfNonGlossyColoredPage"></input>
-			</div>
-			<div class="form-group">
 				<label for="sel1">Number of total pages</label>
 				<span>
-					<a data-toggle="tooltip" data-placement="top" title="No additional charges till 30 pages after 30 pages Rs. +3/- will be charged per extra page!"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+					<a data-toggle="tooltip" data-placement="top" title="No additional charges till specified pages after that Rs. +3/- will be charged per extra page!"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 				</span>
 				<input class="form-control" id="sel1" ng-model="product.noOfPage"></input>
 			</div>
 			<div class="form-group">
+				<label for="sel1">Number of  colored pages</label>
+				<span>
+					<a data-toggle="tooltip" data-placement="top" title="No additional charges till specified pages after that Rs. +8/- will be charged per extra page!"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+				</span>
+				<input class="form-control" id="sel1" ng-model="product.noOfColoredPage"></input>        
+			</div>
+			<div class="form-group">
+				<label for="sel1">Please Provide the page numbers to be printed in color ...</label>
+				<span>
+					<a data-toggle="tooltip" data-placement="top" title="No additional charges for specified pages Rs. +8/- will be charged per extra page !"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+				</span>
+				<input class="form-control" id="sel1" ng-model="product.coloredPageToPrint" placeholder="Ex. 1,3,5.. etc"></input>
+			</div>
+			
+			<div class="form-group">
 				<label>Upload your file in pdf format:</label>
 				<input type="file" class="form-control" file-input file="product.file">
+			</div>
+			<div class="form-group">
+				<label for="sel1">Quantity</label>
+				<span>
+					<a data-toggle="tooltip" data-placement="top" title="20% discount for 2 or more than 2 !"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+				</span>
+				<input class="form-control" id="sel1" ng-model="product.printQuantity"></input>        
 			</div>
 			<div class="form-group">
 				<label for="comment">Any Special Request</label>
