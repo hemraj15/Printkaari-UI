@@ -3,6 +3,7 @@ app.service('authService',['store', function(store){
 	var service = this;
 	
 	service.setAuthData = function(data){
+		data.expireTimestamp =  (data.expires_in * 1000) + Date.now(); 
 		store.set('authData', data);
 		service._initAuthData();			
 	};
@@ -46,7 +47,7 @@ app.service('authService',['store', function(store){
 
 	service._isNotExpired = function(){
 
-		if(true){
+		if(service.authData.expireTimestamp < Date.now()){
 			return true;
 		}
 
