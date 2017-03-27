@@ -1,6 +1,6 @@
 
 
-app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymentFactory','authService' '$rootScope',function($routeParams, cartService, paymentFactory,authService $rootScope){
+app.controller('afterPaymentController', ['$routeParams', 'cartService', 'paymentFactory', '$rootScope',function($routeParams, cartService, paymentFactory, $rootScope){
 
 	var afterpayment = this;
 
