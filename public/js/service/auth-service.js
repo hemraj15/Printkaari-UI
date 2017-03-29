@@ -47,7 +47,7 @@ app.service('authService',['store', function(store){
 
 	service._isNotExpired = function(){
 
-		if(service.authData.expireTimestamp < Date.now()){
+		if(service.authData.expireTimestamp > Date.now()){
 			return true;
 		}
 

@@ -3,6 +3,22 @@
 		<div class="wrapper">
 			<h1 class="headline headline--center">Cart</h1>
 			<p>You Need to Pay &#x20B9; {{cart.total}} for {{cart.noOfProduct}} products</p>
+			<div class="td-row td-row__gutter td-row--header td-row--tb-margin">
+				<div class="td-row-4">Product</div>
+				<div class="td-row-2">Price</div>
+				<div class="td-row-2">Quantity</div>
+				<div class="td-row-2">Total Price</div>
+				<div class="td-row-2"></div>
+			</div>
+			<div class="td-row td-row__gutter td-row--tb-margin" ng-repeat="product in cart.cartData">
+				<div class="td-row-4">Order {{$index + 1}}</div>
+				<div class="td-row-2">140</div>
+				<div class="td-row-2">1</div>
+				<div class="td-row-2">140</div>
+				<div class="td-row-2">
+			      <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+				</div>
+			</div>
 			<div class="float">
 				<div class="btn btn-primary float__right" ng-click="cart.checkout()">checkout</div>
 			</div>

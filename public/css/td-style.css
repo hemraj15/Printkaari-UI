@@ -236,3 +236,42 @@ body {
 .float__right{
     float: right;
 }
+
+.td-row::after {
+    content: " ";
+    clear: both;
+    display: block;
+}
+
+.td-row__gutter{
+    margin-right: -65px;
+}
+
+.td-row__gutter > div{
+    padding-right: 65px;
+}
+
+.td-row--header{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.td-row--tb-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.td-row-4{
+    float: left;
+    width: 33%;
+}
+
+.td-row-3{
+    float: left;
+    width: 25%;
+}
+
+.td-row-2{
+    float: left;
+    width: 16.66%;
+}

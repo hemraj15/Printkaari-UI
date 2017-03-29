@@ -2,7 +2,7 @@
 
  */
 
-app.controller('productController', ['cartService', 'orderFactory', '$location', '$rootScope',function(cartService,orderFactory,$location,$rootScope){
+app.controller('productController', ['cartService', 'orderFactory', '$location', '$rootScope', 'authService', function(cartService,orderFactory,$location,$rootScope,authService){
 
 	var product = this;
 
@@ -13,6 +13,11 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 
 	product.addProduct = function(){
 
+		if(!authService.getAuthData()){
+			alert('please login to add product');
+			return;
+		}
+		
 		var fd = new FormData();
 		
 		fd.append('file', product.file);
