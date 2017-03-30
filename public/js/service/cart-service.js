@@ -39,7 +39,7 @@ app.service('cartService',['store', function(store){
 
 	service.getProductCount = function(){
 
-		return service.cartData.length ? service.cartData.length : false;
+		return service.cartData.length ? service.cartData.length : 0;
 	};
 
 
