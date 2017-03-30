@@ -26,9 +26,10 @@ app.controller('navTabController',['$window','$location','authService', 'cartSer
 	navCtl.logout=function(){		
 		
 		authService.clearAuthData();
-		$window.alert("You Have Logged out Success Fully redirect to Home");
+		$window.alert("You have logged out success fully redirect to Home");
 		navCtl.isLogin = false;
-		navCtl.loginData = {};	
+		navCtl.loginData = {};
+        $window.location.reload();		
 	}
 
 	/*

@@ -37,5 +37,19 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 				$location.path('cart');
 			});
 	};
+	
+	$scope.validatePageNum=function(totalPages,colorPages){
+		
+		  $scope.validatePageNumStr="";
+		  
+		  if(colorPages>totalPages){
+			  
+			$scope.validatePageNumStr="Number of color pages can not be greater than total pages";   
+		  }
+		  //if(!angular.equals($scope.user1,){
+			  
+			// $scope.validatePageNumStr="Number of color pages can not be greater than total pages"; 
+		  //}
+	}
 
 }]);
