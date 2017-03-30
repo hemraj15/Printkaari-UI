@@ -43,12 +43,28 @@ app.service('cartService',['store', function(store){
 	};
 
 
-	service.getTotal = function() {
+	service.getTotalAmount = function() {
+
+		return service.getTotal('Amount');
+	}
+
+	service.getTotalDiscount = function() {
+		
+		return service.getTotal('Discount');
+	}
+
+	service.getNetTotal = function() {
+		
+		return service.getTotal('amountToBePaid');
+	}
+
+	
+	service.getTotal = function(key){
 		
 		var total = 0;
 		
 		for (var i = 0; i < service.cartData.length; i++) {
-			total += service.cartData[i].amountToBePaid;
+			total += service.cartData[i][key];
 		}
 
 		return total;

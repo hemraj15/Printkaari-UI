@@ -20,6 +20,20 @@
 		margin-bottom: 10px;
 	}
 
+	&--t-margin{
+		margin-top: 50px;
+	}
+
+	&-9{
+		float: left;
+		width: 75%;
+	}
+
+	&-8{
+		float: left;
+		width: 67%;
+	}
+
 	&-4{
 		float: left;
 		width: 33%;

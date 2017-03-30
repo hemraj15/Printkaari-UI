@@ -261,6 +261,20 @@ body {
     margin-bottom: 10px;
 }
 
+.td-row--t-margin{
+    margin-top: 50px;
+}
+
+.td-row-9{
+    float: left;
+    width: 75%;
+}
+
+.td-row-8{
+    float: left;
+    width: 67%;
+}
+
 .td-row-4{
     float: left;
     width: 33%;
@@ -279,4 +293,13 @@ body {
 .td-row-1{
     float: left;
     width: 8.33%;
+}
+
+.generic-content{
+	font-size: 1.5rem;
+	line-height: 1.2;
+}
+
+.generic-content--large{
+    font-size: 2.2rem;
 }

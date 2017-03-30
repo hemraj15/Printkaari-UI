@@ -7,7 +7,9 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$ro
 
 	cart.init = function(){
 		cart.cartData = cartService.getCartData();
-		cart.total = cartService.getTotal();
+		cart.netTotal = cartService.getNetTotal();
+		cart.totalAmount = cartService.getTotalAmount();
+		cart.totalDiscount = cartService.getTotalDiscount();
 		cart.noOfProduct = cartService.getProductCount();
 	};
 
