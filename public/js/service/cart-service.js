@@ -23,11 +23,11 @@ app.service('cartService',['store', function(store){
 		service._initCartData();
 	};
 
-	service.removeProduct = function(productId){
+	service.removeProduct = function(orderId){
 
 		for (var i = 0; i < service.cartData.length; i++) {
 			
-			if(service.cartData[i].productId == productId){
+			if(service.cartData[i].orderId == orderId){
 				
 				// removing product from the array
 				service.cartData.splice(i, 1);
@@ -56,6 +56,16 @@ app.service('cartService',['store', function(store){
 	
 	service.getCartData = function(){
 		return service.cartData;
+	};
+
+	service.getOrderIdList = function(){
+		var orderIdList = [];
+
+		for (var i = 0; i < service.cartData.length; i++) {
+			orderIdList.push(service.cartData[i].orderId);
+		}
+
+		return orderIdList;
 	};
 
 	service._initCartData();

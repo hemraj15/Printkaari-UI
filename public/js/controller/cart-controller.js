@@ -1,6 +1,6 @@
 
 
-app.controller('cartController', ['cartService', '$http', 'paymentFactory',function(cartService, $http, paymentFactory){
+app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$rootScope',function(cartService, $http, paymentFactory,$rootScope){
 	
 	var cart = this;
 
@@ -13,8 +13,9 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory',funct
 
  
 	cart.checkout = function(){
+		var orderIdList = cartService.getOrderIdList();
 
-		paymentFactory.initiateTransaction(cart.cartData[0].orderId)
+		paymentFactory.initiateTransaction({orderIdList: orderIdList})
 			.then(function(response){
 				var params = {
 					txnid: response.data.tansactionId,
@@ -65,7 +66,12 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory',funct
 	}
 
 	
-
+	cart.removeProduct = function(orderId){
+		console.log(orderId);
+		cartService.removeProduct(orderId);
+		cart.init();
+		$rootScope.$emit('updateCart', {});
+	}
 
 	cart.init();
 }]);

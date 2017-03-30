@@ -15,6 +15,9 @@ app.factory('orderFactory', ['$http', function($http){
 		});
 	}
 
+	orderFactory.updateOrderStatus = function(orderId){
+		return $http.get(baseURL);
+	}
 
 	return orderFactory;
 }]);

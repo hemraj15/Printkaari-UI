@@ -14,8 +14,8 @@ app.factory('paymentFactory', ['$http', function($http){
 		return $http.post(baseUrl + 'trxComplete/', params);
 	}
 
-	paymentFactory.initiateTransaction = function(orderId){
-		return $http.get(baseUrl + 'trxInitiate/' + orderId);
+	paymentFactory.initiateTransaction = function(params){
+		return $http.post(baseUrl + 'cartTrxInitiate/', params);
 	}
 	
 	return paymentFactory;
