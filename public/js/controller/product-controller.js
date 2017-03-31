@@ -2,7 +2,7 @@
 
  */
 
-app.controller('productController', ['cartService', 'orderFactory', '$location', '$rootScope', 'authService', function(cartService,orderFactory,$location,$rootScope,authService){
+app.controller('productController', ['cartService','$scope' ,'orderFactory', '$location', '$rootScope', 'authService', function(cartService,$scope,orderFactory,$location,$rootScope,authService){
 
 	var product = this;
 
@@ -41,10 +41,33 @@ app.controller('productController', ['cartService', 'orderFactory', '$location',
 	$scope.validatePageNum=function(totalPages,colorPages){
 		
 		  $scope.validatePageNumStr="";
+		  if(totalPages<0){
+			  
+			  $scope.validatePageNumStr="Number Total pages should be gretaer than 0";  
+		  }
+		  
+		  if(colorPages<0){
+			  
+			  $scope.validatePageNumStr="Number of color  pages should be gretaer than 0";   
+		  }
 		  
 		  if(colorPages>totalPages){
 			  
 			$scope.validatePageNumStr="Number of color pages can not be greater than total pages";   
+		  }
+		  //if(!angular.equals($scope.user1,){
+			  
+			// $scope.validatePageNumStr="Number of color pages can not be greater than total pages"; 
+		  //}
+	}
+	
+	$scope.validatePrintQuantity=function(qty){
+		
+		  $scope.validateQty="";
+		  
+		  if( qty < 1){
+			  
+			  $scope.validateQty="Quantity cshould be greater than 0 ";   
 		  }
 		  //if(!angular.equals($scope.user1,){
 			  

@@ -21,7 +21,7 @@
             <input id="login-password" type="password" class="form-control" name="password" placeholder="password" ng-model="password"  required minlength="5" maxlength="15" data-ng-blur="analayzePassword(password)" >
           </div>
           <span style="color: red;" ng-bind="errorMessage" >{{errorMessage}}</span>
-          <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="isPasswordValid !== ''" class="error-msg">{{isPasswordValid}}</p>
+          <p style="clear:both; color: red; margin-left: 36px;" data-ng-if="validatePageNumStr !== ''" class="error-msg">{{validatePageNumStr}}</p>
           <div class="input-group">
             <div class="checkbox">
               <label>
