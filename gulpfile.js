@@ -7,21 +7,26 @@ cssVars = require('postcss-simple-vars'),
 mixins = require('postcss-mixins'),
 nested = require('postcss-nested'),
 cssImport = require('postcss-import'),
-rename = require('gulp-rename');
+rename = require('gulp-rename'),
+nodemon = require('gulp-nodemon');
 
 
-gulp.task('default', function(){
-	browserSync.init({
-		server : {
-			basseDir: "./"
-		}
-	});
+gulp.task('browser-sync', ['nodemon'], function() {
+  browserSync({
+    proxy: "localhost:3000",  // local node app address
+    port: 8080,  // use *different* port than above
+    notify: true
+  });
+});
 
-	watch('./js/**/*.js',function(){
+
+gulp.task('default', ['browser-sync'],function(){
+	
+	watch('./public/js/**/*.js',function(){
 		browserSync.reload();
 	});
 
-	watch('./**/*.html',function(){
+	watch('./public/**/*.html',function(){
 		browserSync.reload();
 	});
 
@@ -31,7 +36,7 @@ gulp.task('default', function(){
 });
 
 gulp.task('cssInject',['td-style'], function(){
-	gulp.src('./dest/styles/td-style.css')
+	gulp.src('./public/css/td-style.css')
 		.pipe(browserSync.stream());
 });
 
@@ -43,5 +48,21 @@ gulp.task('td-style', function(){
 	    	this.emit('end');
 	    })
 	    .pipe(rename('td-style.css'))
-	    .pipe(gulp.dest('./dest/styles/'));
+	    .pipe(gulp.dest('./public/css/'));
+});
+
+gulp.task('nodemon', function (cb) {
+	
+	var started = false;
+	
+	return nodemon({
+		script: 'app.js'
+	}).on('start', function () {
+		// to avoid nodemon being started multiple times
+		// thanks @matthisk
+		if (!started) {
+			cb();
+			started = true; 
+		} 
+	});
 });
