@@ -76,7 +76,7 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$ro
 	}
 
 	cart.init();
-	
+//This is temporary routing to home from cart when cicked on add more option , this needs to be refactored
 	cart.goHome = function ( path ) {
     $window.location.href=path;
      };
