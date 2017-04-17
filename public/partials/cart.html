@@ -8,25 +8,25 @@
 			<div ng-show="cart.noOfProduct > 0">
 			<div class="row">
 			<div class="col-md-9">
-			<div class="panel panel-info" style="margin:left 10px; margin-right:10px; margin-bottom:10px">
-			<div class="panel-heading"  style="background-color:#009688 !important">
-				<div class="panel-title" style='color:white'>My Cart ({{cart.noOfProduct}})</div>
+				<div class="panel panel-info" style="margin-left: 10px;box-shadow:none; margin-right:10px; margin-bottom:10px;">
+					<div class="panel-heading"  style="background-color:#009688 !important;border-radius: 0px;">
+						<div class="panel-title" style='color:white'>My Cart ({{cart.noOfProduct}})</div>
 				<!--<div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" > </a></div> -->
-			</div>
-				<div class="td-row td-row__gutter">				
-					
+					</div>
+				    <div class="td-row td-row__gutter">
 						<!--<p>You Need to Pay &#x20B9; {{cart.netTotal}} for {{cart.noOfProduct}} products</p> -->
 						<div class="td-row td-row__gutter td-row--header td-row--tb-margin">
-							<div class="td-row-3">Product</div>
+							<div class="td-row-2">Product</div>
 							<div class="td-row-2">Price</div>
 							<div class="td-row-2">Discount</div>
 							<div class="td-row-2">Quantity</div>
 							<div class="td-row-2">Net Price</div>
 							<div class="td-row-1">Remove</div>
-							
 						</div>
 						<div class="td-row td-row__gutter td-row--tb-margin" ng-repeat="product in cart.cartData">
-							<div class="td-row-3">{{product.productName}}</div>
+							<div class="td-row-2">
+								<span> <img src="https://placehold.it/150x80?text=IMAGE" class="img-thumbnail" style="width:50px;height:50px;" alt="Image">
+									</span>{{product.productName}}</div>
 							<div class="td-row-2">{{product.Amount}}</div>
 							<div class="td-row-2">{{product.Discount}}</div>
 							<div class="td-row-2">{{product.quantity}}</div>
@@ -35,48 +35,52 @@
 						      <i class="glyphicon glyphicon-trash" aria-hidden="true" ng-click="cart.removeProduct(product.orderId)"></i>
 							</div>
 						</div>
-						
-						<div "td-row">
-						<div class="td-row-3">{{product.productName}} sample </div>
-						
-						</div>
-						<div "td-row">
-						<div class="td-row-3">{{product.productSample}}</div>
-						
-						</div>
-					</div>
-				
-					
-			</div>
-					<div class="col-md-3">
-					  <div class="td-row-3 generic-content generic-content--large td-row--t-margin">
-					  
-					  <div class="panel " style="margin-left:10px;">
-						<div class="td-row td-row--tb-margin">
-							<div class="td-row-9">Total Price ({{cart.noOfProduct}} item)</div>
-							<div class="td-row-3">{{cart.totalAmount}}</div>
-						</div>
-						<div class="td-row td-row--tb-margin">
-							<div class="td-row-9">Delivery Charges</div>
-							<div class="td-row-3">{{0}}</div>
-						</div>
-						<div class="td-row td-row--tb-margin">
-							<div class="td-row-9">Amount Payable </div>
-							<div class="td-row-3">{{cart.netTotal}}</div>
-						</div>
-						
-						<div class="td-row td-row--tb-margin">
-							<div class="td-row-9">Total savings on this order</div>
-							<div class="td-row-3">{{cart.totalDiscount}}</div>
-						</div>
-						
-						</div>
-						<div class="btn btn-primary" ng-click="cart.checkout()">checkout</div>
-					</div>
 					</div>
 				</div>
 			</div>
-			<p>&#42; conditions apply</p>
+					<div class="col-md-3 pricing-box">
+						<div class="row price-heading">
+							<p>Price Details</p>
+						</div>
+
+						<div class="row">
+							<div class="col-md-9"><label>Amount Payable</label> </div>
+							<div class="col-md-3">{{cart.netTotal}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-9"><label>Delivery Charges</label></div>
+							<div class="col-md-3">{{0}}</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-9"><label>Total savings on this order</label></div>
+							<div class="col-md-3">{{cart.totalDiscount}}</div>
+						</div>
+						<div class="row total-price-row">
+							<div class="col-md-9">
+								<label> Total Price ({{cart.noOfProduct}} item)</label></div>
+							<div class="col-md-3">{{cart.totalAmount}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="pull-left">
+								<div class="btn btn-warning btn-sm" ng-click="cart.checkout()">checkout</div>
+								<div class="btn btn-primary btn-sm" ng-click="">Add More + </div>
+								<p style="font-size:12px;margin-left:0px"><span>&#42; conditions apply</span></p>
+							</div>
+
+						</div>
+
+						</div>
+
+
+						</div>
+
+
+				</div>
+			</div>
+
+
 		</div>
 		</div>
 	</div>

@@ -252,7 +252,7 @@ body {
 }
 
 .td-row--header{
-    font-size: 2rem;
+    font-size:14px;
     font-weight: bold;
 }
 
@@ -268,31 +268,37 @@ body {
 .td-row-9{
     float: left;
     width: 75%;
+    padding-left: 10px;
 }
 
 .td-row-8{
     float: left;
     width: 67%;
+    padding-left: 10px;
 }
 
 .td-row-4{
     float: left;
     width: 33%;
+    padding-left: 10px;
 }
 
 .td-row-3{
     float: left;
     width: 25%;
+    padding-left: 10px;
 }
 
 .td-row-2{
     float: left;
     width: 16.66%;
+    padding-left: 10px;
 }
 
 .td-row-1{
     float: left;
     width: 8.33%;
+    padding-left: 10px;
 }
 
 .generic-content{
@@ -302,4 +308,30 @@ body {
 
 .generic-content--large{
     font-size: 2.2rem;
+}
+.pricing-box{
+    border:1px solid #ddd;
+    background: #fff;
+    border-radius: 2px;
+    height: 300px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+    min-height:70px;
+}
+.pricing-box .row{
+    line-height:3.1;
+}
+.pricing-box .price-heading{
+    border-bottom:1px solid #ddd;
+    padding-top:5px;
+    background-color: #ddd;
+}
+
+.pricing-box p{
+
+    margin-left:20px;
+}
+.total-price-row{
+    border-top:1px solid #ddd;
+    border-width:1px;
+    border-top-style:dashed;
 }
