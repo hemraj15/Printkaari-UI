@@ -43,11 +43,13 @@
 							<p>Price Details</p>
 						</div>
 
-						<div class="row">
-							<div class="col-md-9"><label>Amount Payable</label> </div>
-							<div class="col-md-3">{{cart.netTotal}}</div>
+						<div class="row total-price-row">
+							<div class="col-md-9">
+								<label> Total Price ({{cart.noOfProduct}} item)</label></div>
+							<div class="col-md-3">{{cart.totalAmount}}</div>
 						</div>
-						<div class="row">
+
+												<div class="row">
 							<div class="col-md-9"><label>Delivery Charges</label></div>
 							<div class="col-md-3">{{0}}</div>
 						</div>
@@ -56,16 +58,16 @@
 							<div class="col-md-9"><label>Total savings on this order</label></div>
 							<div class="col-md-3">{{cart.totalDiscount}}</div>
 						</div>
-						<div class="row total-price-row">
-							<div class="col-md-9">
-								<label> Total Price ({{cart.noOfProduct}} item)</label></div>
-							<div class="col-md-3">{{cart.totalAmount}}</div>
-						</div>
 						<div class="row">
+							<div class="col-md-9"><label>Amount Payable</label> </div>
+							<div class="col-md-3">{{cart.netTotal}}</div>
+						</div>
+
+												<div class="row">
 							<div class="col-md-12">
 								<div class="pull-left">
 								<div class="btn btn-warning btn-sm" ng-click="cart.checkout()">checkout</div>
-								<div class="btn btn-primary btn-sm" ng-click="">Add More + </div>
+								<div class="btn btn-primary btn-sm" ng-click="cart.goHome('/')">Add More + </div>
 								<p style="font-size:12px;margin-left:0px"><span>&#42; conditions apply</span></p>
 							</div>
 

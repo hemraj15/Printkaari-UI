@@ -92,7 +92,7 @@
 			<p style="clear:both; color: red; margin-left: 36px;" data-ng-if="validateQty !== ''" class="error-msg">{{validateQty}}</p>
 			<div class="form-group">
 				<label for="comment">Any Special Request</label>
-				<textarea class="form-control" rows="5" id="comment" ng-model='product.comment'></textarea>
+				<textarea class="form-control" rows="5" id="comment" ng-model='product.comment' placeholder="Please specify your college name & address"></textarea>
 			</div>
 			<button type="button" class="btn btn-success" ng-click="product.addProduct()">Submit</button>
 		</form>

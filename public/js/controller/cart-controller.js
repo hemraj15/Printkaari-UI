@@ -1,6 +1,6 @@
 
 
-app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$rootScope',function(cartService, $http, paymentFactory,$rootScope){
+app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$rootScope','$window',function(cartService, $http, paymentFactory,$rootScope,$window){
 	
 	var cart = this;
 
@@ -76,4 +76,8 @@ app.controller('cartController', ['cartService', '$http', 'paymentFactory', '$ro
 	}
 
 	cart.init();
+	
+	cart.goHome = function ( path ) {
+    $window.location.href=path;
+     };
 }]);
