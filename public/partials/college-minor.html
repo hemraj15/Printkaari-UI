@@ -37,7 +37,7 @@
   Project Diagram : Glossy Paper <br><br>
   
       * Please provide the page no if more colored pages required other than stated above.<br>
-	  * Rest all teh pages will be in 75 gsm black and white prints. <h5>
+	  * Rest all the pages will be in 75 gsm black and white prints. <h5>
 	  
  <h4> <u>Rate List	</u> </h4> 
  <h5> 
@@ -45,7 +45,7 @@
   Spiral Binding - 45/-<br>
   Glossy Paper   - 12/-<br>
   Color prints   - 8/-<br>
-  Black & White  - 3/- </h5>
+  Black & White  - 2.5/- </h5>
 	</div>
 	
 	<div class="col-sm-6">
@@ -85,14 +85,14 @@
 			<div class="form-group">
 				<label for="sel1">Quantity</label>
 				<span>
-					<a data-toggle="tooltip" data-placement="top" title="20% discount for 2 or more than 2 !"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+					<a data-toggle="tooltip" data-placement="top" title="15% discount up to 2 copy & 25% for more than 2 ! "><i class="fa fa-info-circle" aria-hidden="true"></i></a>
 				</span>
-				<input class="form-control" type="number" id="sel1" ng-model="product.printQuantity" data-ng-blur="validatePrintQuantity(product.printQuantity)"></input>        
+				<input class="form-control" type="number" id="sel1" ng-model="product.printQuantity" data-ng-blur="validatePrintQuantity(product.printQuantity)" placeholder="15% discount for 1 or 2 copy and 25% for more than 2 copy"></input>        
 			</div>
 			<p style="clear:both; color: red; margin-left: 36px;" data-ng-if="validateQty !== ''" class="error-msg">{{validateQty}}</p>
 			<div class="form-group">
 				<label for="comment">Any Special Request</label>
-				<textarea class="form-control" rows="5" id="comment" ng-model='product.comment'></textarea>
+				<textarea class="form-control" rows="5" id="comment" ng-model='product.comment' placeholder="Please specify your college name & address"></textarea>
 			</div>
 			<button type="button" class="btn btn-success" ng-click="product.addProduct()">Submit</button>
 		</form>

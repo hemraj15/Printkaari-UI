@@ -6,7 +6,7 @@
 
 app.factory('authFactory', ['$http', function($http){
 	var authFactory = {},
-	baseUrl = 'http://162.220.61.86:8080/printkaari-api/',
+	baseUrl = 'http://printkaari.com:8080/printkaari-api/',
 	config = {
 		headers: {
 		'Content-Type' : 'application/json'

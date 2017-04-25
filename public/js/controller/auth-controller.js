@@ -47,13 +47,13 @@ app.controller('authController',['$scope', '$http', '$window', '$route','$routeP
 		authFactory.login(params)
 			.then(function(response){
 		
-				var loggedinUser=response.data;
-				authService.setAuthData(loggedinUser);
+				$rootScope.loggedinUser=response.data;
+				authService.setAuthData($rootScope.loggedinUser);
 
 				// to update navbar when ever as success login happen
-				$rootScope.$emit('login', loggedinUser);
+				$rootScope.$emit('login', $rootScope.loggedinUser);
 
-				if (loggedinUser.userType ==="CUSTOMER") {
+				if ($rootScope.loggedinUser.userType ==="CUSTOMER") {
 		
 					console.log(response.data.full_name);
 					$location.path('/custDashboard');
