@@ -2,7 +2,7 @@
 
 app.factory('orderFactory', ['$http', function($http){
 
-	var baseURL = "http://162.220.61.86:8080/printkaari-api/customers/",
+	var baseURL = "http://printkaari.com:8080/printkaari-api/customers/",
 	orderFactory = {},
 	_config = {};
 

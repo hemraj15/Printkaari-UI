@@ -2,7 +2,7 @@
 
 app.factory('locationFactory', ['$http', function($http){
 	var locationFactory = {};
-	var baseUrl = "http://162.220.61.86:8080/printkaari-api/location/"
+	var baseUrl = "http://printkaari.com:8080/printkaari-api/location/"
 
 
 	locationFactory.getCountryList = function(){

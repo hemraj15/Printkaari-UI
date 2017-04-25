@@ -6,7 +6,7 @@
 
 app.factory('paymentFactory', ['$http', function($http){
 	var paymentFactory = {},
-	baseUrl = 'http://162.220.61.86:8080/printkaari-api/payment/',
+	baseUrl = 'http://printkaari.com:8080/printkaari-api/payment/',
 	config = {};
 
 	
