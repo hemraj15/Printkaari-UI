@@ -117,7 +117,7 @@ app.controller('authController',['$scope', '$http', '$window', '$route','$routeP
 		authFactory.completeSignUp(params)
 			.then(function(response){
 				$scope.User=response.data;
-				authService.setLoginData($scope.User);
+				authService.setAuthData($scope.User);
 				$scope.emailToken='';
 				
 				if ($scope.User.userType === 'CUSTOMER') {
