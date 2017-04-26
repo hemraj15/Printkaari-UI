@@ -58,7 +58,7 @@ paymentCtl._populateParams = function(resParams){
 		} 
 	}
 
-	finalParams.amount = 1; // to over-ride amount for testing purpose
+	//finalParams.amount = 1; // to over-ride amount for testing purpose
 };
 
 paymentCtl._generateString = function(params){
